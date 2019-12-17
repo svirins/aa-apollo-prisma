@@ -1,0 +1,64 @@
+type User {
+	id:           ID!
+	name:         String!      
+	email:        String!      
+	password:     String!
+	groups:       [Group!] 
+}
+
+type Group {
+  id:            ID!
+  author:        User!         
+  name:          String!       
+  description:   String!       
+  city:          String!
+  region:        regionType! 
+  phone:         String
+  email:         String
+  address:       String
+	lattitude:     Float
+	longitude:     Float
+  meetings:      [Meeting!]     
+}
+
+type Meeting {
+  id:           ID! 
+  group:        Group!        
+  name:         String!       
+  weekday:      Weekday!
+  time:         String!
+  type:         meetingType
+}
+
+enum Weekday {
+  Mo
+  Tu
+  We
+  Th
+  Fr
+  Sa
+  Su
+}
+
+enum meetingType {
+  Open
+  Closed 
+}
+
+enum regionType {
+  Minsk
+  Minskaya
+  Brestskaya
+  Gomelskaya
+  Mogilevskaya
+  Grodnenskaya
+  Vitebskaya
+}
+
+type Query {
+  group(id: ID!): Group
+  groupByName(name: String): Group
+  groups: [Group!]
+  meeting(id: ID!): Meeting
+  meetings: [Meeting!]
+}

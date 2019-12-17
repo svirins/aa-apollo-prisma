@@ -1,0 +1,9 @@
+#endpoint: ''
+endpoint: https://eu1.prisma.sh/dzmitry-sviryn-c0647b/aa-server/dev
+datamodel: 
+  - types.prisma
+  - enums.prisma
+generate:
+    - generator: javascript-client
+      output: ../src/generated/prisma-client
+      
