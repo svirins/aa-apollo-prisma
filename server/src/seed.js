@@ -1,4 +1,4 @@
-const { prisma } = require('./generated/prisma-client')
+const { prisma } = require("./generated/prisma-client");
 const faker = require('faker');
 
 // A `main` function so that we can use async/await
@@ -17,12 +17,8 @@ async function main() {
           phone: '+375(25)940-95-91',
           email: faker.internet.email(),
           address: faker.address.streetAddress(),
-          geodata: {
-            create: {
-              latitude: 27.77,
-              longitude: 54.33,
-            },
-          },
+          lattitude: 27.77,
+          longitude: 54.33,
           meetings: {
             create: [{
               name: faker.hacker.noun(),
@@ -44,12 +40,8 @@ async function main() {
         phone: '+375(25)940-95-99',
         email: faker.internet.email(),
         address: faker.address.streetAddress(),
-        geodata: {
-          create: {
-            latitude: 27.77,
-            longitude: 54.33,
-          },
-        },
+        lattitude: 27.77,
+        longitude: 54.33,
         meetings: {
           create: [{
             name: faker.hacker.noun(),
@@ -70,13 +62,9 @@ async function main() {
         region: 'Minskaya',
         phone: '+375(25)940-95-91',
         email: faker.internet.email(),
-        address: faker.address.streetAddress(),
-        geodata: {
-          create: {
-            latitude: 27.77,
-            longitude: 54.33,
-          },
-        },
+        address: faker.address.streetAddress(),       
+        lattitude: 27.77,
+        longitude: 54.33,
         meetings: {
           create: [{
             name: faker.hacker.noun(),

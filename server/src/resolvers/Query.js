@@ -1,7 +1,15 @@
-function groups(parent, args, context)  {
+function groupList(parent, args, context)  {
   return context.prisma.groups()
 }
 
 module.exports = {
-  groups,
+  groupList,
 }
+
+/*
+group(id: ID!): Group
+groupByName(name: String): Group
+groups: [Group!]
+meeting(id: ID!): Meeting
+meetings: [Meeting!]
+*/

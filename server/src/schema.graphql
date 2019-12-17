@@ -56,9 +56,16 @@ enum regionType {
 }
 
 type Query {
-  group(id: ID!): Group
-  groupByName(name: String): Group
-  groups: [Group!]
-  meeting(id: ID!): Meeting
-  meetings: [Meeting!]
+  groupList: [Group!]
+  groupById: (id: String!) Group
+}
+
+type Mutation {
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+}
+
+type AuthPayload {
+  token: String
+  user: User
 }
