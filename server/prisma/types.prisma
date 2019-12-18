@@ -30,7 +30,7 @@ type Meeting  {
   weekday:      Weekday!
   time:         String!
   type:         meetingType
-}
+} 
 
 
 

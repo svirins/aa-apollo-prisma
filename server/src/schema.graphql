@@ -56,8 +56,12 @@ enum regionType {
 }
 
 type Query {
-  groupList: [Group!]
-  groupById: (id: String!) Group
+  groupList(filter: String, skip: Int, first: Int, orderBy: GroupOrderByInput): GroupFeed!
+}
+  # groupList(filter: String, skip: Int, first: Int, orderBy: GroupOrderByInput): Feed!
+type GroupFeed {
+  groups: [Group!]!
+  count: Int!
 }
 
 type Mutation {
@@ -68,4 +72,13 @@ type Mutation {
 type AuthPayload {
   token: String
   user: User
+}
+
+enum GroupOrderByInput {
+  name_ASC
+  name_DESC
+  city_ASC
+  city_DESC
+  region_ASC
+  region_DESC
 }
