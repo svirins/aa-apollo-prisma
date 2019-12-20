@@ -5,7 +5,7 @@ const faker = require('faker');
 async function main() {
   const newUser = await prisma.createUser({
     name: 'Dmitriy S',
-    email: 'svirins@gmail.com',
+    email: 'ds@gmail.com',
     password: 'chupacabra',
     groups: {
       create: [

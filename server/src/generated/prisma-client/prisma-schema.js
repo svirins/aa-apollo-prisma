@@ -3,7 +3,11 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateGroup {
+/* GraphQL */ `type AggregateEvent {
+  count: Int!
+}
+
+type AggregateGroup {
   count: Int!
 }
 
@@ -20,6 +24,365 @@ type BatchPayload {
 }
 
 scalar DateTime
+
+type Event {
+  id: ID!
+  author: User!
+  name: String!
+  date: DateTime!
+  city: String!
+  description: String!
+  agenda: String
+  contact: String
+}
+
+type EventConnection {
+  pageInfo: PageInfo!
+  edges: [EventEdge]!
+  aggregate: AggregateEvent!
+}
+
+input EventCreateInput {
+  id: ID
+  author: UserCreateOneWithoutEventsInput!
+  name: String!
+  date: DateTime!
+  city: String!
+  description: String!
+  agenda: String
+  contact: String
+}
+
+input EventCreateManyWithoutAuthorInput {
+  create: [EventCreateWithoutAuthorInput!]
+  connect: [EventWhereUniqueInput!]
+}
+
+input EventCreateWithoutAuthorInput {
+  id: ID
+  name: String!
+  date: DateTime!
+  city: String!
+  description: String!
+  agenda: String
+  contact: String
+}
+
+type EventEdge {
+  node: Event!
+  cursor: String!
+}
+
+enum EventOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  date_ASC
+  date_DESC
+  city_ASC
+  city_DESC
+  description_ASC
+  description_DESC
+  agenda_ASC
+  agenda_DESC
+  contact_ASC
+  contact_DESC
+}
+
+type EventPreviousValues {
+  id: ID!
+  name: String!
+  date: DateTime!
+  city: String!
+  description: String!
+  agenda: String
+  contact: String
+}
+
+input EventScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime!]
+  date_not_in: [DateTime!]
+  date_lt: DateTime
+  date_lte: DateTime
+  date_gt: DateTime
+  date_gte: DateTime
+  city: String
+  city_not: String
+  city_in: [String!]
+  city_not_in: [String!]
+  city_lt: String
+  city_lte: String
+  city_gt: String
+  city_gte: String
+  city_contains: String
+  city_not_contains: String
+  city_starts_with: String
+  city_not_starts_with: String
+  city_ends_with: String
+  city_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  agenda: String
+  agenda_not: String
+  agenda_in: [String!]
+  agenda_not_in: [String!]
+  agenda_lt: String
+  agenda_lte: String
+  agenda_gt: String
+  agenda_gte: String
+  agenda_contains: String
+  agenda_not_contains: String
+  agenda_starts_with: String
+  agenda_not_starts_with: String
+  agenda_ends_with: String
+  agenda_not_ends_with: String
+  contact: String
+  contact_not: String
+  contact_in: [String!]
+  contact_not_in: [String!]
+  contact_lt: String
+  contact_lte: String
+  contact_gt: String
+  contact_gte: String
+  contact_contains: String
+  contact_not_contains: String
+  contact_starts_with: String
+  contact_not_starts_with: String
+  contact_ends_with: String
+  contact_not_ends_with: String
+  AND: [EventScalarWhereInput!]
+  OR: [EventScalarWhereInput!]
+  NOT: [EventScalarWhereInput!]
+}
+
+type EventSubscriptionPayload {
+  mutation: MutationType!
+  node: Event
+  updatedFields: [String!]
+  previousValues: EventPreviousValues
+}
+
+input EventSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: EventWhereInput
+  AND: [EventSubscriptionWhereInput!]
+  OR: [EventSubscriptionWhereInput!]
+  NOT: [EventSubscriptionWhereInput!]
+}
+
+input EventUpdateInput {
+  author: UserUpdateOneRequiredWithoutEventsInput
+  name: String
+  date: DateTime
+  city: String
+  description: String
+  agenda: String
+  contact: String
+}
+
+input EventUpdateManyDataInput {
+  name: String
+  date: DateTime
+  city: String
+  description: String
+  agenda: String
+  contact: String
+}
+
+input EventUpdateManyMutationInput {
+  name: String
+  date: DateTime
+  city: String
+  description: String
+  agenda: String
+  contact: String
+}
+
+input EventUpdateManyWithoutAuthorInput {
+  create: [EventCreateWithoutAuthorInput!]
+  delete: [EventWhereUniqueInput!]
+  connect: [EventWhereUniqueInput!]
+  set: [EventWhereUniqueInput!]
+  disconnect: [EventWhereUniqueInput!]
+  update: [EventUpdateWithWhereUniqueWithoutAuthorInput!]
+  upsert: [EventUpsertWithWhereUniqueWithoutAuthorInput!]
+  deleteMany: [EventScalarWhereInput!]
+  updateMany: [EventUpdateManyWithWhereNestedInput!]
+}
+
+input EventUpdateManyWithWhereNestedInput {
+  where: EventScalarWhereInput!
+  data: EventUpdateManyDataInput!
+}
+
+input EventUpdateWithoutAuthorDataInput {
+  name: String
+  date: DateTime
+  city: String
+  description: String
+  agenda: String
+  contact: String
+}
+
+input EventUpdateWithWhereUniqueWithoutAuthorInput {
+  where: EventWhereUniqueInput!
+  data: EventUpdateWithoutAuthorDataInput!
+}
+
+input EventUpsertWithWhereUniqueWithoutAuthorInput {
+  where: EventWhereUniqueInput!
+  update: EventUpdateWithoutAuthorDataInput!
+  create: EventCreateWithoutAuthorInput!
+}
+
+input EventWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  author: UserWhereInput
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime!]
+  date_not_in: [DateTime!]
+  date_lt: DateTime
+  date_lte: DateTime
+  date_gt: DateTime
+  date_gte: DateTime
+  city: String
+  city_not: String
+  city_in: [String!]
+  city_not_in: [String!]
+  city_lt: String
+  city_lte: String
+  city_gt: String
+  city_gte: String
+  city_contains: String
+  city_not_contains: String
+  city_starts_with: String
+  city_not_starts_with: String
+  city_ends_with: String
+  city_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  agenda: String
+  agenda_not: String
+  agenda_in: [String!]
+  agenda_not_in: [String!]
+  agenda_lt: String
+  agenda_lte: String
+  agenda_gt: String
+  agenda_gte: String
+  agenda_contains: String
+  agenda_not_contains: String
+  agenda_starts_with: String
+  agenda_not_starts_with: String
+  agenda_ends_with: String
+  agenda_not_ends_with: String
+  contact: String
+  contact_not: String
+  contact_in: [String!]
+  contact_not_in: [String!]
+  contact_lt: String
+  contact_lte: String
+  contact_gt: String
+  contact_gte: String
+  contact_contains: String
+  contact_not_contains: String
+  contact_starts_with: String
+  contact_not_starts_with: String
+  contact_ends_with: String
+  contact_not_ends_with: String
+  AND: [EventWhereInput!]
+  OR: [EventWhereInput!]
+  NOT: [EventWhereInput!]
+}
+
+input EventWhereUniqueInput {
+  id: ID
+}
 
 type Group {
   id: ID!
@@ -797,6 +1160,12 @@ input MeetingWhereUniqueInput {
 }
 
 type Mutation {
+  createEvent(data: EventCreateInput!): Event!
+  updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
+  updateManyEvents(data: EventUpdateManyMutationInput!, where: EventWhereInput): BatchPayload!
+  upsertEvent(where: EventWhereUniqueInput!, create: EventCreateInput!, update: EventUpdateInput!): Event!
+  deleteEvent(where: EventWhereUniqueInput!): Event
+  deleteManyEvents(where: EventWhereInput): BatchPayload!
   createGroup(data: GroupCreateInput!): Group!
   updateGroup(data: GroupUpdateInput!, where: GroupWhereUniqueInput!): Group
   updateManyGroups(data: GroupUpdateManyMutationInput!, where: GroupWhereInput): BatchPayload!
@@ -835,6 +1204,9 @@ type PageInfo {
 }
 
 type Query {
+  event(where: EventWhereUniqueInput!): Event
+  events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event]!
+  eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
   group(where: GroupWhereUniqueInput!): Group
   groups(where: GroupWhereInput, orderBy: GroupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Group]!
   groupsConnection(where: GroupWhereInput, orderBy: GroupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GroupConnection!
@@ -858,6 +1230,7 @@ enum regionType {
 }
 
 type Subscription {
+  event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
   group(where: GroupSubscriptionWhereInput): GroupSubscriptionPayload
   meeting(where: MeetingSubscriptionWhereInput): MeetingSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
@@ -869,6 +1242,7 @@ type User {
   email: String!
   password: String!
   groups(where: GroupWhereInput, orderBy: GroupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Group!]
+  events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event!]
 }
 
 type UserConnection {
@@ -883,6 +1257,12 @@ input UserCreateInput {
   email: String!
   password: String!
   groups: GroupCreateManyWithoutAuthorInput
+  events: EventCreateManyWithoutAuthorInput
+}
+
+input UserCreateOneWithoutEventsInput {
+  create: UserCreateWithoutEventsInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutGroupsInput {
@@ -890,11 +1270,20 @@ input UserCreateOneWithoutGroupsInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateWithoutEventsInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
+  groups: GroupCreateManyWithoutAuthorInput
+}
+
 input UserCreateWithoutGroupsInput {
   id: ID
   name: String!
   email: String!
   password: String!
+  events: EventCreateManyWithoutAuthorInput
 }
 
 type UserEdge {
@@ -943,12 +1332,20 @@ input UserUpdateInput {
   email: String
   password: String
   groups: GroupUpdateManyWithoutAuthorInput
+  events: EventUpdateManyWithoutAuthorInput
 }
 
 input UserUpdateManyMutationInput {
   name: String
   email: String
   password: String
+}
+
+input UserUpdateOneRequiredWithoutEventsInput {
+  create: UserCreateWithoutEventsInput
+  update: UserUpdateWithoutEventsDataInput
+  upsert: UserUpsertWithoutEventsInput
+  connect: UserWhereUniqueInput
 }
 
 input UserUpdateOneRequiredWithoutGroupsInput {
@@ -958,10 +1355,23 @@ input UserUpdateOneRequiredWithoutGroupsInput {
   connect: UserWhereUniqueInput
 }
 
+input UserUpdateWithoutEventsDataInput {
+  name: String
+  email: String
+  password: String
+  groups: GroupUpdateManyWithoutAuthorInput
+}
+
 input UserUpdateWithoutGroupsDataInput {
   name: String
   email: String
   password: String
+  events: EventUpdateManyWithoutAuthorInput
+}
+
+input UserUpsertWithoutEventsInput {
+  update: UserUpdateWithoutEventsDataInput!
+  create: UserCreateWithoutEventsInput!
 }
 
 input UserUpsertWithoutGroupsInput {
@@ -1029,6 +1439,9 @@ input UserWhereInput {
   groups_every: GroupWhereInput
   groups_some: GroupWhereInput
   groups_none: GroupWhereInput
+  events_every: EventWhereInput
+  events_some: EventWhereInput
+  events_none: EventWhereInput
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]

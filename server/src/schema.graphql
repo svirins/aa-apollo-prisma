@@ -4,6 +4,7 @@ type User {
 	email:        String!      
 	password:     String!
 	groups:       [Group!] 
+  events:       [Event!]
 }
 
 type Group {
@@ -29,6 +30,19 @@ type Meeting {
   time:         String!
   type:         meetingType
 }
+
+type Event {
+  id:           ID!   
+  author:       User!             
+  name:         String!        
+  date:         DateTime!     
+  city:         String!
+  description:  String!       
+  agenda:       String
+  contact:      String
+}
+
+scalar DateTime
 
 enum Weekday {
   Mo
@@ -57,12 +71,19 @@ enum regionType {
 
 type Query {
   groupList(filter: String, skip: Int, first: Int, orderBy: GroupOrderByInput): GroupFeed!
+  eventList(filter: String, skip: Int, first: Int, orderBy: EventOrderByInput): EventFeed!
 }
-  # groupList(filter: String, skip: Int, first: Int, orderBy: GroupOrderByInput): Feed!
+
 type GroupFeed {
   groups: [Group!]!
   count: Int!
 }
+
+type EventFeed {
+  events: [Event!]!
+  count: Int!
+}
+
 
 type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload
@@ -81,4 +102,11 @@ enum GroupOrderByInput {
   city_DESC
   region_ASC
   region_DESC
+}
+
+enum EventOrderByInput {
+  date_ASC
+  date_DESC
+  city_ASC
+  city_DESC
 }

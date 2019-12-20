@@ -17,6 +17,10 @@ var models = [
     embedded: false
   },
   {
+    name: "Event",
+    embedded: false
+  },
+  {
     name: "Weekday",
     embedded: false
   },

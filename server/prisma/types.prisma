@@ -5,6 +5,7 @@ type User {
   email:        String!      @unique
   password:     String!
   groups:       [Group!] 
+  events:       [Event!]
 }
 
 type Group {
@@ -32,6 +33,15 @@ type Meeting  {
   type:         meetingType
 } 
 
-
+type Event {
+  id:           ID!           @id
+  author:       User!         @relation(link: INLINE)
+  name:         String!       
+  date:         DateTime!     
+  city:         String!
+  description:  String!       
+  agenda:       String        
+  contact:      String        
+}
 
 
