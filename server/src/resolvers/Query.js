@@ -57,6 +57,7 @@ async function eventList(parent, args, context)  {
 }
 
 module.exports = {
-  groupList, eventList
+  groupList,
+  eventList
 }
 

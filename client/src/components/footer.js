@@ -4,8 +4,6 @@ import styled from 'react-emotion';
 import MenuItem from './menu-item';
 import LogoutButton from '../containers/logout-button';
 import { ReactComponent as HomeIcon } from '../assets/icons/home.svg';
-import { ReactComponent as CartIcon } from '../assets/icons/cart.svg';
-import { ReactComponent as ProfileIcon } from '../assets/icons/profile.svg';
 import { colors, unit } from '../styles';
 
 export default function Footer() {
@@ -14,14 +12,14 @@ export default function Footer() {
       <InnerContainer>
         <MenuItem to="/">
           <HomeIcon />
-          Home
+          All Groups List
         </MenuItem>
-        <MenuItem to="/cart">
-          <CartIcon />
-          Cart
-        </MenuItem>
+        <MenuItem to="/nearme">
+          <HomeIcon />
+          Near Me
+        </MenuItem> 
         <MenuItem to="/profile">
-          <ProfileIcon />
+          <HomeIcon />
           Profile
         </MenuItem>
         <LogoutButton />

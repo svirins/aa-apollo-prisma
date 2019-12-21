@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const { GraphQLServer } = require("graphql-yoga");
 const { prisma } = require("./generated/prisma-client");
 
@@ -7,13 +9,15 @@ const Mutation = require('./resolvers/Mutation')
 const User = require('./resolvers/User')
 const Meeting = require('./resolvers/Meeting')
 const Group = require('./resolvers/Group')
+const Event = require('./resolvers/Event')
 
 const resolvers = {
     Query,
     Mutation,
     User,
     Meeting,
-    Group
+    Group,
+    Event
 }
  
 const server = new GraphQLServer({
@@ -25,4 +29,13 @@ const server = new GraphQLServer({
         prisma,
       }
     },});
-server.start(() => console.log(`Server is running on http://localhost:4000`));
+
+const options = {
+  port: process.env.PORT || 4000,
+}
+
+server.start(options, ({ port }) =>
+  console.log(
+    `🚀 Server started, listening on port ${port} for incoming requests.`,
+  ),
+)

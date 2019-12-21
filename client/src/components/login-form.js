@@ -6,7 +6,7 @@ import Button from './button';
 import space from '../assets/images/space.jpg';
 import { ReactComponent as Logo } from '../assets/logo.svg';
 import { ReactComponent as Curve } from '../assets/curve.svg';
-import { ReactComponent as Rocket } from '../assets/rocket.svg';
+import { ReactComponent as AALogo } from '../assets/aa-logo.svg';
 import { colors, unit } from '../styles';
 
 export default class LoginForm extends Component {

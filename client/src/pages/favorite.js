@@ -5,14 +5,14 @@ import gql from 'graphql-tag';
 import { Header, Loading } from '../components';
 import { CartItem, BookTrips } from '../containers';
 
-export const GET_CART_ITEMS = gql`
+export const GET_CLIENT_STORAGE = gql`
   query GetCartItems {
-    cartItems @client
+    clientStorage: @client
   }
 `;
 
 export default function Cart() {
-  const { data, loading, error } = useQuery(GET_CART_ITEMS);
+  const { data, loading, error } = useQuery(GET_CLIENT_STORAGE);
   if (loading) return <Loading />;
   if (error) return <p>ERROR: {error.message}</p>;
   return (

@@ -1,6 +1,7 @@
 module.exports = {
   client: {
-    name: 'AAS',
-    service: 'AAS',
+    name: 'aa-belarus-locator',
+    service: 'aa-belarus-locator'
   },
 };
+

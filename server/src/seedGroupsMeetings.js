@@ -8,6 +8,7 @@ async function main() {
     email: 'ds@gmail.com',
     password: 'chupacabra',
     groups: {
+      
       create: [
         {
           name: 'Na ozere',
