@@ -1,40 +1,35 @@
-import React from 'react';
-import styled from 'react-emotion';
-import { ReactComponent as Logo } from '../assets/logo.svg'
-import { unit, colors } from '../styles/styles';
-import { size } from 'polished';
+import React from 'react'
+import {
+  Image,
+  Menu,
+  Input,
+  Button
+} from 'semantic-ui-react'
 
+const Header = () => (
+  <Menu stackable fixed='top'>
+    <Menu.Item as='a' header>
+      <Image size='mini' src='../assets/images/logo.png' style={{ marginRight: '1.5em' }} />
+      AA Locator
+    </Menu.Item>
+    <Menu.Item to="/">
+      All Groups
+    </Menu.Item>
+    <Menu.Item to="/nearme">
+      Near Me
+    </Menu.Item>
+    <Menu.Item to="/events">
+      Upcoming Events
+    </Menu.Item>
+    <Menu.Menu position='right'>
+      <Menu.Item>
+        <Input icon='search' placeholder='Search...' />
+      </Menu.Item>
+      <Menu.Item>
+        <Button primary>Sign up</Button>
+      </Menu.Item>
+    </Menu.Menu>
+  </Menu>
+)
 
-export default function Header() {
-  
-  return (
-    <Container>
-      <StyledLogo />
-      <div>
-        <h2>!! TBD !!</h2>
-        <Subheading>!! TBD !!</Subheading>
-      </div>
-    </Container>
-  );
-}
-
-/**
- * STYLED COMPONENTS USED IN THIS FILE ARE BELOW HERE
- */
-
-const Container = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
-  marginBottom: unit * 4.5,
-});
-
-const Subheading = styled('h5')({
-  marginTop: unit / 2,
-  color: colors.textSecondary,
-});
-
-const StyledLogo = styled(Logo)(size(56), {
-  display: 'block',
-  margin: '0 auto',
-  position: 'relative',
-});
+export default Header

@@ -9,10 +9,8 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import Pages from './pages';
 
 import { resolvers, typeDefs } from './resolvers';
-import injectStyles from './styles/styles';
 
 const cache = new InMemoryCache();
-
 const client = new ApolloClient({
   cache,
   link: new HttpLink({
@@ -21,10 +19,6 @@ const client = new ApolloClient({
   resolvers,
   typeDefs,
 });
-
-
-
-injectStyles();
 
 ReactDOM.render(
   <ApolloProvider client={client}>

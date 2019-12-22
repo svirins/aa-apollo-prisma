@@ -1,50 +1,35 @@
 import React from 'react';
-import styled from 'react-emotion';
+import {
+  Container,
+  Divider,
+  Header,
+  Image,
+  List,
+  Segment,
+} from 'semantic-ui-react'
 
-import MenuItem from './menu-item';
-import LogoutButton from '../containers/logout-button';
-import { ReactComponent as SomeIcon } from '../assets/icons/home.svg';
-import { colors, unit } from '../styles/styles';
-
-export default function Footer() {
-  return (
-    <Container>
-      <InnerContainer>
-        <MenuItem to="/">
-          <SomeIcon />
-          All Groups 
-        </MenuItem>
-        <MenuItem to="/nearme">
-          <SomeIcon />
+const Footer = () => (
+  <Segment inverted vertical style={{ margin: '5em 0em 0em', padding: '5em 0em' }}>
+    <Container textAlign='center'>
+      <Header inverted as='h4' content='Footer Header' />          
+      <Divider inverted section />
+      <Image centered size='mini' src='/logo.png' />
+      <List horizontal inverted divided link size='small'>
+        <List.Item as='a' href='#'>
+          Groups 
+        </List.Item>
+        <List.Item as='a' href='#'>
           Near Me
-        </MenuItem> 
-        <MenuItem to="/profile">
-          <SomeIcon />
+        </List.Item>
+        <List.Item as='a' href='#'>
+          Events
+        </List.Item>
+        <List.Item as='a' href='#'>
           Profile
-        </MenuItem>
-        <LogoutButton />
-      </InnerContainer>
+        </List.Item>
+      </List>
     </Container>
-  );
-}
+  </Segment>
+)
 
-/**
- * STYLED COMPONENTS USED IN THIS FILE ARE BELOW HERE
- */
-
-const Container = styled('footer')({
-  flexShrink: 0,
-  marginTop: 'auto',
-  backgroundColor: 'white',
-  color: colors.textSecondary,
-  position: 'sticky',
-  bottom: 0,
-});
-
-const InnerContainer = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
-  maxWidth: 460,
-  padding: unit * 2.5,
-  margin: '0 auto',
-});
+export default Footer

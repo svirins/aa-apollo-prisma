@@ -1,9 +1,8 @@
 import React from 'react';
 
 
-const Profile = () => (
+const Events = () => (
   <p>TBD Later</p>
 );
 
-export default Profile;
-
+export default Events;
