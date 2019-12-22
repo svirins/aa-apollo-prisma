@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import { Router } from '@reach/router';
-
-import NearMe from './nearme'
 import GroupList from './grouplist';
+import NearMe from './nearme'
 import Profile from './profile';
 
 import { Footer, PageContainer } from '../components';
+// navigation links located in footer
 
 export default function Pages() {
   return (

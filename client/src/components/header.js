@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'react-emotion';
-import { ReactComponent as Logo } from '../assets/aa-logo.svg'
+import { ReactComponent as Logo } from '../assets/logo.svg'
+import { unit, colors } from '../styles/styles';
+import { size } from 'polished';
+
 
 export default function Header() {
   
@@ -14,6 +17,10 @@ export default function Header() {
     </Container>
   );
 }
+
+/**
+ * STYLED COMPONENTS USED IN THIS FILE ARE BELOW HERE
+ */
 
 const Container = styled('div')({
   display: 'flex',

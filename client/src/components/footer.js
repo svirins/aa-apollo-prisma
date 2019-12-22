@@ -3,23 +3,23 @@ import styled from 'react-emotion';
 
 import MenuItem from './menu-item';
 import LogoutButton from '../containers/logout-button';
-import { ReactComponent as HomeIcon } from '../assets/icons/home.svg';
-import { colors, unit } from '../styles';
+import { ReactComponent as SomeIcon } from '../assets/icons/home.svg';
+import { colors, unit } from '../styles/styles';
 
 export default function Footer() {
   return (
     <Container>
       <InnerContainer>
         <MenuItem to="/">
-          <HomeIcon />
-          All Groups List
+          <SomeIcon />
+          All Groups 
         </MenuItem>
         <MenuItem to="/nearme">
-          <HomeIcon />
+          <SomeIcon />
           Near Me
         </MenuItem> 
         <MenuItem to="/profile">
-          <HomeIcon />
+          <SomeIcon />
           Profile
         </MenuItem>
         <LogoutButton />

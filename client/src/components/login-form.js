@@ -3,11 +3,10 @@ import styled, { css } from 'react-emotion';
 import { size } from 'polished';
 
 import Button from './button';
-import space from '../assets/images/space.jpg';
+import space from '../assets/images/recovery.jpg';
 import { ReactComponent as Logo } from '../assets/logo.svg';
 import { ReactComponent as Curve } from '../assets/curve.svg';
-import { ReactComponent as AALogo } from '../assets/aa-logo.svg';
-import { colors, unit } from '../styles';
+import { colors, unit } from '../styles/styles';
 
 export default class LoginForm extends Component {
   state = { email: '' };
@@ -93,7 +92,7 @@ const Heading = styled('h1')({
   margin: `${unit * 3}px 0 ${unit * 6}px`,
 });
 
-const StyledRocket = styled(Rocket)(svgClassName, {
+const StyledRocket = styled(Logo)(svgClassName, {
   width: 250,
 });
 

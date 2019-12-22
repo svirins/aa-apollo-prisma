@@ -1,50 +1,31 @@
 import React, { Fragment } from 'react';
 import { useQuery } from '@apollo/react-hooks';
+import { Header, Loading } from '../components';
 import gql from 'graphql-tag';
 
-import { LaunchTile, Header, Button, Loading } from '../components';
+const MEETINGS_LIST_QUERY = gql`
+  query getMeetings {
+    groupList {
+      count
+      groups {
+        name
+        meetings {
+          name
+        }
+      }
+    }
+  }
+`
 
-
-export default function Launches() {
-  const { data, loading, error, fetchMore } = useQuery(GET_LAUNCHES);
+export default function GroupList() {
+  const { data, loading, error } = useQuery(MEETINGS_LIST_QUERY);
   if (loading) return <Loading />;
   if (error) return <p>ERROR</p>;
-
+  console.log(data)
   return (
     <Fragment>
       <Header />
-      {data.launches &&
-        data.launches.launches &&
-        data.launches.launches.map(launch => (
-          <LaunchTile key={launch.id} launch={launch} />
-        ))}
-      {data.launches &&
-        data.launches.hasMore && (
-          <Button
-            onClick={() =>
-              fetchMore({
-                variables: {
-                  after: data.launches.cursor,
-                },
-                updateQuery: (prev, { fetchMoreResult, ...rest }) => {
-                  if (!fetchMoreResult) return prev;
-                  return {
-                    ...fetchMoreResult,
-                    launches: {
-                      ...fetchMoreResult.launches,
-                      launches: [
-                        ...prev.launches.launches,
-                        ...fetchMoreResult.launches.launches,
-                      ],
-                    },
-                  };
-                },
-              })
-            }
-          >
-            Load More
-          </Button>
-        )}
+     
     </Fragment>
   );
 }

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import styled from 'react-emotion';
 
-import { unit, colors } from '../styles';
+import { unit, colors } from '../styles/styles';
 
 export default function PageContainer(props) {
   return (

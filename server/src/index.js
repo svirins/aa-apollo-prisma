@@ -23,6 +23,9 @@ const resolvers = {
 const server = new GraphQLServer({
     typeDefs: "./src/schema.graphql",
     resolvers,
+    engine: {
+      apiKey: "service:aa-belarus-locator:JJzRvrRXVvwolM3WeSCQlw",
+    },
     context: request => {
       return {
         ...request,
