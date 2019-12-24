@@ -18,6 +18,7 @@ export type Maybe<T> = T | undefined | null;
 export interface Exists {
   event: (where?: EventWhereInput) => Promise<boolean>;
   group: (where?: GroupWhereInput) => Promise<boolean>;
+  location: (where?: LocationWhereInput) => Promise<boolean>;
   meeting: (where?: MeetingWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
@@ -79,6 +80,25 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => GroupConnectionPromise;
+  location: (where: LocationWhereUniqueInput) => LocationNullablePromise;
+  locations: (args?: {
+    where?: LocationWhereInput;
+    orderBy?: LocationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Location>;
+  locationsConnection: (args?: {
+    where?: LocationWhereInput;
+    orderBy?: LocationOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => LocationConnectionPromise;
   meeting: (where: MeetingWhereUniqueInput) => MeetingNullablePromise;
   meetings: (args?: {
     where?: MeetingWhereInput;
@@ -155,6 +175,22 @@ export interface Prisma {
   }) => GroupPromise;
   deleteGroup: (where: GroupWhereUniqueInput) => GroupPromise;
   deleteManyGroups: (where?: GroupWhereInput) => BatchPayloadPromise;
+  createLocation: (data: LocationCreateInput) => LocationPromise;
+  updateLocation: (args: {
+    data: LocationUpdateInput;
+    where: LocationWhereUniqueInput;
+  }) => LocationPromise;
+  updateManyLocations: (args: {
+    data: LocationUpdateManyMutationInput;
+    where?: LocationWhereInput;
+  }) => BatchPayloadPromise;
+  upsertLocation: (args: {
+    where: LocationWhereUniqueInput;
+    create: LocationCreateInput;
+    update: LocationUpdateInput;
+  }) => LocationPromise;
+  deleteLocation: (where: LocationWhereUniqueInput) => LocationPromise;
+  deleteManyLocations: (where?: LocationWhereInput) => BatchPayloadPromise;
   createMeeting: (data: MeetingCreateInput) => MeetingPromise;
   updateMeeting: (args: {
     data: MeetingUpdateInput;
@@ -202,6 +238,9 @@ export interface Subscription {
   group: (
     where?: GroupSubscriptionWhereInput
   ) => GroupSubscriptionPayloadSubscription;
+  location: (
+    where?: LocationSubscriptionWhereInput
+  ) => LocationSubscriptionPayloadSubscription;
   meeting: (
     where?: MeetingSubscriptionWhereInput
   ) => MeetingSubscriptionPayloadSubscription;
@@ -249,11 +288,7 @@ export type GroupOrderByInput =
   | "email_ASC"
   | "email_DESC"
   | "address_ASC"
-  | "address_DESC"
-  | "lattitude_ASC"
-  | "lattitude_DESC"
-  | "longitude_ASC"
-  | "longitude_DESC";
+  | "address_DESC";
 
 export type MeetingOrderByInput =
   | "id_ASC"
@@ -282,6 +317,14 @@ export type EventOrderByInput =
   | "agenda_DESC"
   | "contact_ASC"
   | "contact_DESC";
+
+export type LocationOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "latitude_ASC"
+  | "latitude_DESC"
+  | "longitude_ASC"
+  | "longitude_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -411,22 +454,7 @@ export interface GroupWhereInput {
   address_not_starts_with?: Maybe<String>;
   address_ends_with?: Maybe<String>;
   address_not_ends_with?: Maybe<String>;
-  lattitude?: Maybe<Float>;
-  lattitude_not?: Maybe<Float>;
-  lattitude_in?: Maybe<Float[] | Float>;
-  lattitude_not_in?: Maybe<Float[] | Float>;
-  lattitude_lt?: Maybe<Float>;
-  lattitude_lte?: Maybe<Float>;
-  lattitude_gt?: Maybe<Float>;
-  lattitude_gte?: Maybe<Float>;
-  longitude?: Maybe<Float>;
-  longitude_not?: Maybe<Float>;
-  longitude_in?: Maybe<Float[] | Float>;
-  longitude_not_in?: Maybe<Float[] | Float>;
-  longitude_lt?: Maybe<Float>;
-  longitude_lte?: Maybe<Float>;
-  longitude_gt?: Maybe<Float>;
-  longitude_gte?: Maybe<Float>;
+  location?: Maybe<LocationWhereInput>;
   meetings_every?: Maybe<MeetingWhereInput>;
   meetings_some?: Maybe<MeetingWhereInput>;
   meetings_none?: Maybe<MeetingWhereInput>;
@@ -602,6 +630,42 @@ export interface EventWhereInput {
   NOT?: Maybe<EventWhereInput[] | EventWhereInput>;
 }
 
+export interface LocationWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  latitude?: Maybe<Float>;
+  latitude_not?: Maybe<Float>;
+  latitude_in?: Maybe<Float[] | Float>;
+  latitude_not_in?: Maybe<Float[] | Float>;
+  latitude_lt?: Maybe<Float>;
+  latitude_lte?: Maybe<Float>;
+  latitude_gt?: Maybe<Float>;
+  latitude_gte?: Maybe<Float>;
+  longitude?: Maybe<Float>;
+  longitude_not?: Maybe<Float>;
+  longitude_in?: Maybe<Float[] | Float>;
+  longitude_not_in?: Maybe<Float[] | Float>;
+  longitude_lt?: Maybe<Float>;
+  longitude_lte?: Maybe<Float>;
+  longitude_gt?: Maybe<Float>;
+  longitude_gte?: Maybe<Float>;
+  AND?: Maybe<LocationWhereInput[] | LocationWhereInput>;
+  OR?: Maybe<LocationWhereInput[] | LocationWhereInput>;
+  NOT?: Maybe<LocationWhereInput[] | LocationWhereInput>;
+}
+
 export interface MeetingWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
@@ -663,6 +727,10 @@ export type GroupWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
+export type LocationWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
 export type MeetingWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
@@ -713,9 +781,19 @@ export interface GroupCreateWithoutAuthorInput {
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
-  lattitude?: Maybe<Float>;
-  longitude?: Maybe<Float>;
+  location?: Maybe<LocationCreateOneInput>;
   meetings?: Maybe<MeetingCreateManyWithoutGroupInput>;
+}
+
+export interface LocationCreateOneInput {
+  create?: Maybe<LocationCreateInput>;
+  connect?: Maybe<LocationWhereUniqueInput>;
+}
+
+export interface LocationCreateInput {
+  id?: Maybe<ID_Input>;
+  latitude: Float;
+  longitude: Float;
 }
 
 export interface MeetingCreateManyWithoutGroupInput {
@@ -792,9 +870,27 @@ export interface GroupUpdateWithoutAuthorDataInput {
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
-  lattitude?: Maybe<Float>;
-  longitude?: Maybe<Float>;
+  location?: Maybe<LocationUpdateOneInput>;
   meetings?: Maybe<MeetingUpdateManyWithoutGroupInput>;
+}
+
+export interface LocationUpdateOneInput {
+  create?: Maybe<LocationCreateInput>;
+  update?: Maybe<LocationUpdateDataInput>;
+  upsert?: Maybe<LocationUpsertNestedInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<LocationWhereUniqueInput>;
+}
+
+export interface LocationUpdateDataInput {
+  latitude?: Maybe<Float>;
+  longitude?: Maybe<Float>;
+}
+
+export interface LocationUpsertNestedInput {
+  update: LocationUpdateDataInput;
+  create: LocationCreateInput;
 }
 
 export interface MeetingUpdateManyWithoutGroupInput {
@@ -1023,22 +1119,6 @@ export interface GroupScalarWhereInput {
   address_not_starts_with?: Maybe<String>;
   address_ends_with?: Maybe<String>;
   address_not_ends_with?: Maybe<String>;
-  lattitude?: Maybe<Float>;
-  lattitude_not?: Maybe<Float>;
-  lattitude_in?: Maybe<Float[] | Float>;
-  lattitude_not_in?: Maybe<Float[] | Float>;
-  lattitude_lt?: Maybe<Float>;
-  lattitude_lte?: Maybe<Float>;
-  lattitude_gt?: Maybe<Float>;
-  lattitude_gte?: Maybe<Float>;
-  longitude?: Maybe<Float>;
-  longitude_not?: Maybe<Float>;
-  longitude_in?: Maybe<Float[] | Float>;
-  longitude_not_in?: Maybe<Float[] | Float>;
-  longitude_lt?: Maybe<Float>;
-  longitude_lte?: Maybe<Float>;
-  longitude_gt?: Maybe<Float>;
-  longitude_gte?: Maybe<Float>;
   AND?: Maybe<GroupScalarWhereInput[] | GroupScalarWhereInput>;
   OR?: Maybe<GroupScalarWhereInput[] | GroupScalarWhereInput>;
   NOT?: Maybe<GroupScalarWhereInput[] | GroupScalarWhereInput>;
@@ -1057,8 +1137,6 @@ export interface GroupUpdateManyDataInput {
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
-  lattitude?: Maybe<Float>;
-  longitude?: Maybe<Float>;
 }
 
 export interface UserUpsertWithoutEventsInput {
@@ -1085,8 +1163,7 @@ export interface GroupCreateInput {
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
-  lattitude?: Maybe<Float>;
-  longitude?: Maybe<Float>;
+  location?: Maybe<LocationCreateOneInput>;
   meetings?: Maybe<MeetingCreateManyWithoutGroupInput>;
 }
 
@@ -1129,8 +1206,7 @@ export interface GroupUpdateInput {
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
-  lattitude?: Maybe<Float>;
-  longitude?: Maybe<Float>;
+  location?: Maybe<LocationUpdateOneInput>;
   meetings?: Maybe<MeetingUpdateManyWithoutGroupInput>;
 }
 
@@ -1315,7 +1391,15 @@ export interface GroupUpdateManyMutationInput {
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
-  lattitude?: Maybe<Float>;
+}
+
+export interface LocationUpdateInput {
+  latitude?: Maybe<Float>;
+  longitude?: Maybe<Float>;
+}
+
+export interface LocationUpdateManyMutationInput {
+  latitude?: Maybe<Float>;
   longitude?: Maybe<Float>;
 }
 
@@ -1343,8 +1427,7 @@ export interface GroupCreateWithoutMeetingsInput {
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
-  lattitude?: Maybe<Float>;
-  longitude?: Maybe<Float>;
+  location?: Maybe<LocationCreateOneInput>;
 }
 
 export interface MeetingUpdateInput {
@@ -1371,8 +1454,7 @@ export interface GroupUpdateWithoutMeetingsDataInput {
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
-  lattitude?: Maybe<Float>;
-  longitude?: Maybe<Float>;
+  location?: Maybe<LocationUpdateOneInput>;
 }
 
 export interface GroupUpsertWithoutMeetingsInput {
@@ -1430,6 +1512,21 @@ export interface GroupSubscriptionWhereInput {
   AND?: Maybe<GroupSubscriptionWhereInput[] | GroupSubscriptionWhereInput>;
   OR?: Maybe<GroupSubscriptionWhereInput[] | GroupSubscriptionWhereInput>;
   NOT?: Maybe<GroupSubscriptionWhereInput[] | GroupSubscriptionWhereInput>;
+}
+
+export interface LocationSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<LocationWhereInput>;
+  AND?: Maybe<
+    LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput
+  >;
+  OR?: Maybe<LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput>;
+  NOT?: Maybe<
+    LocationSubscriptionWhereInput[] | LocationSubscriptionWhereInput
+  >;
 }
 
 export interface MeetingSubscriptionWhereInput {
@@ -1601,8 +1698,6 @@ export interface Group {
   phone?: String;
   email?: String;
   address?: String;
-  lattitude?: Float;
-  longitude?: Float;
 }
 
 export interface GroupPromise extends Promise<Group>, Fragmentable {
@@ -1616,8 +1711,7 @@ export interface GroupPromise extends Promise<Group>, Fragmentable {
   phone: () => Promise<String>;
   email: () => Promise<String>;
   address: () => Promise<String>;
-  lattitude: () => Promise<Float>;
-  longitude: () => Promise<Float>;
+  location: <T = LocationPromise>() => T;
   meetings: <T = FragmentableArray<Meeting>>(args?: {
     where?: MeetingWhereInput;
     orderBy?: MeetingOrderByInput;
@@ -1642,8 +1736,7 @@ export interface GroupSubscription
   phone: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   address: () => Promise<AsyncIterator<String>>;
-  lattitude: () => Promise<AsyncIterator<Float>>;
-  longitude: () => Promise<AsyncIterator<Float>>;
+  location: <T = LocationSubscription>() => T;
   meetings: <T = Promise<AsyncIterator<MeetingSubscription>>>(args?: {
     where?: MeetingWhereInput;
     orderBy?: MeetingOrderByInput;
@@ -1668,8 +1761,7 @@ export interface GroupNullablePromise
   phone: () => Promise<String>;
   email: () => Promise<String>;
   address: () => Promise<String>;
-  lattitude: () => Promise<Float>;
-  longitude: () => Promise<Float>;
+  location: <T = LocationPromise>() => T;
   meetings: <T = FragmentableArray<Meeting>>(args?: {
     where?: MeetingWhereInput;
     orderBy?: MeetingOrderByInput;
@@ -1679,6 +1771,34 @@ export interface GroupNullablePromise
     first?: Int;
     last?: Int;
   }) => T;
+}
+
+export interface Location {
+  id: ID_Output;
+  latitude: Float;
+  longitude: Float;
+}
+
+export interface LocationPromise extends Promise<Location>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  latitude: () => Promise<Float>;
+  longitude: () => Promise<Float>;
+}
+
+export interface LocationSubscription
+  extends Promise<AsyncIterator<Location>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  latitude: () => Promise<AsyncIterator<Float>>;
+  longitude: () => Promise<AsyncIterator<Float>>;
+}
+
+export interface LocationNullablePromise
+  extends Promise<Location | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  latitude: () => Promise<Float>;
+  longitude: () => Promise<Float>;
 }
 
 export interface Meeting {
@@ -1847,6 +1967,62 @@ export interface AggregateGroupPromise
 
 export interface AggregateGroupSubscription
   extends Promise<AsyncIterator<AggregateGroup>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface LocationConnection {
+  pageInfo: PageInfo;
+  edges: LocationEdge[];
+}
+
+export interface LocationConnectionPromise
+  extends Promise<LocationConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<LocationEdge>>() => T;
+  aggregate: <T = AggregateLocationPromise>() => T;
+}
+
+export interface LocationConnectionSubscription
+  extends Promise<AsyncIterator<LocationConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<LocationEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateLocationSubscription>() => T;
+}
+
+export interface LocationEdge {
+  node: Location;
+  cursor: String;
+}
+
+export interface LocationEdgePromise
+  extends Promise<LocationEdge>,
+    Fragmentable {
+  node: <T = LocationPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface LocationEdgeSubscription
+  extends Promise<AsyncIterator<LocationEdge>>,
+    Fragmentable {
+  node: <T = LocationSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateLocation {
+  count: Int;
+}
+
+export interface AggregateLocationPromise
+  extends Promise<AggregateLocation>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateLocationSubscription
+  extends Promise<AsyncIterator<AggregateLocation>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -2069,8 +2245,6 @@ export interface GroupPreviousValues {
   phone?: String;
   email?: String;
   address?: String;
-  lattitude?: Float;
-  longitude?: Float;
 }
 
 export interface GroupPreviousValuesPromise
@@ -2085,8 +2259,6 @@ export interface GroupPreviousValuesPromise
   phone: () => Promise<String>;
   email: () => Promise<String>;
   address: () => Promise<String>;
-  lattitude: () => Promise<Float>;
-  longitude: () => Promise<Float>;
 }
 
 export interface GroupPreviousValuesSubscription
@@ -2101,7 +2273,52 @@ export interface GroupPreviousValuesSubscription
   phone: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   address: () => Promise<AsyncIterator<String>>;
-  lattitude: () => Promise<AsyncIterator<Float>>;
+}
+
+export interface LocationSubscriptionPayload {
+  mutation: MutationType;
+  node: Location;
+  updatedFields: String[];
+  previousValues: LocationPreviousValues;
+}
+
+export interface LocationSubscriptionPayloadPromise
+  extends Promise<LocationSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = LocationPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = LocationPreviousValuesPromise>() => T;
+}
+
+export interface LocationSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<LocationSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = LocationSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = LocationPreviousValuesSubscription>() => T;
+}
+
+export interface LocationPreviousValues {
+  id: ID_Output;
+  latitude: Float;
+  longitude: Float;
+}
+
+export interface LocationPreviousValuesPromise
+  extends Promise<LocationPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  latitude: () => Promise<Float>;
+  longitude: () => Promise<Float>;
+}
+
+export interface LocationPreviousValuesSubscription
+  extends Promise<AsyncIterator<LocationPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  latitude: () => Promise<AsyncIterator<Float>>;
   longitude: () => Promise<AsyncIterator<Float>>;
 }
 
@@ -2265,6 +2482,10 @@ export const models: Model[] = [
   },
   {
     name: "Event",
+    embedded: false
+  },
+  {
+    name: "Location",
     embedded: false
   },
   {

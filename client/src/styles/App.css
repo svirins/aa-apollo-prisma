@@ -1,0 +1,15 @@
+.marker-btn {
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+.marker-img {
+  width: 35px;
+  height: 35px;
+}
+.mapboxgl-ctrl-group {
+  box-shadow: 0 0 0 0px !important;
+
+  background: none !important;
+}

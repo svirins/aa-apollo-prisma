@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+
+import 'semantic-ui-css/semantic.min.css';
 
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
@@ -21,8 +24,10 @@ const client = new ApolloClient({
 });
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <Pages />
-  </ApolloProvider>,
-  document.getElementById('root'),
+    <ApolloProvider client={client}>
+      <BrowserRouter>
+        <Pages />
+      </BrowserRouter>
+    </ApolloProvider>,
+   document.getElementById('root'),
 );

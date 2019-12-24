@@ -19,8 +19,7 @@ type Group {
   phone:        String
   email:        String
   address:      String
-  lattitude:    Float 
-  longitude:    Float
+  location:     Location
   meetings:     [Meeting!]! 
 }
 
@@ -41,7 +40,11 @@ type Event {
   city:         String!
   description:  String!       
   agenda:       String        
-  contact:      String        
+  contact:      String   
 }
 
-
+type Location {
+  id: ID! @id
+  latitude: Float!
+  longitude: Float!
+}

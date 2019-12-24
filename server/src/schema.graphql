@@ -17,9 +17,8 @@ type Group {
   phone:         String
   email:         String
   address:       String
-	lattitude:     Float
-	longitude:     Float
-  meetings:      [Meeting!]     
+  meetings:      [Meeting!]  
+  location:      Location! 
 }
 
 type Meeting {
@@ -40,6 +39,12 @@ type Event {
   description:  String!       
   agenda:       String
   contact:      String
+}
+
+type Location {
+  id:           ID! 
+  latitude:     Float!
+  longitude:    Float!
 }
 
 scalar DateTime
