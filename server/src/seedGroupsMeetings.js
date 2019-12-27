@@ -7,8 +7,7 @@ async function main() {
     name: 'Dmitriy S',
     email: 'ds@gmail.com',
     password: 'chupacabra',
-    groups: {
-      
+    groups: {   
       create: [
         {
           name: 'Na ozere',
@@ -18,8 +17,12 @@ async function main() {
           phone: '+375(25)940-95-91',
           email: faker.internet.email(),
           address: faker.address.streetAddress(),
-          lattitude: 27.77,
-          longitude: 54.33,
+          location: {
+            create: {
+                lattitude: 26.77,
+                longitude: 52.33,
+            },
+          },
           meetings: {
             create: [{
               name: faker.hacker.noun(),
@@ -41,8 +44,12 @@ async function main() {
         phone: '+375(25)940-95-99',
         email: faker.internet.email(),
         address: faker.address.streetAddress(),
-        lattitude: 27.77,
-        longitude: 54.33,
+        location: {
+          create: {
+              lattitude: 26.77,
+              longitude: 53.53,
+          },
+        },
         meetings: {
           create: [{
             name: faker.hacker.noun(),
@@ -64,8 +71,12 @@ async function main() {
         phone: '+375(25)940-95-91',
         email: faker.internet.email(),
         address: faker.address.streetAddress(),       
-        lattitude: 27.77,
-        longitude: 54.33,
+        location: {
+          create: {
+              lattitude: 27.77,
+              longitude: 51.33,
+          },
+        },
         meetings: {
           create: [{
             name: faker.hacker.noun(),
@@ -79,7 +90,88 @@ async function main() {
             type: 'Closed',
           },],
         },
-      },],
+      },{
+        name: 'Na ozere',
+        description: faker.hacker.phrase(),
+        city: faker.address.city(),
+        region: 'Minskaya',
+        phone: '+375(25)940-95-91',
+        email: faker.internet.email(),
+        address: faker.address.streetAddress(),
+        location: {
+          create: {
+              lattitude: 28.77,
+              longitude: 52.33,
+          },
+        },
+        meetings: {
+          create: [{
+            name: faker.hacker.noun(),
+            weekday: 'Mo',
+            time: '19:00',
+            type: 'Closed',
+          },{
+            name: faker.hacker.noun(),
+            weekday: 'Tu',
+            time: '19:00',
+            type: 'Closed',
+          },],
+        },
+    },{
+      name: 'Na gore',
+      description: faker.hacker.phrase(),
+      city: faker.address.city(),
+      region: 'Minskaya',
+      phone: '+375(25)940-95-99',
+      email: faker.internet.email(),
+      address: faker.address.streetAddress(),
+      location: {
+        create: {
+            lattitude: 28.78,
+            longitude: 54.33,
+        },
+      },
+      meetings: {
+        create: [{
+          name: faker.hacker.noun(),
+          weekday: 'Mo',
+          time: '19:00',
+          type: 'Closed',
+        },{
+          name: faker.hacker.noun(),
+          weekday: 'Tu',
+          time: '19:00',
+          type: 'Closed',
+        },],
+      },
+    },{
+      name: 'Tochka',
+      description: faker.hacker.phrase(),
+      city: faker.address.city(),
+      region: 'Minskaya',
+      phone: '+375(25)940-95-91',
+      email: faker.internet.email(),
+      address: faker.address.streetAddress(),       
+      location: {
+        create: {
+            lattitude: 24.77,
+            longitude: 56.33,
+        },
+      },
+      meetings: {
+        create: [{
+          name: faker.hacker.noun(),
+          weekday: 'Mo',
+          time: '19:00',
+          type: 'Closed',
+        },{
+          name: faker.hacker.noun(),
+          weekday: 'Tu',
+          time: '19:00',
+          type: 'Closed',
+        },],
+      },
+    }],
      }, 
     })
   console.log(`Created new user: ${newUser.name} (ID: ${newUser.id})`)

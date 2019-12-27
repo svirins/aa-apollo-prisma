@@ -45,6 +45,6 @@ type Event {
 
 type Location {
   id: ID! @id
-  latitude: Float!
-  longitude: Float!
+  lattitude: Float
+  longitude: Float
 }

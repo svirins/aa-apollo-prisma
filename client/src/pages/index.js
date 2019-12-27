@@ -1,14 +1,12 @@
 import React, { Fragment, Suspense, lazy } from 'react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 
-import GroupList from './groupList';
+import GroupsContainer from './GroupList';
 import NearMe from './nearMe'
 import Events from './events';
 import Profile from './profile';
 import LoginPage from './loginPage'
-
 import FourZeroFour from './notFound'
-
 
 import Header from '../components/header'
 import PageContainer from '../components/page-container'
@@ -23,7 +21,7 @@ const Pages = (props) => (
         <Route path="/events" render={(props) => <Events {...props}/>} />
         <Route path="/profile" render={(props) => <Profile {...props}/>} />
         <Route path='/login' render={(props) => <LoginPage {...props}/>} />
-        <Route path="/" exact component={GroupList} />
+        <Route path="/" exact component={GroupsContainer} />
         <FourZeroFour Route path="*" component={FourZeroFour} />
       </Switch>
     </PageContainer>

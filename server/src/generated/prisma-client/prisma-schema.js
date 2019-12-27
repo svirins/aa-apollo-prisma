@@ -855,8 +855,8 @@ input GroupWhereUniqueInput {
 
 type Location {
   id: ID!
-  latitude: Float!
-  longitude: Float!
+  lattitude: Float
+  longitude: Float
 }
 
 type LocationConnection {
@@ -867,8 +867,8 @@ type LocationConnection {
 
 input LocationCreateInput {
   id: ID
-  latitude: Float!
-  longitude: Float!
+  lattitude: Float
+  longitude: Float
 }
 
 input LocationCreateOneInput {
@@ -884,16 +884,16 @@ type LocationEdge {
 enum LocationOrderByInput {
   id_ASC
   id_DESC
-  latitude_ASC
-  latitude_DESC
+  lattitude_ASC
+  lattitude_DESC
   longitude_ASC
   longitude_DESC
 }
 
 type LocationPreviousValues {
   id: ID!
-  latitude: Float!
-  longitude: Float!
+  lattitude: Float
+  longitude: Float
 }
 
 type LocationSubscriptionPayload {
@@ -915,17 +915,17 @@ input LocationSubscriptionWhereInput {
 }
 
 input LocationUpdateDataInput {
-  latitude: Float
+  lattitude: Float
   longitude: Float
 }
 
 input LocationUpdateInput {
-  latitude: Float
+  lattitude: Float
   longitude: Float
 }
 
 input LocationUpdateManyMutationInput {
-  latitude: Float
+  lattitude: Float
   longitude: Float
 }
 
@@ -958,14 +958,14 @@ input LocationWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  latitude: Float
-  latitude_not: Float
-  latitude_in: [Float!]
-  latitude_not_in: [Float!]
-  latitude_lt: Float
-  latitude_lte: Float
-  latitude_gt: Float
-  latitude_gte: Float
+  lattitude: Float
+  lattitude_not: Float
+  lattitude_in: [Float!]
+  lattitude_not_in: [Float!]
+  lattitude_lt: Float
+  lattitude_lte: Float
+  lattitude_gt: Float
+  lattitude_gte: Float
   longitude: Float
   longitude_not: Float
   longitude_in: [Float!]

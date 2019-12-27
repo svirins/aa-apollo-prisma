@@ -321,8 +321,8 @@ export type EventOrderByInput =
 export type LocationOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "latitude_ASC"
-  | "latitude_DESC"
+  | "lattitude_ASC"
+  | "lattitude_DESC"
   | "longitude_ASC"
   | "longitude_DESC";
 
@@ -645,14 +645,14 @@ export interface LocationWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  latitude?: Maybe<Float>;
-  latitude_not?: Maybe<Float>;
-  latitude_in?: Maybe<Float[] | Float>;
-  latitude_not_in?: Maybe<Float[] | Float>;
-  latitude_lt?: Maybe<Float>;
-  latitude_lte?: Maybe<Float>;
-  latitude_gt?: Maybe<Float>;
-  latitude_gte?: Maybe<Float>;
+  lattitude?: Maybe<Float>;
+  lattitude_not?: Maybe<Float>;
+  lattitude_in?: Maybe<Float[] | Float>;
+  lattitude_not_in?: Maybe<Float[] | Float>;
+  lattitude_lt?: Maybe<Float>;
+  lattitude_lte?: Maybe<Float>;
+  lattitude_gt?: Maybe<Float>;
+  lattitude_gte?: Maybe<Float>;
   longitude?: Maybe<Float>;
   longitude_not?: Maybe<Float>;
   longitude_in?: Maybe<Float[] | Float>;
@@ -792,8 +792,8 @@ export interface LocationCreateOneInput {
 
 export interface LocationCreateInput {
   id?: Maybe<ID_Input>;
-  latitude: Float;
-  longitude: Float;
+  lattitude?: Maybe<Float>;
+  longitude?: Maybe<Float>;
 }
 
 export interface MeetingCreateManyWithoutGroupInput {
@@ -884,7 +884,7 @@ export interface LocationUpdateOneInput {
 }
 
 export interface LocationUpdateDataInput {
-  latitude?: Maybe<Float>;
+  lattitude?: Maybe<Float>;
   longitude?: Maybe<Float>;
 }
 
@@ -1394,12 +1394,12 @@ export interface GroupUpdateManyMutationInput {
 }
 
 export interface LocationUpdateInput {
-  latitude?: Maybe<Float>;
+  lattitude?: Maybe<Float>;
   longitude?: Maybe<Float>;
 }
 
 export interface LocationUpdateManyMutationInput {
-  latitude?: Maybe<Float>;
+  lattitude?: Maybe<Float>;
   longitude?: Maybe<Float>;
 }
 
@@ -1775,13 +1775,13 @@ export interface GroupNullablePromise
 
 export interface Location {
   id: ID_Output;
-  latitude: Float;
-  longitude: Float;
+  lattitude?: Float;
+  longitude?: Float;
 }
 
 export interface LocationPromise extends Promise<Location>, Fragmentable {
   id: () => Promise<ID_Output>;
-  latitude: () => Promise<Float>;
+  lattitude: () => Promise<Float>;
   longitude: () => Promise<Float>;
 }
 
@@ -1789,7 +1789,7 @@ export interface LocationSubscription
   extends Promise<AsyncIterator<Location>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  latitude: () => Promise<AsyncIterator<Float>>;
+  lattitude: () => Promise<AsyncIterator<Float>>;
   longitude: () => Promise<AsyncIterator<Float>>;
 }
 
@@ -1797,7 +1797,7 @@ export interface LocationNullablePromise
   extends Promise<Location | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  latitude: () => Promise<Float>;
+  lattitude: () => Promise<Float>;
   longitude: () => Promise<Float>;
 }
 
@@ -2302,15 +2302,15 @@ export interface LocationSubscriptionPayloadSubscription
 
 export interface LocationPreviousValues {
   id: ID_Output;
-  latitude: Float;
-  longitude: Float;
+  lattitude?: Float;
+  longitude?: Float;
 }
 
 export interface LocationPreviousValuesPromise
   extends Promise<LocationPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  latitude: () => Promise<Float>;
+  lattitude: () => Promise<Float>;
   longitude: () => Promise<Float>;
 }
 
@@ -2318,7 +2318,7 @@ export interface LocationPreviousValuesSubscription
   extends Promise<AsyncIterator<LocationPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  latitude: () => Promise<AsyncIterator<Float>>;
+  lattitude: () => Promise<AsyncIterator<Float>>;
   longitude: () => Promise<AsyncIterator<Float>>;
 }
 
