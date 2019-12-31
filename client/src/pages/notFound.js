@@ -1,8 +1,8 @@
 import React from 'react';
-
+import Error from '../components/ui-elements/error'
 
 const FourZeroFour = () => (
-  <p>FourZeroFour</p>
+  <Error errorMessage="Error 404 - page not found on server"/>
 );
 
 export default FourZeroFour;

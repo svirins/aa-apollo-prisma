@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
 import 'semantic-ui-css/semantic.min.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';

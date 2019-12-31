@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Image, Menu, Input, Button, Container, Icon } from "semantic-ui-react";
-
-import logo from "../assets/images/logo.svg";
 import { Link } from 'react-router-dom'
+
+import logo from "../../assets/images/logo.svg";
 
 const Header = props => {
   const [inputValue, setInputValue] = useState("");

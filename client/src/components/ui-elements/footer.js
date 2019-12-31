@@ -8,7 +8,7 @@ import {
   Segment,
 } from 'semantic-ui-react'
 
-import logo from '../assets/images/logo.png'
+import logo from "../../assets/images/logo.svg";
 
 
 const Footer = () => (

@@ -2,9 +2,9 @@ import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
-import { Loader } from 'semantic-ui-react'
-import Error from '../components/error'
-import EventList from '../components/eventsList'
+import LoadingMessage from '../components/ui-elements/loader'
+import Error from '../components/ui-elements/error'
+import EventList from '../components/event/eventsList'
 
 const EVENTS_LIST_QUERY = gql`
   query getEvents {
@@ -26,9 +26,8 @@ const EVENTS_LIST_QUERY = gql`
 const Events = () => {
   const { data, loading, error } = useQuery(EVENTS_LIST_QUERY);
 
-  if (loading) return (<Loader>Loading</Loader>)
+  if (loading) return (<LoadingMessage />)
   if (error) return <Error errorMessage="GraphQL server signal an error to the client"/>;
-  console.log(data)
 
   return (
     <EventList {...data}/>
