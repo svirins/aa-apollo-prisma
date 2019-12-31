@@ -11,8 +11,8 @@ const GroupList = props => {
   const groupGrid = props.groupData.groups.map(group => (
     <Grid.Row key={group.id}>
       <Grid.Column width={6}>
-        <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
-        {/* <MapDataDisplay location={group.location} name={group.name}/> */}
+        {/* <Image src="https://react.semantic-ui.com/images/wireframe/image.png" /> */}
+        <MapDataDisplay location={group.location} name={group.name}/> 
       </Grid.Column>
       <Grid.Column width={7}>
         <GroupDataDisplay

@@ -1,7 +1,7 @@
 import React,{ Fragment } from 'react';
 import { Card, Header, Image} from 'semantic-ui-react'
 import Event from './event'
-import logo from '../../assets/images/aa-logo-marker.svg'
+import logo from '../../assets/images/marker.svg'
 
 const EventList = props => {
   const eventCount = props.eventList.count

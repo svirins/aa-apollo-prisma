@@ -2,7 +2,7 @@ import React, { Fragment, Suspense, lazy } from 'react';
 import { Route, Switch } from 'react-router-dom'
 
 import Groups from './groups';
-import NearMe from './nearMe'
+import AllGroupsMap from './allGroupsMap'
 import Events from './events';
 import Profile from './profile';
 import LoginPage from './loginPage'
@@ -19,7 +19,7 @@ const Pages = (props) => (
     <Header />
     <PageContainer>
       <Switch>
-        <Route path="/nearme" render={(props) => <NearMe {...props}/>} />
+        <Route path="/allgroups" render={(props) => <AllGroupsMap {...props}/>} />
         <Route path="/events" render={(props) => <Events {...props}/>} />
         <Route path="/profile" render={(props) => <Profile {...props}/>} />
         <Route path='/login' render={(props) => <LoginPage {...props}/>} />

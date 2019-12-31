@@ -19,7 +19,7 @@ const Header = props => {
         <Menu.Item as={Link} to="/">
           All Groups
         </Menu.Item>
-        <Menu.Item as={Link} to="/nearme">Near Me</Menu.Item>
+        <Menu.Item as={Link} to="/allgroups">Whole Map</Menu.Item>
         <Menu.Item as={Link} to="/events">Upcoming Events</Menu.Item>
         <Menu.Menu position="right">
           <Menu.Item>
