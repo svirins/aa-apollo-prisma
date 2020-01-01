@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
-
 import ReactMapGL, {
   Marker,
   Popup,
@@ -14,25 +11,10 @@ import { Container } from "semantic-ui-react";
 import Error from "../components/ui-elements/error";
 import LoadingMessage from "../components/ui-elements/loader";
 
-import mapMarker from "../assets/images/marker.png";
 
-const GROUPS_LIST_QUERY_SIMPLIFIED = gql`
-  query getGroups($filter: String) {
-    groupList(filter: $filter) {
-      groups {
-        id
-        name
-        city
-        region
-        address
-        location {
-          lattitude
-          longitude
-        }
-      }
-    }
-  }
-`;
+import { useQuery } from "@apollo/react-hooks";
+import GROUPS_LIST_QUERY_SIMPLIFIED from '../queries/groupsMapList'
+
 
 const AllGroupsMap = props => {
   const [variables, setVariables] = useState({});

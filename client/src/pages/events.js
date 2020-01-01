@@ -1,27 +1,10 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-
 import LoadingMessage from '../components/ui-elements/loader'
 import Error from '../components/ui-elements/error'
 import EventList from '../components/event/eventsList'
 
-const EVENTS_LIST_QUERY = gql`
-  query getEvents {
-    eventList(orderBy: date_ASC) {
-      count
-      events {
-        id
-        name
-        date
-        city
-        description
-        agenda
-        contact
-      }
-    }
-  }
-`
+import { useQuery } from '@apollo/react-hooks';
+import EVENTS_LIST_QUERY from '../queries/eventsList'
 
 const Events = () => {
   const { data, loading, error } = useQuery(EVENTS_LIST_QUERY);
