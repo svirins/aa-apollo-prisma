@@ -6,7 +6,7 @@ import LoadingMessage from '../components/ui-elements/loader'
 import { Container } from "semantic-ui-react";
 
 import { useQuery } from '@apollo/react-hooks';
-import GROUPS_LIST_QUERY from '../queries/groupsList'
+import { GROUPS_LIST_QUERY } from '../queries'
 
 
 const Groups = () => {

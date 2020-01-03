@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl'
 import { Container } from 'semantic-ui-react';
 
-import mapMarker from "../../assets/images/marker.png";
+import mapMarker from "../../assets/images/logoMarker.svg";
 
 const MapDataDisplay = (props) => {
   const [viewport, setViewport] = useState({

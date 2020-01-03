@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Card, Icon, Divider} from 'semantic-ui-react'
 
 const Event = props => {
@@ -22,5 +22,3 @@ const Event = props => {
 
 export default Event
 
-
-// {props.agenda}

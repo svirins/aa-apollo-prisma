@@ -1,15 +1,16 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Input, Header, Container, Icon } from "semantic-ui-react";
 
 import useDebounce from '../../hooks/hooks'
 
 const SearchAndNavigation = props => {
   const [enteredFilter, setEnteredFilter] = useState("");
-  const debouncedEnteredFilter = useDebounce(enteredFilter, 750);
+  const debouncedEnteredFilter = useDebounce(enteredFilter, 1000);
+  const { filterHandler } = props
 
   useEffect(() => {
       if (debouncedEnteredFilter) {
-        props.filterHandler(debouncedEnteredFilter)
+        filterHandler(debouncedEnteredFilter)
     }}, [debouncedEnteredFilter]);
 
 
@@ -22,6 +23,7 @@ const SearchAndNavigation = props => {
         icon={<Icon name="search" circular link />}
         placeholder="Search..."
         onChange={event => setEnteredFilter(event.target.value)}
+        value={enteredFilter}
       />
 
 

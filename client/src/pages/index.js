@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense, lazy } from 'react';
+import React, { Fragment} from 'react';
 import { Route, Switch } from 'react-router-dom'
 
 import Groups from './groups';
@@ -9,6 +9,7 @@ import LoginPage from './loginPage'
 import FourZeroFour from './notFound'
 
 // implement lazy loading here
+
 import Header from '../components/ui-elements/header'
 import PageContainer from '../components/ui-elements/page-container'
 import Footer from '../components/ui-elements/footer'

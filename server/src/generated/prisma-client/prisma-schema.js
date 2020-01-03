@@ -396,6 +396,7 @@ type Group {
   description: String!
   city: String!
   region: regionType!
+  isActive: Boolean
   phone: String
   email: String
   address: String
@@ -416,6 +417,7 @@ input GroupCreateInput {
   description: String
   city: String!
   region: regionType!
+  isActive: Boolean
   phone: String
   email: String
   address: String
@@ -439,6 +441,7 @@ input GroupCreateWithoutAuthorInput {
   description: String
   city: String!
   region: regionType!
+  isActive: Boolean
   phone: String
   email: String
   address: String
@@ -453,6 +456,7 @@ input GroupCreateWithoutMeetingsInput {
   description: String
   city: String!
   region: regionType!
+  isActive: Boolean
   phone: String
   email: String
   address: String
@@ -477,6 +481,8 @@ enum GroupOrderByInput {
   city_DESC
   region_ASC
   region_DESC
+  isActive_ASC
+  isActive_DESC
   phone_ASC
   phone_DESC
   email_ASC
@@ -492,6 +498,7 @@ type GroupPreviousValues {
   description: String!
   city: String!
   region: regionType!
+  isActive: Boolean
   phone: String
   email: String
   address: String
@@ -566,6 +573,8 @@ input GroupScalarWhereInput {
   region_not: regionType
   region_in: [regionType!]
   region_not_in: [regionType!]
+  isActive: Boolean
+  isActive_not: Boolean
   phone: String
   phone_not: String
   phone_in: [String!]
@@ -637,6 +646,7 @@ input GroupUpdateInput {
   description: String
   city: String
   region: regionType
+  isActive: Boolean
   phone: String
   email: String
   address: String
@@ -649,6 +659,7 @@ input GroupUpdateManyDataInput {
   description: String
   city: String
   region: regionType
+  isActive: Boolean
   phone: String
   email: String
   address: String
@@ -659,6 +670,7 @@ input GroupUpdateManyMutationInput {
   description: String
   city: String
   region: regionType
+  isActive: Boolean
   phone: String
   email: String
   address: String
@@ -693,6 +705,7 @@ input GroupUpdateWithoutAuthorDataInput {
   description: String
   city: String
   region: regionType
+  isActive: Boolean
   phone: String
   email: String
   address: String
@@ -706,6 +719,7 @@ input GroupUpdateWithoutMeetingsDataInput {
   description: String
   city: String
   region: regionType
+  isActive: Boolean
   phone: String
   email: String
   address: String
@@ -798,6 +812,8 @@ input GroupWhereInput {
   region_not: regionType
   region_in: [regionType!]
   region_not_in: [regionType!]
+  isActive: Boolean
+  isActive_not: Boolean
   phone: String
   phone_not: String
   phone_in: [String!]
@@ -990,7 +1006,7 @@ type Meeting {
   group: Group!
   name: String!
   weekday: Weekday!
-  time: String!
+  time: DateTime!
   type: meetingType
 }
 
@@ -1005,7 +1021,7 @@ input MeetingCreateInput {
   group: GroupCreateOneWithoutMeetingsInput!
   name: String
   weekday: Weekday!
-  time: String!
+  time: DateTime!
   type: meetingType
 }
 
@@ -1018,7 +1034,7 @@ input MeetingCreateWithoutGroupInput {
   id: ID
   name: String
   weekday: Weekday!
-  time: String!
+  time: DateTime!
   type: meetingType
 }
 
@@ -1044,7 +1060,7 @@ type MeetingPreviousValues {
   id: ID!
   name: String!
   weekday: Weekday!
-  time: String!
+  time: DateTime!
   type: meetingType
 }
 
@@ -1081,20 +1097,14 @@ input MeetingScalarWhereInput {
   weekday_not: Weekday
   weekday_in: [Weekday!]
   weekday_not_in: [Weekday!]
-  time: String
-  time_not: String
-  time_in: [String!]
-  time_not_in: [String!]
-  time_lt: String
-  time_lte: String
-  time_gt: String
-  time_gte: String
-  time_contains: String
-  time_not_contains: String
-  time_starts_with: String
-  time_not_starts_with: String
-  time_ends_with: String
-  time_not_ends_with: String
+  time: DateTime
+  time_not: DateTime
+  time_in: [DateTime!]
+  time_not_in: [DateTime!]
+  time_lt: DateTime
+  time_lte: DateTime
+  time_gt: DateTime
+  time_gte: DateTime
   type: meetingType
   type_not: meetingType
   type_in: [meetingType!]
@@ -1131,21 +1141,21 @@ input MeetingUpdateInput {
   group: GroupUpdateOneRequiredWithoutMeetingsInput
   name: String
   weekday: Weekday
-  time: String
+  time: DateTime
   type: meetingType
 }
 
 input MeetingUpdateManyDataInput {
   name: String
   weekday: Weekday
-  time: String
+  time: DateTime
   type: meetingType
 }
 
 input MeetingUpdateManyMutationInput {
   name: String
   weekday: Weekday
-  time: String
+  time: DateTime
   type: meetingType
 }
 
@@ -1169,7 +1179,7 @@ input MeetingUpdateManyWithWhereNestedInput {
 input MeetingUpdateWithoutGroupDataInput {
   name: String
   weekday: Weekday
-  time: String
+  time: DateTime
   type: meetingType
 }
 
@@ -1218,20 +1228,14 @@ input MeetingWhereInput {
   weekday_not: Weekday
   weekday_in: [Weekday!]
   weekday_not_in: [Weekday!]
-  time: String
-  time_not: String
-  time_in: [String!]
-  time_not_in: [String!]
-  time_lt: String
-  time_lte: String
-  time_gt: String
-  time_gte: String
-  time_contains: String
-  time_not_contains: String
-  time_starts_with: String
-  time_not_starts_with: String
-  time_ends_with: String
-  time_not_ends_with: String
+  time: DateTime
+  time_not: DateTime
+  time_in: [DateTime!]
+  time_not_in: [DateTime!]
+  time_lt: DateTime
+  time_lte: DateTime
+  time_gt: DateTime
+  time_gte: DateTime
   type: meetingType
   type_not: meetingType
   type_in: [meetingType!]

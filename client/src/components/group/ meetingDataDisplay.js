@@ -1,6 +1,6 @@
 import React from "react";
 import Meeting from "./meeting";
-import { Table, Feed } from "semantic-ui-react";
+import { Table } from "semantic-ui-react";
 
 const MeetingDataDisplay = props => {
   const meetings = props.meetings.map(meeting => (

@@ -4,7 +4,7 @@ import Error from '../components/ui-elements/error'
 import EventList from '../components/event/eventsList'
 
 import { useQuery } from '@apollo/react-hooks';
-import EVENTS_LIST_QUERY from '../queries/eventsList'
+import { EVENTS_LIST_QUERY } from '../queries'
 
 const Events = () => {
   const { data, loading, error } = useQuery(EVENTS_LIST_QUERY);

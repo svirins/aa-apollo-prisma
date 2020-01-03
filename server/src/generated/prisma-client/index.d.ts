@@ -283,6 +283,8 @@ export type GroupOrderByInput =
   | "city_DESC"
   | "region_ASC"
   | "region_DESC"
+  | "isActive_ASC"
+  | "isActive_DESC"
   | "phone_ASC"
   | "phone_DESC"
   | "email_ASC"
@@ -412,6 +414,8 @@ export interface GroupWhereInput {
   region_not?: Maybe<regionType>;
   region_in?: Maybe<regionType[] | regionType>;
   region_not_in?: Maybe<regionType[] | regionType>;
+  isActive?: Maybe<Boolean>;
+  isActive_not?: Maybe<Boolean>;
   phone?: Maybe<String>;
   phone_not?: Maybe<String>;
   phone_in?: Maybe<String[] | String>;
@@ -700,20 +704,14 @@ export interface MeetingWhereInput {
   weekday_not?: Maybe<Weekday>;
   weekday_in?: Maybe<Weekday[] | Weekday>;
   weekday_not_in?: Maybe<Weekday[] | Weekday>;
-  time?: Maybe<String>;
-  time_not?: Maybe<String>;
-  time_in?: Maybe<String[] | String>;
-  time_not_in?: Maybe<String[] | String>;
-  time_lt?: Maybe<String>;
-  time_lte?: Maybe<String>;
-  time_gt?: Maybe<String>;
-  time_gte?: Maybe<String>;
-  time_contains?: Maybe<String>;
-  time_not_contains?: Maybe<String>;
-  time_starts_with?: Maybe<String>;
-  time_not_starts_with?: Maybe<String>;
-  time_ends_with?: Maybe<String>;
-  time_not_ends_with?: Maybe<String>;
+  time?: Maybe<DateTimeInput>;
+  time_not?: Maybe<DateTimeInput>;
+  time_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  time_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  time_lt?: Maybe<DateTimeInput>;
+  time_lte?: Maybe<DateTimeInput>;
+  time_gt?: Maybe<DateTimeInput>;
+  time_gte?: Maybe<DateTimeInput>;
   type?: Maybe<meetingType>;
   type_not?: Maybe<meetingType>;
   type_in?: Maybe<meetingType[] | meetingType>;
@@ -778,6 +776,7 @@ export interface GroupCreateWithoutAuthorInput {
   description?: Maybe<String>;
   city: String;
   region: regionType;
+  isActive?: Maybe<Boolean>;
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
@@ -807,7 +806,7 @@ export interface MeetingCreateWithoutGroupInput {
   id?: Maybe<ID_Input>;
   name?: Maybe<String>;
   weekday: Weekday;
-  time: String;
+  time: DateTimeInput;
   type?: Maybe<meetingType>;
 }
 
@@ -867,6 +866,7 @@ export interface GroupUpdateWithoutAuthorDataInput {
   description?: Maybe<String>;
   city?: Maybe<String>;
   region?: Maybe<regionType>;
+  isActive?: Maybe<Boolean>;
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
@@ -924,7 +924,7 @@ export interface MeetingUpdateWithWhereUniqueWithoutGroupInput {
 export interface MeetingUpdateWithoutGroupDataInput {
   name?: Maybe<String>;
   weekday?: Maybe<Weekday>;
-  time?: Maybe<String>;
+  time?: Maybe<DateTimeInput>;
   type?: Maybe<meetingType>;
 }
 
@@ -967,20 +967,14 @@ export interface MeetingScalarWhereInput {
   weekday_not?: Maybe<Weekday>;
   weekday_in?: Maybe<Weekday[] | Weekday>;
   weekday_not_in?: Maybe<Weekday[] | Weekday>;
-  time?: Maybe<String>;
-  time_not?: Maybe<String>;
-  time_in?: Maybe<String[] | String>;
-  time_not_in?: Maybe<String[] | String>;
-  time_lt?: Maybe<String>;
-  time_lte?: Maybe<String>;
-  time_gt?: Maybe<String>;
-  time_gte?: Maybe<String>;
-  time_contains?: Maybe<String>;
-  time_not_contains?: Maybe<String>;
-  time_starts_with?: Maybe<String>;
-  time_not_starts_with?: Maybe<String>;
-  time_ends_with?: Maybe<String>;
-  time_not_ends_with?: Maybe<String>;
+  time?: Maybe<DateTimeInput>;
+  time_not?: Maybe<DateTimeInput>;
+  time_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  time_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  time_lt?: Maybe<DateTimeInput>;
+  time_lte?: Maybe<DateTimeInput>;
+  time_gt?: Maybe<DateTimeInput>;
+  time_gte?: Maybe<DateTimeInput>;
   type?: Maybe<meetingType>;
   type_not?: Maybe<meetingType>;
   type_in?: Maybe<meetingType[] | meetingType>;
@@ -998,7 +992,7 @@ export interface MeetingUpdateManyWithWhereNestedInput {
 export interface MeetingUpdateManyDataInput {
   name?: Maybe<String>;
   weekday?: Maybe<Weekday>;
-  time?: Maybe<String>;
+  time?: Maybe<DateTimeInput>;
   type?: Maybe<meetingType>;
 }
 
@@ -1077,6 +1071,8 @@ export interface GroupScalarWhereInput {
   region_not?: Maybe<regionType>;
   region_in?: Maybe<regionType[] | regionType>;
   region_not_in?: Maybe<regionType[] | regionType>;
+  isActive?: Maybe<Boolean>;
+  isActive_not?: Maybe<Boolean>;
   phone?: Maybe<String>;
   phone_not?: Maybe<String>;
   phone_in?: Maybe<String[] | String>;
@@ -1134,6 +1130,7 @@ export interface GroupUpdateManyDataInput {
   description?: Maybe<String>;
   city?: Maybe<String>;
   region?: Maybe<regionType>;
+  isActive?: Maybe<Boolean>;
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
@@ -1160,6 +1157,7 @@ export interface GroupCreateInput {
   description?: Maybe<String>;
   city: String;
   region: regionType;
+  isActive?: Maybe<Boolean>;
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
@@ -1203,6 +1201,7 @@ export interface GroupUpdateInput {
   description?: Maybe<String>;
   city?: Maybe<String>;
   region?: Maybe<regionType>;
+  isActive?: Maybe<Boolean>;
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
@@ -1388,6 +1387,7 @@ export interface GroupUpdateManyMutationInput {
   description?: Maybe<String>;
   city?: Maybe<String>;
   region?: Maybe<regionType>;
+  isActive?: Maybe<Boolean>;
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
@@ -1408,7 +1408,7 @@ export interface MeetingCreateInput {
   group: GroupCreateOneWithoutMeetingsInput;
   name?: Maybe<String>;
   weekday: Weekday;
-  time: String;
+  time: DateTimeInput;
   type?: Maybe<meetingType>;
 }
 
@@ -1424,6 +1424,7 @@ export interface GroupCreateWithoutMeetingsInput {
   description?: Maybe<String>;
   city: String;
   region: regionType;
+  isActive?: Maybe<Boolean>;
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
@@ -1434,7 +1435,7 @@ export interface MeetingUpdateInput {
   group?: Maybe<GroupUpdateOneRequiredWithoutMeetingsInput>;
   name?: Maybe<String>;
   weekday?: Maybe<Weekday>;
-  time?: Maybe<String>;
+  time?: Maybe<DateTimeInput>;
   type?: Maybe<meetingType>;
 }
 
@@ -1451,6 +1452,7 @@ export interface GroupUpdateWithoutMeetingsDataInput {
   description?: Maybe<String>;
   city?: Maybe<String>;
   region?: Maybe<regionType>;
+  isActive?: Maybe<Boolean>;
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
@@ -1465,7 +1467,7 @@ export interface GroupUpsertWithoutMeetingsInput {
 export interface MeetingUpdateManyMutationInput {
   name?: Maybe<String>;
   weekday?: Maybe<Weekday>;
-  time?: Maybe<String>;
+  time?: Maybe<DateTimeInput>;
   type?: Maybe<meetingType>;
 }
 
@@ -1695,6 +1697,7 @@ export interface Group {
   description: String;
   city: String;
   region: regionType;
+  isActive?: Boolean;
   phone?: String;
   email?: String;
   address?: String;
@@ -1708,6 +1711,7 @@ export interface GroupPromise extends Promise<Group>, Fragmentable {
   description: () => Promise<String>;
   city: () => Promise<String>;
   region: () => Promise<regionType>;
+  isActive: () => Promise<Boolean>;
   phone: () => Promise<String>;
   email: () => Promise<String>;
   address: () => Promise<String>;
@@ -1733,6 +1737,7 @@ export interface GroupSubscription
   description: () => Promise<AsyncIterator<String>>;
   city: () => Promise<AsyncIterator<String>>;
   region: () => Promise<AsyncIterator<regionType>>;
+  isActive: () => Promise<AsyncIterator<Boolean>>;
   phone: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   address: () => Promise<AsyncIterator<String>>;
@@ -1758,6 +1763,7 @@ export interface GroupNullablePromise
   description: () => Promise<String>;
   city: () => Promise<String>;
   region: () => Promise<regionType>;
+  isActive: () => Promise<Boolean>;
   phone: () => Promise<String>;
   email: () => Promise<String>;
   address: () => Promise<String>;
@@ -1805,7 +1811,7 @@ export interface Meeting {
   id: ID_Output;
   name: String;
   weekday: Weekday;
-  time: String;
+  time: DateTimeOutput;
   type?: meetingType;
 }
 
@@ -1814,7 +1820,7 @@ export interface MeetingPromise extends Promise<Meeting>, Fragmentable {
   group: <T = GroupPromise>() => T;
   name: () => Promise<String>;
   weekday: () => Promise<Weekday>;
-  time: () => Promise<String>;
+  time: () => Promise<DateTimeOutput>;
   type: () => Promise<meetingType>;
 }
 
@@ -1825,7 +1831,7 @@ export interface MeetingSubscription
   group: <T = GroupSubscription>() => T;
   name: () => Promise<AsyncIterator<String>>;
   weekday: () => Promise<AsyncIterator<Weekday>>;
-  time: () => Promise<AsyncIterator<String>>;
+  time: () => Promise<AsyncIterator<DateTimeOutput>>;
   type: () => Promise<AsyncIterator<meetingType>>;
 }
 
@@ -1836,7 +1842,7 @@ export interface MeetingNullablePromise
   group: <T = GroupPromise>() => T;
   name: () => Promise<String>;
   weekday: () => Promise<Weekday>;
-  time: () => Promise<String>;
+  time: () => Promise<DateTimeOutput>;
   type: () => Promise<meetingType>;
 }
 
@@ -2242,6 +2248,7 @@ export interface GroupPreviousValues {
   description: String;
   city: String;
   region: regionType;
+  isActive?: Boolean;
   phone?: String;
   email?: String;
   address?: String;
@@ -2256,6 +2263,7 @@ export interface GroupPreviousValuesPromise
   description: () => Promise<String>;
   city: () => Promise<String>;
   region: () => Promise<regionType>;
+  isActive: () => Promise<Boolean>;
   phone: () => Promise<String>;
   email: () => Promise<String>;
   address: () => Promise<String>;
@@ -2270,6 +2278,7 @@ export interface GroupPreviousValuesSubscription
   description: () => Promise<AsyncIterator<String>>;
   city: () => Promise<AsyncIterator<String>>;
   region: () => Promise<AsyncIterator<regionType>>;
+  isActive: () => Promise<AsyncIterator<Boolean>>;
   phone: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   address: () => Promise<AsyncIterator<String>>;
@@ -2351,7 +2360,7 @@ export interface MeetingPreviousValues {
   id: ID_Output;
   name: String;
   weekday: Weekday;
-  time: String;
+  time: DateTimeOutput;
   type?: meetingType;
 }
 
@@ -2361,7 +2370,7 @@ export interface MeetingPreviousValuesPromise
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
   weekday: () => Promise<Weekday>;
-  time: () => Promise<String>;
+  time: () => Promise<DateTimeOutput>;
   type: () => Promise<meetingType>;
 }
 
@@ -2371,7 +2380,7 @@ export interface MeetingPreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
   weekday: () => Promise<AsyncIterator<Weekday>>;
-  time: () => Promise<AsyncIterator<String>>;
+  time: () => Promise<AsyncIterator<DateTimeOutput>>;
   type: () => Promise<AsyncIterator<meetingType>>;
 }
 
@@ -2447,6 +2456,11 @@ DateTime scalar output type, which is always a string
 export type DateTimeOutput = string;
 
 /*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
+
+/*
 The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
 */
 export type Float = number;
@@ -2455,11 +2469,6 @@ export type Float = number;
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
 export type Int = number;
-
-/*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean;
 
 export type Long = string;
 

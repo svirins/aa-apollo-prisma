@@ -11,7 +11,7 @@ import {
 const Meeting = (props) => {
   const weekday = getToday();
   let isToday = (props.weekday === weekday) ? true : false
- 
+  const timeSubstr = props.time.substr(props.time.indexOf('T')+1, 5)
   return (
     <Table.Row positive={isToday}>
       <Table.Cell>
@@ -19,7 +19,7 @@ const Meeting = (props) => {
           <Image src='https://react.semantic-ui.com/images/avatar/small/lena.png' rounded size='mini' />
           <Header.Content>
             {props.weekday}
-            <Header.Subheader>{props.time}</Header.Subheader>
+            <Header.Subheader>{timeSubstr}</Header.Subheader>
           </Header.Content>
         </Header>
       </Table.Cell>

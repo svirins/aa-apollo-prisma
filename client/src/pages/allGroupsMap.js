@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactMapGL, {
   Marker,
   Popup,
@@ -11,13 +11,13 @@ import { Container } from "semantic-ui-react";
 import Error from "../components/ui-elements/error";
 import LoadingMessage from "../components/ui-elements/loader";
 
+import mapMarker from "../assets/images/logoMarker.svg";
 
 import { useQuery } from "@apollo/react-hooks";
-import GROUPS_LIST_QUERY_SIMPLIFIED from '../queries/groupsMapList'
+import { GROUPS_LIST_QUERY_SIMPLIFIED } from '../queries'
 
 
 const AllGroupsMap = props => {
-  const [variables, setVariables] = useState({});
   const [selectedMeeting, setSelectedMeeting] = useState(null);
   const [viewport, setViewport] = useState({
     latitude: 53.7211,
@@ -27,7 +27,8 @@ const AllGroupsMap = props => {
     height: "85vh",
     language: 'ru',
   });
-
+  const mapRef = React.createRef();
+                                             
   useEffect(() => {
     const listener = e => {
       if (e.key === "Escape") {
@@ -43,21 +44,15 @@ const AllGroupsMap = props => {
   const {
     data,
     loading,
-    error,
-    refetch
-  } = useQuery(GROUPS_LIST_QUERY_SIMPLIFIED, { variables });
-
-  const mapRef = React.createRef();
-
-  useEffect(() => {
-    refetch(variables);
-  }, [variables]);
+    error
+  } = useQuery(GROUPS_LIST_QUERY_SIMPLIFIED);
 
   if (loading) return <LoadingMessage />;
-  if (error)
+  if (error) 
     return (
       <Error errorMessage="GraphQL server signal an error to the client" />
     );
+  
   const markersList = data.groupList.groups.map(element => (
       <Marker
         key={element.id}
@@ -71,18 +66,14 @@ const AllGroupsMap = props => {
             setSelectedMeeting(element);
           }}
         >
-          <img
-            className="marker-img"
-            src="../assets/images/marker.png"
-            alt="AA Meeting"
-          />
+     <img className="marker-img" src={mapMarker} alt="AA Meeting" />
         </button>
       </Marker>
     )
   );
 
   return (
-    <Container fluid>
+    <Container>
       <ReactMapGL
         ref={mapRef}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
@@ -95,7 +86,7 @@ const AllGroupsMap = props => {
         <GeolocateControl
           positionOptions={{ enableHighAccuracy: true }}
           trackUserLocation={true}
-        />
+        /> 
         <NavigationControl />
         {markersList}
         {selectedMeeting ? (
@@ -107,7 +98,8 @@ const AllGroupsMap = props => {
             }}
           >
             <div>
-              <h4>{selectedMeeting.title}</h4>
+              <h4>{selectedMeeting.name}</h4>
+              <p>{selectedMeeting.address}</p>
             </div>
           </Popup>
         ) : null}

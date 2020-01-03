@@ -16,6 +16,7 @@ type Group {
   description:  String!       @default(value: "Some descriptive description")
   city:         String!
   region:       regionType! 
+  isActive:     Boolean       @default(value: true)
   phone:        String
   email:        String
   address:      String
@@ -28,7 +29,7 @@ type Meeting  {
   group:        Group!        @relation(link: INLINE)
   name:         String!       @default(value: "New AA Meeting")
   weekday:      Weekday!
-  time:         String!
+  time:         DateTime! 
   type:         meetingType
 } 
 
