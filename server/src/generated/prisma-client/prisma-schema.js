@@ -1319,7 +1319,6 @@ type Query {
 }
 
 enum regionType {
-  Minsk
   Minskaya
   Brestskaya
   Gomelskaya

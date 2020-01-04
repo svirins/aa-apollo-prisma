@@ -15,7 +15,6 @@ enum meetingType {
 }
 
 enum regionType {
-  Minsk
   Minskaya
   Brestskaya
   Gomelskaya

@@ -258,7 +258,6 @@ export interface ClientConstructor<T> {
  */
 
 export type regionType =
-  | "Minsk"
   | "Minskaya"
   | "Brestskaya"
   | "Gomelskaya"

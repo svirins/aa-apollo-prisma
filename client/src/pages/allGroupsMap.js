@@ -14,7 +14,7 @@ import LoadingMessage from "../components/ui-elements/loader";
 import mapMarker from "../assets/images/logoMarker.svg";
 
 import { useQuery } from "@apollo/react-hooks";
-import { GROUPS_LIST_QUERY_SIMPLIFIED } from '../queries'
+import { GROUPS_LIST_QUERY } from '../queries'
 
 
 const AllGroupsMap = props => {
@@ -45,7 +45,7 @@ const AllGroupsMap = props => {
     data,
     loading,
     error
-  } = useQuery(GROUPS_LIST_QUERY_SIMPLIFIED);
+  } = useQuery(GROUPS_LIST_QUERY);
 
   if (loading) return <LoadingMessage />;
   if (error) 

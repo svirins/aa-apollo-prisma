@@ -14,15 +14,15 @@ const MapDataDisplay = (props) => {
     language: 'ru'
   });
 
-  const _goToMinsk = () => {
-    const viewport = {
-      ...viewport,
-      longitude: 27.73603,
-      latitude: 53.883812,
-      zoom: 10.68
-    };
-    setViewport(viewport);
-  };
+  // const _goToMinsk = () => {
+  //   const viewport = {
+  //     ...viewport,
+  //     longitude: 27.73603,
+  //     latitude: 53.883812,
+  //     zoom: 10.68
+  //   };
+  //   setViewport(viewport);
+  // };
 
   return (
     <Container>

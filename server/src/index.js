@@ -3,7 +3,6 @@ require('dotenv').config()
 const { GraphQLServer } = require("graphql-yoga");
 const { prisma } = require("./generated/prisma-client");
 
-// resolvers comes here
 const Query = require('./resolvers/Query')
 const Mutation = require('./resolvers/Mutation')
 const User = require('./resolvers/User')
@@ -36,6 +35,11 @@ const server = new GraphQLServer({
 const options = {
   port: process.env.PORT || 4000
 }
+
+// const options = {
+//   port: process.env.PORT || 4000,
+//   endpoint: '/graphql'
+// }
 
 server.start(options, ({ port }) =>
   console.log(

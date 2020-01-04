@@ -1,23 +1,15 @@
 import gql from 'graphql-tag';
 
-export const GROUPS_LIST_QUERY_SIMPLIFIED = gql`
-  query getGroupsFromMap($filter: String) {
-    groupList(filter: $filter) {
-      groups {
-        id
+export const GET_REGIONS = gql`
+  query getRegions {
+    __type(name: "regionType") {
+      name
+      enumValues {
         name
-        city
-        isActive
-        region
-        address
-        location {
-          lattitude
-          longitude
-        }
       }
     }
   }
-`;
+`
 
 export const GROUPS_LIST_QUERY = gql`
   query getGroups($filter: String, $orderBy: GroupOrderByInput ) {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import GroupList from '../components/group/groupList'
-import SearchAndNavigation from '../components/ui-elements/searchAndNavigationBar'
+import Filters from '../components/ui-elements/filters'
 import Error from '../components/ui-elements/error'
 import LoadingMessage from '../components/ui-elements/loader'
 import { Container } from "semantic-ui-react";
@@ -19,14 +19,14 @@ const Groups = () => {
   if (loading) return (<LoadingMessage />)
   if (error) return <Error errorMessage="GraphQL server signal an error to the client"/>;
  
-  const onFilterStringChangeHandler = (value) => {
+  const onFilterChangeHandler = (value) => {
     setVariables({filter: value})
     console.log(variables)
   }
 
   return (
     <Container style={{ marginTop: '5em' }}>
-      <SearchAndNavigation filterHandler={onFilterStringChangeHandler}/>
+      <Filters filterHandler={onFilterChangeHandler}/>
       <GroupList groupData={data.groupList}/>
     </Container>
   )
