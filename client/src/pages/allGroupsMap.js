@@ -6,33 +6,29 @@ import ReactMapGL, {
   NavigationControl
 } from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
-
 import { Container } from "semantic-ui-react";
 import Error from "../components/ui-elements/error";
 import LoadingMessage from "../components/ui-elements/loader";
-
 import mapMarker from "../assets/images/logoMarker.svg";
-
 import { useQuery } from "@apollo/react-hooks";
-import { GROUPS_LIST_QUERY } from '../queries'
-
+import { GROUPS_LIST_QUERY } from "../queries";
 
 const AllGroupsMap = props => {
-  const [selectedMeeting, setSelectedMeeting] = useState(null);
+  const [selectedMarker, setSelectedMarker] = useState(null);
   const [viewport, setViewport] = useState({
     latitude: 53.7211,
     longitude: 27.6903,
     zoom: 6.5,
     width: "100%",
     height: "85vh",
-    language: 'ru',
+    language: "ru"
   });
-  const mapRef = React.createRef();
-                                             
+  const mapRef = useRef(null);
+
   useEffect(() => {
     const listener = e => {
       if (e.key === "Escape") {
-        setSelectedMeeting(null);
+        setSelectedMarker(null);
       }
     };
     window.addEventListener("keydown", listener);
@@ -41,36 +37,31 @@ const AllGroupsMap = props => {
     };
   }, []);
 
-  const {
-    data,
-    loading,
-    error
-  } = useQuery(GROUPS_LIST_QUERY);
+  const { data, loading, error } = useQuery(GROUPS_LIST_QUERY);
 
   if (loading) return <LoadingMessage />;
-  if (error) 
+  if (error)
     return (
       <Error errorMessage="GraphQL server signal an error to the client" />
     );
-  
+
   const markersList = data.groupList.groups.map(element => (
-      <Marker
-        key={element.id}
-        latitude={element.location.lattitude}
-        longitude={element.location.longitude}
+    <Marker
+      key={element.id}
+      latitude={element.location.lattitude}
+      longitude={element.location.longitude}
+    >
+      <button
+        className="marker-btn"
+        onClick={e => {
+          e.preventDefault();
+          setSelectedMarker(element);
+        }}
       >
-        <button
-          className="marker-btn"
-          onClick={e => {
-            e.preventDefault();
-            setSelectedMeeting(element);
-          }}
-        >
-     <img className="marker-img" src={mapMarker} alt="AA Meeting" />
-        </button>
-      </Marker>
-    )
-  );
+        <img className="marker-img" src={mapMarker} alt="AA Meeting" />
+      </button>
+    </Marker>
+  ));
 
   return (
     <Container>
@@ -86,20 +77,20 @@ const AllGroupsMap = props => {
         <GeolocateControl
           positionOptions={{ enableHighAccuracy: true }}
           trackUserLocation={true}
-        /> 
+        />
         <NavigationControl />
         {markersList}
-        {selectedMeeting ? (
+        {selectedMarker ? (
           <Popup
-            latitude={selectedMeeting.location.lattitude}
-            longitude={selectedMeeting.location.longitude}
+            latitude={selectedMarker.location.lattitude}
+            longitude={selectedMarker.location.longitude}
             onClose={() => {
-              setSelectedMeeting(null);
+              setSelectedMarker(null);
             }}
           >
             <div>
-              <h4>{selectedMeeting.name}</h4>
-              <p>{selectedMeeting.address}</p>
+              <h4>{selectedMarker.name}</h4>
+              <p>{selectedMarker.address}</p>
             </div>
           </Popup>
         ) : null}

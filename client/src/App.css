@@ -9,7 +9,12 @@
   height: 35px;
 }
 
-.mapboxgl-ctrl-group {
+/* .mapboxgl-ctrl-group {
   box-shadow: 0 0 0 0px !important;
   background: none !important;
+} */
+
+.mapboxgl-ctrl-group {
+  width: 30px;
+  margin: 10px 0 0 10px;
 }

@@ -12,8 +12,8 @@ export const GET_REGIONS = gql`
 `
 
 export const GROUPS_LIST_QUERY = gql`
-  query getGroups($filter: String, $orderBy: GroupOrderByInput ) {
-    groupList(filter: $filter, orderBy: $orderBy){
+  query getGroups($filter: String, $orderBy: GroupOrderByInput, $regionSelect: regionType ) {
+    groupList(filter: $filter, orderBy: $orderBy, regionSelect: $regionSelect){
       count
       groups{
         id
