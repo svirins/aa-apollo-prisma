@@ -15,7 +15,7 @@ type Group {
   name:         String!       @default(value: "New AA Group")
   description:  String!       @default(value: "Some descriptive description")
   city:         String!
-  region:       regionType! 
+  region:       regionType!   
   isActive:     Boolean       @default(value: true)
   phone:        String
   email:        String

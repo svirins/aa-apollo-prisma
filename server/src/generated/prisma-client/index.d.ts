@@ -258,6 +258,7 @@ export interface ClientConstructor<T> {
  */
 
 export type regionType =
+  | "All"
   | "Minskaya"
   | "Brestskaya"
   | "Gomelskaya"

@@ -1319,6 +1319,7 @@ type Query {
 }
 
 enum regionType {
+  All
   Minskaya
   Brestskaya
   Gomelskaya

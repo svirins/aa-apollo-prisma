@@ -5,7 +5,7 @@ import ReactMapGL, {
   GeolocateControl,
   NavigationControl
 } from "react-map-gl";
-import Geocoder from "react-map-gl-geocoder";
+// import Geocoder from "react-map-gl-geocoder";
 import { Container } from "semantic-ui-react";
 import Error from "../components/ui-elements/error";
 import LoadingMessage from "../components/ui-elements/loader";
@@ -20,10 +20,9 @@ const AllGroupsMap = props => {
     longitude: 27.6903,
     zoom: 6.5,
     width: "100%",
-    height: "85vh",
-    language: "ru"
-  });
-  const mapRef = useRef(null);
+    height: "85vh"
+    });
+  // const mapRef = useRef(null);
 
   useEffect(() => {
     const listener = e => {
@@ -66,7 +65,7 @@ const AllGroupsMap = props => {
   return (
     <Container>
       <ReactMapGL
-        ref={mapRef}
+        // ref={mapRef}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
         mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
         onViewportChange={viewport => {

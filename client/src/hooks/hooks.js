@@ -19,17 +19,10 @@ export const useDebounce = (value, delay) => {
 export const useInitialiseRegion = () => {
   const { data, loading, error } = useQuery(GET_REGIONS);
   if (loading || error) return []
-  const options = [
-    {
-      key: 0,
-      text: "All",
-      value: "All"
-    }
-  ];
-  if (loading || error) return []
+  const options = [];
   data.__type.enumValues.map((region, index) =>
     options.push({
-      key: index + 1,
+      key: index ,
       text: region.name,
       value: region.name
     })

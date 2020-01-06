@@ -21,17 +21,8 @@ const Header = props => {
         </Menu.Item>
         <Menu.Item as={Link} to="/allgroups">Whole Map</Menu.Item>
         <Menu.Item as={Link} to="/events">Upcoming Events</Menu.Item>
+        <Menu.Item as={Link} to="/mapex">Map Experimental</Menu.Item>
         <Menu.Menu position="right">
-          <Menu.Item>
-            <Input
-              width={12}
-              icon="search"
-              value={inputValue}
-              name="inputValue"
-              onChange={handleFilterTextChange}
-              placeholder="Search for ..."
-            />
-          </Menu.Item>
           <Menu.Item>
             <Button primary icon>
               <Icon name="user" />

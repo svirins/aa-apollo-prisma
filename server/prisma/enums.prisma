@@ -15,6 +15,7 @@ enum meetingType {
 }
 
 enum regionType {
+  All
   Minskaya
   Brestskaya
   Gomelskaya

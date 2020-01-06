@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Input, Header, Container, Icon, Dropdown } from "semantic-ui-react";
-import { useInitialiseRegion } from "../../hooks/hooks";
-import { useDebounce } from "../../hooks/hooks";
+import { useInitialiseRegion, useDebounce } from "../../hooks/hooks";
 
 const Filters = props => {
   const { searchHandler, regionHandler } = props;
   const { filter, regionSelect } = props.filterValues;
+
+  const [searchValue, setSearchValue] = useState(filter);
   const options = useInitialiseRegion();
+  const debouncedSearchValue = useDebounce(searchValue, 500);
+
+  useEffect(() => {
+    searchHandler(debouncedSearchValue);
+  }, [debouncedSearchValue]);
 
   return (
     <Container style={{ marginTop: "6em" }}>
@@ -18,14 +24,14 @@ const Filters = props => {
         selection
         options={options}
         defaultValue={regionSelect}
-        onChange={(event, data) => regionHandler(data.value)}
+        onChange={(e, { value }) => regionHandler(value)}
       />
       <Input
         fluid
         icon={<Icon name="search" circular link />}
         placeholder="Search..."
         value={filter}
-        onChange={(event, data) => searchHandler(data.value)}
+        onChange={(e, { value }) => setSearchValue(value)}
       />
     </Container>
   );

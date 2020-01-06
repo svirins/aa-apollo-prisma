@@ -3,6 +3,7 @@ import GroupList from "../components/group/groupList";
 import Filters from "../components/ui-elements/filters";
 import Error from "../components/ui-elements/error";
 import LoadingMessage from "../components/ui-elements/loader";
+import SearchSummary from "../components/ui-elements/searchSummary";
 import { Container } from "semantic-ui-react";
 import { useQuery } from "@apollo/react-hooks";
 import { GROUPS_LIST_QUERY } from "../queries";
@@ -10,7 +11,7 @@ import { GROUPS_LIST_QUERY } from "../queries";
 const Groups = () => {
   const [variables, setVariables] = useState({
     filter: "",
-    regionSelect: "Minskaya"
+    regionSelect: "All"
   });
   const { data, loading, error, refetch } = useQuery(GROUPS_LIST_QUERY, {
     variables
@@ -43,6 +44,7 @@ const Groups = () => {
         regionHandler={onRegionChangeHandler}
         filterValues={variables}
       />
+      <SearchSummary count={data.groupList.count} searchParams={variables} />
       <GroupList groupData={data.groupList} />
     </Container>
   );
