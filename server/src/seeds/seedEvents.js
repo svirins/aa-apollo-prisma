@@ -1,4 +1,4 @@
-const { prisma } = require("./generated/prisma-client");
+const { prisma } = require("../generated/prisma-client");
 const faker = require('faker');
 
 // A `main` function so that we can use async/await
