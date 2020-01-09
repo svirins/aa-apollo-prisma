@@ -15,7 +15,7 @@ const Filters = props => {
   }, [debouncedSearchValue]);
 
   return (
-    <Container style={{ marginTop: "6em" }}>
+    <Container>
       <Header>Search and filter:</Header>
       <Dropdown
         text="Choose Region"

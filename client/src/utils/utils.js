@@ -12,3 +12,9 @@ const getToday = () => {
   return weekday[now.getDay()];
 };
 export default getToday
+
+
+export default getNow = props => {
+  let nowCount = 0
+  return nowCount
+}

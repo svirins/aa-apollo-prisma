@@ -12,6 +12,7 @@ import FourZeroFour from './notFound'
 // implement lazy loading here
 
 import Header from '../components/ui-elements/header'
+import StatisticBar from '../components/ui-elements/statistic'
 import PageContainer from '../components/ui-elements/page-container'
 import Footer from '../components/ui-elements/footer'
 
@@ -19,6 +20,7 @@ import Footer from '../components/ui-elements/footer'
 const Pages = (props) => (
   <Fragment>
     <Header />
+    <StatisticBar />
     <PageContainer>
       <Switch>
         <Route path="/allgroups" render={(props) => <AllGroupsMap {...props}/>} />
