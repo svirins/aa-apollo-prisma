@@ -8,6 +8,7 @@
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^8.0.2",
     "apollo-boost": "^0.4.7",
+    "geolib": "^3.2.1",
     "graphql": "^14.5.8",
     "install": "^0.13.0",
     "lodash": "^4.17.15",
@@ -22,7 +23,8 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2",
     "svg-loader": "^0.0.2",
-    "to": "^0.2.9"
+    "to": "^0.2.9",
+    "use-position": "^0.0.6"
   },
   "scripts": {
     "start": "react-scripts start",

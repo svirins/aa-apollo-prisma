@@ -59,8 +59,41 @@ async function eventList(parent, args, context)  {
 }
 
 
+async function getStatistics(parent, args, context)  {
+  // calculate groups
+  const groupCount = await context.prisma
+    .groupsConnection()
+    .aggregate()
+    .count()
+  // calculate unique cities
+  const groups = await context.prisma.groups()  
+  const groupsCities = groups.map(el => el.city)
+  const citiesCount = [...new Set(groupsCities)].length
+  // calculate meetings
+  const meetingCount = await context.prisma
+    .meetingsConnection()
+    .aggregate()
+    .count()
+  // calculate events
+  const eventsCount = await context.prisma
+  .eventsConnection()
+  .aggregate()
+  .count()
+
+  return {
+    groupCount,
+    citiesCount,
+    meetingCount,
+    eventsCount,
+    groups
+  }
+}
+
+
+
 module.exports = {
   groupList,
-  eventList
+  eventList,
+  getStatistics
 }
 

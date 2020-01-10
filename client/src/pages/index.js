@@ -1,4 +1,4 @@
-import React, { Fragment} from 'react';
+import React, { Fragment, useEffect} from 'react';
 import { Route, Switch } from 'react-router-dom'
 
 import Groups from './groups';
@@ -17,23 +17,25 @@ import PageContainer from '../components/ui-elements/page-container'
 import Footer from '../components/ui-elements/footer'
 
 
-const Pages = (props) => (
-  <Fragment>
-    <Header />
-    <StatisticBar />
-    <PageContainer>
-      <Switch>
-        <Route path="/allgroups" render={(props) => <AllGroupsMap {...props}/>} />
-        <Route path="/events" render={(props) => <Events {...props}/>} />
-        <Route path="/profile" render={(props) => <Profile {...props}/>} />
-        <Route path='/login' render={(props) => <LoginPage {...props}/>} />
-        <Route path='/mapex' render={(props) => <MapExperimental />} />
-        <Route path="/" exact component={Groups} />
-        <FourZeroFour Route path="*" component={FourZeroFour} />
-      </Switch>
-    </PageContainer>
-    <Footer />
-  </Fragment>
-);
-
+const Pages = (props) => {
+  
+  return (
+    <Fragment>
+      <Header />
+      <StatisticBar />
+      <PageContainer>
+        <Switch>
+          <Route path="/allgroups" render={(props) => <AllGroupsMap {...props}/>} />
+          <Route path="/events" render={(props) => <Events {...props}/>} />
+          <Route path="/profile" render={(props) => <Profile {...props}/>} />
+          <Route path='/login' render={(props) => <LoginPage {...props}/>} />
+          <Route path='/mapex' render={(props) => <MapExperimental />} />
+          <Route path="/" exact component={Groups} />
+          <FourZeroFour Route path="*" component={FourZeroFour} />
+        </Switch>
+      </PageContainer>
+      <Footer />
+    </Fragment>
+  );
+}
 export default Pages

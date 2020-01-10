@@ -1,5 +1,5 @@
 import React from 'react';
-import getToday from "../../utils/utils";
+import { getToday } from "../../utils/utils";
 
 import {
   Table,

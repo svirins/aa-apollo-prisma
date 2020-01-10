@@ -60,7 +60,22 @@ export const EVENTS_LIST_QUERY = gql`
 
 
 export const GET_STATISTICS = gql`
-  query getStatistics {
-
+  query getStat {
+    getStatistics {
+      groupCount
+      meetingCount
+      citiesCount
+      eventsCount
+      groups { 
+      	location {
+          lattitude
+          longitude
+        }
+        meetings {
+          weekday
+          time
+        }
+      }
+    }
   }
 `

@@ -38,7 +38,6 @@ type Event {
   author:       User!         @relation(link: INLINE)
   name:         String!       
   date:         DateTime!
-  bannerImage:       
   city:         String!
   description:  String!       
   agenda:       String        

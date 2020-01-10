@@ -78,6 +78,7 @@ enum regionType {
 type Query {
   groupList(filter: String, skip: Int, first: Int, orderBy: GroupOrderByInput, regionSelect: regionType, activeFilter: Boolean): GroupFeed!
   eventList(filter: String, skip: Int, first: Int, orderBy: EventOrderByInput): EventFeed!
+  getStatistics: StatisticResponse!
 }
 
 type GroupFeed {
@@ -98,6 +99,14 @@ type Mutation {
 type AuthPayload {
   token: String
   user: User
+}
+
+type StatisticResponse {
+  groupCount: Int!
+  citiesCount: Int!
+  meetingCount: Int!
+  eventsCount: Int!
+  groups: [Group!]!
 }
 
 enum GroupOrderByInput {
