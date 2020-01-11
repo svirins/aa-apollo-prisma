@@ -19,4 +19,3 @@ const GeoLocateButton = () => {
 
 export default GeoLocateButton
 
-

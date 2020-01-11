@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Button, Icon, Modal } from "semantic-ui-react";
+import { Grid, Button, Icon, Modal, Header } from "semantic-ui-react";
 
 import GroupDataDisplay from "./ groupDataDisplay";
 import MeetingDataDisplay from "./ meetingDataDisplay";
@@ -9,12 +9,12 @@ const GroupList = props => {
   const groupGrid = props.groupData.groups.map(group => (
     <Grid.Row key={group.id}>
       <Grid.Column width={6}>
-        <Modal trigger={<Button icon='map' color='green'>Map</Button>}>
-         <Modal.Header>Address goes here</Modal.Header>
+        <Modal size='Large' dimmer='Blurring' closeIcon trigger={<Button icon='map' color='green'>Map</Button>}>
+          <Header icon='map marker alternate' content={group.name} />
          <Modal.Content>
           <Modal.Description>
             <MapDataDisplay location={group.location} name={group.name}/>
-            <p>Descr</p>
+            {group.city}
           </Modal.Description>
         </Modal.Content>
       </Modal>
