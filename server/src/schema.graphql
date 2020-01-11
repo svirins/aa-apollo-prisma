@@ -107,6 +107,7 @@ type StatisticResponse {
   meetingCount: Int!
   eventsCount: Int!
   groups: [Group!]!
+  meetings: [Meeting]!
 }
 
 enum GroupOrderByInput {

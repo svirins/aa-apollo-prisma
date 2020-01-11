@@ -67,6 +67,8 @@ async function getStatistics(parent, args, context)  {
     .count()
   // calculate unique cities
   const groups = await context.prisma.groups()  
+  const meetings = await context.prisma.meetings()  
+
   const groupsCities = groups.map(el => el.city)
   const citiesCount = [...new Set(groupsCities)].length
   // calculate meetings
@@ -85,7 +87,8 @@ async function getStatistics(parent, args, context)  {
     citiesCount,
     meetingCount,
     eventsCount,
-    groups
+    groups,
+    meetings
   }
 }
 

@@ -71,11 +71,11 @@ export const GET_STATISTICS = gql`
           lattitude
           longitude
         }
-        meetings {
+      }
+      meetings {
           weekday
           time
         }
-      }
     }
   }
 `

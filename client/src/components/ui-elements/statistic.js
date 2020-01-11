@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Statistic, Icon, Image, Header, Divider } from "semantic-ui-react";
+import { Container, Statistic, Icon, Image, Header, Divider, Reveal, Radio } from "semantic-ui-react";
 import logo from '../../assets/images/logo.svg'
 import Error from "./error";
 import LoadingMessage from "./loader";
@@ -8,34 +8,41 @@ import { useQuery } from "@apollo/react-hooks";
 import { GET_STATISTICS } from "../../queries/";
 import getDistance from 'geolib/es/getDistance';
 
-// import { calculateDistance } from '../../utils/utils'
+import { getToday } from '../../utils/utils'
 
 
 const StatisticBar = () => {
   const { data, loading, errorMess } = useQuery(GET_STATISTICS);
-  const { latitude, longitude, timestamp, accuracy, error } = usePosition(true, {enableHighAccuracy: true});
+  const { latitude, longitude, error } = usePosition(true, {enableHighAccuracy: true});
 
   if (loading) return (<LoadingMessage />)
   if (errorMess) return <Error errorMessage="GraphQL server signal an error to the client"/>;
 
-  const { groupCount, citiesCount, meetingCount, eventsCount, groups } = data.getStatistics
-  // calculate cstatistics here
+  const { groupCount, citiesCount, meetingCount, eventsCount, groups, meetings } = data.getStatistics
+  // calculate distance  lower than 10000 meters!
   let distanceArray = []
-  let todaymeetings= []
-  for (var value of groups) {
-    console.log(value.location.lattitude,value.location.longitude,latitude, longitude)
+  for (let value of groups) {
     distanceArray.push(getDistance(
-      {latitude: value.location.lattitude, longitude: value.location.longitude},
-      {latitude, longitude}
-      ))
+      { latitude: value.location.lattitude, longitude: value.location.longitude },
+      { latitude, longitude }
+    ))   
   }
-  console.log(distanceArray)
-  // lower than 10000 meters!
-  const  nearCount  = distanceArray.filter(value => value< 9000).length
-  const  nowCount = 0
+  const nearCount  = distanceArray.filter(value => value < 9000).length
+  // calculate total amount of today's meetings
+  const nowCount = meetings.filter(el =>  el.weekday === getToday()).length
 
   return (
     <Container style={{ marginTop: "6em" }}>
+      <Radio toggle />
+      <Reveal animated='rotate'>
+        <Reveal.Content visible>
+          <Image circular size='small' src='https://react.semantic-ui.com/images/wireframe/square-image.png' />
+        </Reveal.Content>
+        <Reveal.Content hidden>
+          <Image circular size='small' src='https://react.semantic-ui.com/images/avatar/large/stevie.jpg' />
+        </Reveal.Content>
+      </Reveal>
+
        <Header as='h2' textAlign='center'>
          <Image circular size="mini" src={logo} /> Alcoholics Anonimous in Belarus
       </Header>
@@ -58,7 +65,7 @@ const StatisticBar = () => {
 
         <Statistic color='olive'>
           <Statistic.Value><Icon name='clock' />{nowCount}</Statistic.Value>
-          <Statistic.Label>Now</Statistic.Label>
+          <Statistic.Label>Today</Statistic.Label>
         </Statistic>
 
         <Statistic color='green'>

@@ -1,5 +1,6 @@
 import React from 'react';
-import { getToday } from "../../utils/utils";
+import { format, parseISO } from "date-fns";
+import { getToday } from '../../utils/utils';
 
 import {
   Table,
@@ -9,9 +10,8 @@ import {
 
 
 const Meeting = (props) => {
-  const weekday = getToday();
-  let isToday = (props.weekday === weekday) ? true : false
-  const timeSubstr = props.time.substr(props.time.indexOf('T')+1, 5)
+  const isToday = (props.weekday === getToday()) ? true : false
+  const timeSubstr = format(parseISO(props.time), 'p')
   return (
     <Table.Row positive={isToday}>
       <Table.Cell>
