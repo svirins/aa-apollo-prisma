@@ -38,7 +38,7 @@ const Groups = () => {
     });
   };
   return (
-    <Container style={{ marginTop: "5em" }}>
+    <Container>
       <Filters
         searchHandler={onFilterChangeHandler}
         regionHandler={onRegionChangeHandler}

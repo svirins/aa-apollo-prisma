@@ -44,7 +44,7 @@ type Event {
 
 type Location {
   id:           ID! 
-  lattitude:     Float!
+  lattitude:    Float!
   longitude:    Float!
 }
 
@@ -63,6 +63,9 @@ enum Weekday {
 enum meetingType {
   Open
   Closed 
+  Speaker
+  Twelve Steps
+  Reflections
 }
 
 enum regionType {

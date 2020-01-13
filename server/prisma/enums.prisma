@@ -12,6 +12,9 @@ enum Weekday {
 enum meetingType {
   Open
   Closed 
+  Speaker
+  Twelve Steps
+  Reflections
 }
 
 enum regionType {

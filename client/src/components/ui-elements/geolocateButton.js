@@ -1,21 +1,24 @@
 import React from "react";
-import { Button, Icon } from "semantic-ui-react";
+import { Button, Popup } from "semantic-ui-react";
 import { usePosition } from 'use-position';
 
-const GeoLocateButton = () => {
-  const { error } = usePosition(true, {enableHighAccuracy: true});
+export const GeolocateButton = () => {
+	let color, content, icon = ''
+	const { error } = usePosition(true, {enableHighAccuracy: true});
+	if (error) {
+		color = 'red'
+		content = "Geolocation disabled"
+		icon = 'question circle outline'
+	} else {
+		color = 'olive'
+		content = "Geolocation is on"
+		icon = 'map'
+	}
 	return (
-		<Button
-			basic
-			color={!error ? 'green' : 'red'}
-			disabled
-			floated='right'
-		>	
-		<Icon name='map marker alternate' />
-			{!error ? "Geolocation is on" : "Geolocation disabled"}
-		</Button>
+		<Popup content={content} trigger={<Button basic disabled icon={icon} color={color} />} />
 	)
 }
 
-export default GeoLocateButton
+
+
 

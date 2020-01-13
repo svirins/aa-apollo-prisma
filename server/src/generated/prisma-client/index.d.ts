@@ -268,7 +268,13 @@ export type regionType =
 
 export type Weekday = "Mo" | "Tu" | "We" | "Th" | "Fr" | "Sa" | "Su";
 
-export type meetingType = "Open" | "Closed";
+export type meetingType =
+  | "Open"
+  | "Closed"
+  | "Speaker"
+  | "Twelve"
+  | "Steps"
+  | "Reflections";
 
 export type GroupOrderByInput =
   | "id_ASC"

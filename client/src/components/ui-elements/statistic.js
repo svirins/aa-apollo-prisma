@@ -1,6 +1,5 @@
 import React from "react";
-import { Container, Statistic, Icon, Image, Header, Divider, Reveal, Radio } from "semantic-ui-react";
-import logo from '../../assets/images/logo.svg'
+import { Container, Statistic, Icon, Divider } from "semantic-ui-react";
 import Error from "./error";
 import LoadingMessage from "./loader";
 import { usePosition } from 'use-position';
@@ -32,21 +31,7 @@ const StatisticBar = () => {
   const nowCount = meetings.filter(el =>  el.weekday === getToday()).length
 
   return (
-    <Container style={{ marginTop: "6em" }}>
-      <Radio toggle />
-      <Reveal animated='rotate'>
-        <Reveal.Content visible>
-          <Image circular size='small' src='https://react.semantic-ui.com/images/wireframe/square-image.png' />
-        </Reveal.Content>
-        <Reveal.Content hidden>
-          <Image circular size='small' src='https://react.semantic-ui.com/images/avatar/large/stevie.jpg' />
-        </Reveal.Content>
-      </Reveal>
-
-       <Header as='h2' textAlign='center'>
-         <Image circular size="mini" src={logo} /> Alcoholics Anonimous in Belarus
-      </Header>
-      <Divider />
+    <Container style={{ marginTop: '1.5em' }}>
       <Statistic.Group widths='six' size="mini">
         <Statistic color='blue'>
           <Statistic.Value><Icon name='users' />{groupCount}</Statistic.Value>
@@ -77,16 +62,8 @@ const StatisticBar = () => {
           <Statistic.Value><Icon name='gift' />{eventsCount}</Statistic.Value>
           <Statistic.Label>Events</Statistic.Label>
         </Statistic>
-
-
-
-
       </Statistic.Group>
-
-
-
-
-      
+      <Divider />  
     </Container>
   )
 }

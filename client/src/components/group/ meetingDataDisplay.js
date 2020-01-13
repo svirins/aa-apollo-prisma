@@ -11,16 +11,19 @@ const MeetingDataDisplay = props => {
     <Meeting key={meeting.id} {...meeting} />
   ));
   return (
-    <Table compact basic="very" collapsing size="small">
-      <Table.Header>
-        <Table.Row>
-          <Table.HeaderCell>WeekDay</Table.HeaderCell>
-          <Table.HeaderCell>Type</Table.HeaderCell>
-        </Table.Row>
-      </Table.Header>
+    // remove meetings header
+    <Table verticalAlign='top' compact='very' stackable size="small" style={{ marginTop: '0em', marginBottom: '0em',  }}>
       <Table.Body>{meetings}</Table.Body>
     </Table>
   );
 };
 
 export default MeetingDataDisplay;
+
+// no header
+{/* <Table.Header>
+<Table.Row>
+  <Table.HeaderCell>WeekDay</Table.HeaderCell>
+  <Table.HeaderCell>Type</Table.HeaderCell>
+</Table.Row>
+</Table.Header> */}

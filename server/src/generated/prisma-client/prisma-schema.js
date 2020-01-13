@@ -1135,6 +1135,10 @@ input MeetingSubscriptionWhereInput {
 enum meetingType {
   Open
   Closed
+  Speaker
+  Twelve
+  Steps
+  Reflections
 }
 
 input MeetingUpdateInput {

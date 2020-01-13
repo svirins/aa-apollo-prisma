@@ -5,7 +5,7 @@ import Groups from './groups';
 import Map from './map'
 import Events from './events';
 import Profile from './profile';
-import LoginPage from './loginPage'
+import LoginPage from './login'
 import FourZeroFour from './notFound'
 
 // implement lazy loading here
