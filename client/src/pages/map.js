@@ -15,7 +15,7 @@ import LoadingMessage from "../components/ui-elements/loader";
 import { useQuery } from "@apollo/react-hooks";
 import { GROUPS_LIST_QUERY } from "../queries";
 
-const Map = props => {
+const Map = () => {
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [viewport, setViewport] = useState({
     latitude: 53.7211,

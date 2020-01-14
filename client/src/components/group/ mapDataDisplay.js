@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ReactMapGL, { Marker, Popup } from 'react-map-gl'
+import ReactMapGL, { Marker } from 'react-map-gl'
 import { Container } from 'semantic-ui-react';
 
 import mapMarker from "../../assets/images/logoMarker.svg";

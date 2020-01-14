@@ -7,10 +7,13 @@ import { Container } from "semantic-ui-react";
 import { useQuery } from "@apollo/react-hooks";
 import { GROUPS_LIST_QUERY } from "../queries";
 
+import { useDebounce } from "../hooks/hooks";
+
 const Groups = () => {
   const [variables, setVariables] = useState({
     filter: "",
-    regionSelect: "All"
+    regionSelect: "All",
+    sortByDistance: false
   });
   const { data, loading, error, refetch } = useQuery(GROUPS_LIST_QUERY, {
     variables
@@ -27,6 +30,7 @@ const Groups = () => {
     );
 
   const onFilterChangeHandler = value => {
+    // implement useDebounce here
     setVariables(prevState => {
       return { ...prevState, filter: value };
     });
@@ -36,13 +40,22 @@ const Groups = () => {
       return { ...prevState, regionSelect: value };
     });
   };
+
+  const onSortByDistanceChangeHandler = () => {
+    setVariables(prevState => {
+      return { ...prevState, sortByDistance: !prevState.sortByDistance };
+    });
+    // do some sort-ordering here
+  };
+
   return (
     <Container>
       <Filters
         searchHandler={onFilterChangeHandler}
         regionHandler={onRegionChangeHandler}
+        distanceHandler={onSortByDistanceChangeHandler}
         filterValues={variables}
-        count={data.groupList.count} 
+        count={data.groupList.count}
       />
       <GroupList groupData={data.groupList} />
     </Container>

@@ -20,10 +20,3 @@ const MeetingDataDisplay = props => {
 
 export default MeetingDataDisplay;
 
-// no header
-{/* <Table.Header>
-<Table.Row>
-  <Table.HeaderCell>WeekDay</Table.HeaderCell>
-  <Table.HeaderCell>Type</Table.HeaderCell>
-</Table.Row>
-</Table.Header> */}

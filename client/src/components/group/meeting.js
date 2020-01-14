@@ -2,7 +2,7 @@ import React from "react";
 import { format, parseISO } from "date-fns";
 import { getToday } from "../../utils/utils";
 
-import { Table, Header, Icon, Popup } from "semantic-ui-react";
+import { Table, Icon, Popup, Label } from "semantic-ui-react";
 
 const Meeting = props => {
   const isToday = props.weekday === getToday() ? true : false;
@@ -37,8 +37,8 @@ const Meeting = props => {
 
   return (
     <Table.Row negative={isToday}>
-      <Table.Cell color={props.weekday === "Su" ? "orange" : "blue"}>
-        {props.weekday}
+      <Table.Cell>
+        <Label size="mini" color={props.weekday === "Su"  || props.weekday === "Sa" ? "orange" : "grey"}>{props.weekday}</Label>
       </Table.Cell>
       <Table.Cell>{timeSubstr}</Table.Cell>
       <Table.Cell>
