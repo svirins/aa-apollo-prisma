@@ -3,7 +3,6 @@ import GroupList from "../components/group/groupList";
 import Filters from "../components/ui-elements/filters";
 import Error from "../components/ui-elements/error";
 import LoadingMessage from "../components/ui-elements/loader";
-import SearchSummary from "../components/ui-elements/searchSummary";
 import { Container } from "semantic-ui-react";
 import { useQuery } from "@apollo/react-hooks";
 import { GROUPS_LIST_QUERY } from "../queries";
@@ -43,8 +42,8 @@ const Groups = () => {
         searchHandler={onFilterChangeHandler}
         regionHandler={onRegionChangeHandler}
         filterValues={variables}
+        count={data.groupList.count} 
       />
-      <SearchSummary count={data.groupList.count} searchParams={variables} />
       <GroupList groupData={data.groupList} />
     </Container>
   );

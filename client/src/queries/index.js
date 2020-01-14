@@ -58,7 +58,6 @@ export const EVENTS_LIST_QUERY = gql`
   }
 `
 
-
 export const GET_STATISTICS = gql`
   query getStat {
     getStatistics {
@@ -79,3 +78,11 @@ export const GET_STATISTICS = gql`
     }
   }
 `
+
+export const GET_POSITION = gql` 
+  {
+    latitude @client
+    longitude @client
+    error @client  
+  }
+`  

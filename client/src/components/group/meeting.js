@@ -56,22 +56,6 @@ const Meeting = props => {
 };
 
 export default Meeting;
-// consider !
-{
-  /* <Label ribbon>First</Label> */
-}
 
-{
-  /* <Table.Cell>
-  <Header as='h4' image>
-      <Image src='https://react.semantic-ui.com/images/avatar/small/lena.png' rounded size='mini' />
-      <Header.Content>
-        {props.weekday}
-        <Header.Subheader>{timeSubstr}</Header.Subheader>
-    </Header.Content>
-  </Header>
-</Table.Cell>
-<Table.Cell>
-  {props.type}
-</Table.Cell> */
-}
+// consider !
+// <Label ribbon>First</Label>

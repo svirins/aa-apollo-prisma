@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom'
+import { useApolloClient } from '@apollo/react-hooks'
+import { usePosition } from 'use-position';
 
 import Groups from './groups';
 import Map from './map'
@@ -17,7 +19,17 @@ import Footer from '../components/ui-elements/footer'
 
 
 const Pages = (props) => {
-  
+  // resolving user location and storing position data
+  const { latitude, longitude, error } = usePosition(true, {enableHighAccuracy: true});
+  // accessing apollo client
+  const client = useApolloClient();
+  client.writeData({
+    data: {
+      latitude: latitude,
+      longitude: longitude,
+      error: error
+    },
+  });
   return (
     <Fragment>
       <Header />
