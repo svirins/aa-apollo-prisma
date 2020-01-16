@@ -5,23 +5,39 @@ import Error from "../components/ui-elements/error";
 import LoadingMessage from "../components/ui-elements/loader";
 import { Container } from "semantic-ui-react";
 import { useQuery } from "@apollo/react-hooks";
-import { GROUPS_LIST_QUERY } from "../queries";
-
+import { GET_GROUPS_WITH_POSITION } from "../queries";
 import { useDebounce } from "../hooks/hooks";
 
 const Groups = () => {
+  // right place to implement usePosition + getDistance + write distance to @client distance field
   const [variables, setVariables] = useState({
     filter: "",
     regionSelect: "All",
     sortByDistance: false
   });
-  const { data, loading, error, refetch } = useQuery(GROUPS_LIST_QUERY, {
+  const { data, loading, error, refetch } = useQuery(GET_GROUPS_WITH_POSITION, {
     variables
   });
+  // implement indexing
 
   useEffect(() => {
     refetch(variables);
-  }, [variables, refetch]);
+  }, [variables.filter, variables.regionSelect, refetch]);
+
+  // SORT BY DISTANCE
+
+  useEffect(() => {
+    if (variables.sortByDistance) {
+      data.groupList.groups.sort((a, b) =>
+        a.distance > b.distance ? 1 : b.distance > a.distance ? -1 : 0
+      );
+      console.log('applying distance filter')
+    } else {
+      // implement refetching
+     refetch();
+      console.log('refetch')
+    }
+  }, [variables.sortByDistance, data]);
 
   if (loading) return <LoadingMessage />;
   if (error)

@@ -2,11 +2,11 @@ import React from "react";
 import {
   Input,
   Grid,
-  Container,
   Icon,
   Dropdown,
   Label,
-  Checkbox
+  Checkbox, 
+  Segment
 } from "semantic-ui-react";
 import { useInitialiseRegion } from "../../hooks/hooks";
 import { useQuery } from "@apollo/react-hooks";
@@ -38,9 +38,9 @@ const Filters = props => {
   }
 
   return (
-    <Container>
+    <Segment>
       <Grid stackable>
-        <Grid.Column width={5}>
+        <Grid.Column width={4}>
           <Input
             fluid
             icon={<Icon name="search" circular link />}
@@ -49,7 +49,7 @@ const Filters = props => {
             onChange={(e, { value }) => searchHandler(value)}
           />
         </Grid.Column>
-        <Grid.Column width={3}>
+        <Grid.Column width={4}>
           <Dropdown
             text="Choose Region"
             placeholder="Select Friend"
@@ -61,7 +61,7 @@ const Filters = props => {
           />
         </Grid.Column>
         <Grid.Column width={2} verticalAlign="middle">
-          <Checkbox
+        <Checkbox
             toggle
             disabled={disabled}
             checked={sortByDistance}
@@ -69,7 +69,9 @@ const Filters = props => {
             onChange={() => distanceHandler()}
           />
         </Grid.Column>
-        <Grid.Column width={6} verticalAlign="middle" floated="right">
+
+        <Grid.Column width={6} verticalAlign="middle" floated="right"  textAlign='right'>
+
           <Label color="olive" tag>
             {props.count} groups
           </Label>
@@ -77,7 +79,7 @@ const Filters = props => {
           {regionSelectLabel}
         </Grid.Column>
       </Grid>
-    </Container>
+    </Segment>
   );
 };
 

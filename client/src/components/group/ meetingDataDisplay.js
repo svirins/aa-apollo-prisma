@@ -12,7 +12,7 @@ const MeetingDataDisplay = props => {
   ));
   return (
     // remove meetings header
-    <Table verticalAlign='top' compact='very' stackable size="small" style={{ marginTop: '0em', marginBottom: '0em',  }}>
+    <Table verticalAlign='top' compact='very' basic='very' unstackable size="small">
       <Table.Body>{meetings}</Table.Body>
     </Table>
   );

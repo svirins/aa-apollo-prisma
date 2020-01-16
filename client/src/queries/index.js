@@ -86,3 +86,34 @@ export const GET_POSITION = gql`
     error @client  
   }
 `  
+
+export const GET_GROUPS_WITH_POSITION  = gql`
+  query getGroups($filter: String, $orderBy: GroupOrderByInput, $regionSelect: regionType ) {
+    groupList(filter: $filter, orderBy: $orderBy, regionSelect: $regionSelect){
+      count
+      groups{
+        id
+        name
+        isActive
+        description
+        city
+        region
+        phone
+        email
+        address
+        distance @client
+        location {
+          lattitude
+          longitude
+        }
+        meetings{
+          id
+          name
+          weekday
+          time
+          type
+        }
+      }
+    }
+  }
+`
