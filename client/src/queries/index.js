@@ -10,26 +10,20 @@ export const GET_REGIONS = gql`
     }
   }
 `
-
 export const GROUPS_LIST_QUERY = gql`
-  query getGroups($filter: String, $orderBy: GroupOrderByInput, $regionSelect: regionType ) {
-    groupList(filter: $filter, orderBy: $orderBy, regionSelect: $regionSelect){
-      count
-      groups{
+  query getGroupsList {
+    groupList {
+      groups {
         id
         name
-        isActive
-        description
         city
-        region
-        phone
-        email
+        region    
         address
         location {
           lattitude
           longitude
         }
-        meetings{
+        meetings {
           id
           name
           weekday
@@ -40,7 +34,6 @@ export const GROUPS_LIST_QUERY = gql`
     }
   }
 `
-
 export const EVENTS_LIST_QUERY = gql`
   query getEvents {
     eventList(orderBy: date_ASC) {
@@ -57,7 +50,6 @@ export const EVENTS_LIST_QUERY = gql`
     }
   }
 `
-
 export const GET_STATISTICS = gql`
   query getStat {
     getStatistics {
@@ -78,7 +70,6 @@ export const GET_STATISTICS = gql`
     }
   }
 `
-
 export const GET_POSITION = gql` 
   {
     latitude @client
@@ -86,7 +77,6 @@ export const GET_POSITION = gql`
     error @client  
   }
 `  
-
 export const GET_GROUPS_WITH_POSITION  = gql`
   query getGroups($filter: String, $orderBy: GroupOrderByInput, $regionSelect: regionType ) {
     groupList(filter: $filter, orderBy: $orderBy, regionSelect: $regionSelect){

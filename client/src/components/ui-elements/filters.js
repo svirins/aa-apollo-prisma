@@ -25,14 +25,14 @@ const Filters = props => {
   if (filter) {
     filterLabel = (
       <Label color="orange" tag>
-        {filter} filter
+        `{filter}`
       </Label>
     );
   }
   if (regionSelect) {
     regionSelectLabel = (
       <Label color="teal" tag>
-        {regionSelect} filter
+        {regionSelect}
       </Label>
     );
   }

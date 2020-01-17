@@ -1,18 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import ReactMapGL, {
   Marker,
   Popup,
   GeolocateControl,
   NavigationControl
 } from "react-map-gl";
-import mapMarker from "../assets/images/logoMarker.svg";
 
-import Geocoder from "react-map-gl-geocoder";
 import { Container } from "semantic-ui-react";
 import Error from "../components/ui-elements/error";
 import LoadingMessage from "../components/ui-elements/loader";
 import { useQuery } from "@apollo/react-hooks";
 import { GROUPS_LIST_QUERY } from "../queries";
+import mapMarker from "../assets/images/logoMarker.svg";
 
 const Map = () => {
   const [selectedMarker, setSelectedMarker] = useState(null);
@@ -23,8 +22,6 @@ const Map = () => {
     width: "100%",
     height: "85vh"    
   });
-
-  const mapMapRef = useRef(null);
 
   useEffect(() => {
     const listener = e => {
@@ -45,6 +42,7 @@ const Map = () => {
     return (
       <Error errorMessage="GraphQL server signal an error to the client" />
     );
+
 
   const markersList = data.groupList.groups.map(element => (
     <Marker
@@ -68,15 +66,12 @@ const Map = () => {
     <Container fluid>
       <ReactMapGL        
         {...viewport}
-        ref={mapMapRef}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
         mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
         onViewportChange={viewport => {
           setViewport(viewport);
         }}
       >
-        <Geocoder mapRef={mapMapRef} mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN} />
-
         <GeolocateControl
           positionOptions={{ enableHighAccuracy: true }}
           trackUserLocation={true}
@@ -93,6 +88,7 @@ const Map = () => {
           >
             <div>
               <h4>{selectedMarker.name}</h4>
+              <p>{selectedMarker.city} / {selectedMarker.region}</p>
               <p>{selectedMarker.address}</p>
             </div>
           </Popup>

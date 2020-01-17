@@ -3,7 +3,7 @@ import { Image, Menu, Container, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.svg";
 
-const Header = props => {
+const Header = () => {
   const [activeItem, setActiveItem] = useState("groups");
 
   return (
