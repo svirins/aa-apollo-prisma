@@ -9,7 +9,6 @@ import { GET_GROUPS_WITH_POSITION } from "../queries";
 import { useDebounce } from "../hooks/hooks";
 
 const Groups = () => {
-  // right place to implement usePosition + getDistance + write distance to @client distance field
   const [variables, setVariables] = useState({
     filter: "",
     regionSelect: "All",
@@ -18,7 +17,6 @@ const Groups = () => {
   const { data, loading, error, refetch } = useQuery(GET_GROUPS_WITH_POSITION, {
     variables
   });
-  // implement indexing
 
   useEffect(() => {
     refetch(variables);
@@ -33,8 +31,7 @@ const Groups = () => {
       );
       console.log('applying distance filter')
     } else {
-      // implement refetching
-     refetch();
+      refetch();
       console.log('refetch')
     }
   }, [variables.sortByDistance, data]);
