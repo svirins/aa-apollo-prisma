@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import {
   Icon,
   Segment,
@@ -14,28 +14,14 @@ import MapDataDisplay from "../ui-elements/mapDataDisplay";
 const GroupDataDisplay = props => {
   const distanceString = (props.distance / 1000).toFixed(1);
   return (
-    <Segment placeholder>
+    <Fragment>
       <Header as="h2">
         {props.name}{" "}
-        <Label horizontal color="purple" size="tiny">
+        <Label horizontal color="pink" size="tiny">
           {distanceString} {" km"}
         </Label>
       </Header>
-      <Modal
-        closeIcon
-        trigger={
-          <Button compact basic icon="map" color="purple" content="Map" />
-        }
-      >
-        <Header icon="map marker alternate" content={props.name} />
-        <Modal.Content>
-          <Modal.Description>
-            <MapDataDisplay location={props.location} name={props.name} />
-            {props.city}
-          </Modal.Description>
-        </Modal.Content>
-      </Modal>
-      <Divider />
+
 
       <List>
         <List.Item>
@@ -61,7 +47,21 @@ const GroupDataDisplay = props => {
           </List.Content>
         </List.Item>
       </List>
-    </Segment>
+      <Modal
+        closeIcon
+        trigger={
+          <Button compact basic icon="map" color="pink" content="Map" />
+        }
+      >
+        <Header icon="map marker alternate" content={props.name} />
+        <Modal.Content>
+          <Modal.Description>
+            <MapDataDisplay location={props.location} name={props.name} />
+            {props.city} / {props.address}
+          </Modal.Description>
+        </Modal.Content>
+      </Modal>
+    </Fragment>
   );
 };
 

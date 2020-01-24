@@ -2,6 +2,7 @@ import React from "react";
 import { format, parseISO } from "date-fns";
 import { getToday } from "../../utils/utils";
 import { Table, Icon, Popup, Label } from "semantic-ui-react";
+import {ruWeekdays, ruMeetingType} from '../../const/globalConst'
 
 const Meeting = props => {
   const isToday = props.weekday === getToday() ? true : false;
@@ -43,13 +44,13 @@ const Meeting = props => {
             props.weekday === "Su" || props.weekday === "Sa" ? "orange" : "grey"
           }
         >
-          {props.weekday}
+          {ruWeekdays.get(props.weekday)}
         </Label>
       </Table.Cell>
       <Table.Cell textAlign='right'>{timeSubstr}</Table.Cell>
       <Table.Cell textAlign='right'>
         <Popup
-          content={props.type}
+          content={ruMeetingType.get(props.type)}
           position="bottom right"
           size="mini"
           trigger={

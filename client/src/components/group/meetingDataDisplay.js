@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import Meeting from "./meeting";
 import { Table, Segment } from "semantic-ui-react";
 import sortBy from 'lodash/sortBy'
@@ -11,11 +11,11 @@ const MeetingDataDisplay = props => {
     <Meeting key={meeting.id} {...meeting} />
   ));
   return (
-    <Segment placeholder>
-      <Table verticalAlign='top' compact='very' basic='very' unstackable size="small">
+    <Fragment>
+      <Table compact='very' basic='very' unstackable size="small">
         <Table.Body>{meetings}</Table.Body>
       </Table>
-    </Segment>
+    </Fragment>
 
   );
 };

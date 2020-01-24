@@ -8,6 +8,8 @@ import {
   Segment
 } from "semantic-ui-react";
 import { useInitialiseRegion, useInitialiseCity } from "../../hooks/hooks";
+import { ruRegions } from '../../const/globalConst'
+import { fromUnixTime } from "date-fns";
 
 const Filters = props => {
   const { searchHandler, regionHandler, cityHandler } = props;
@@ -29,7 +31,7 @@ const Filters = props => {
   if (regionSelect) {
     regionSelectLabel = (
       <Label color="purple" tag>
-        {regionSelect}
+        {ruRegions.get(regionSelect)}
       </Label>
     );
   }

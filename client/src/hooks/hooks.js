@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useQuery } from '@apollo/react-hooks';
 import { GET_REGIONS, GET_CITIES } from '../queries'
-
+import { ruRegions} from '../const/globalConst'
 
 export const useDebounce = (value, delay) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -23,7 +23,7 @@ export const useInitialiseRegion = () => {
   data.__type.enumValues.map((region, index) =>
     options.push({
       key: index ,
-      text: region.name,
+      text: ruRegions.get(region.name),
       value: region.name
     })
   );
