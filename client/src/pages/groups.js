@@ -12,7 +12,7 @@ const Groups = () => {
   const [variables, setVariables] = useState({
     filter: "",
     regionSelect: "All",
-    sortByDistance: false
+    citySelect: "All"
   });
   const { data, loading, error, refetch } = useQuery(GET_GROUPS_WITH_POSITION, {
     variables
@@ -20,21 +20,8 @@ const Groups = () => {
 
   useEffect(() => {
     refetch(variables);
-  }, [variables.filter, variables.regionSelect, refetch]);
+  }, [variables, refetch]);
 
-  // SORT BY DISTANCE
-
-  useEffect(() => {
-    if (variables.sortByDistance) {
-      data.groupList.groups.sort((a, b) =>
-        a.distance > b.distance ? 1 : b.distance > a.distance ? -1 : 0
-      );
-      console.log('applying distance filter')
-    } else {
-      refetch();
-      console.log('refetch')
-    }
-  }, [variables.sortByDistance, data]);
 
   if (loading) return <LoadingMessage />;
   if (error)
@@ -53,20 +40,19 @@ const Groups = () => {
       return { ...prevState, regionSelect: value };
     });
   };
-
-  const onSortByDistanceChangeHandler = () => {
+  const onCityChangeHandler = value => {
     setVariables(prevState => {
-      return { ...prevState, sortByDistance: !prevState.sortByDistance };
+      return { ...prevState, citySelect: value };
     });
-    // do some sort-ordering here
   };
+
 
   return (
     <Container>
       <Filters
         searchHandler={onFilterChangeHandler}
         regionHandler={onRegionChangeHandler}
-        distanceHandler={onSortByDistanceChangeHandler}
+        cityHandler={onCityChangeHandler}
         filterValues={variables}
         count={data.groupList.count}
       />

@@ -3,8 +3,8 @@ type User {
 	name:         String!      
 	email:        String!      
 	password:     String!
-	groups:       [Group!] 
-  events:       [Event!]
+	groups:       [Group] 
+  events:       [Event]
 }
 
 type Group {
@@ -40,12 +40,20 @@ type Event {
   description:  String!       
   agenda:       String
   contact:      String
+  location:     Location
+  image:        Image
 }
 
 type Location {
   id:           ID! 
   lattitude:    Float!
   longitude:    Float!
+}
+
+type Image {
+  id:           ID!           
+  publicId:     String!       
+  cloudinaryUrl:String!     
 }
 
 scalar DateTime
@@ -79,7 +87,7 @@ enum regionType {
 }
 
 type Query {
-  groupList(filter: String, skip: Int, first: Int, orderBy: GroupOrderByInput, regionSelect: regionType, activeFilter: Boolean): GroupFeed!
+  groupList(filter: String, skip: Int, first: Int, orderBy: GroupOrderByInput, citySelect: String, regionSelect: regionType, activeFilter: Boolean): GroupFeed!
   eventList(filter: String, skip: Int, first: Int, orderBy: EventOrderByInput): EventFeed!
   getStatistics: StatisticResponse!
 }

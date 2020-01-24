@@ -1,6 +1,6 @@
 import React from "react";
 import Meeting from "./meeting";
-import { Table } from "semantic-ui-react";
+import { Table, Segment } from "semantic-ui-react";
 import sortBy from 'lodash/sortBy'
 
 const weekdays = ["Mo","Tu","We","Th","Fr","Sa","Su"]
@@ -11,10 +11,12 @@ const MeetingDataDisplay = props => {
     <Meeting key={meeting.id} {...meeting} />
   ));
   return (
-    // remove meetings header
-    <Table verticalAlign='top' compact='very' basic='very' unstackable size="small">
-      <Table.Body>{meetings}</Table.Body>
-    </Table>
+    <Segment placeholder>
+      <Table verticalAlign='top' compact='very' basic='very' unstackable size="small">
+        <Table.Body>{meetings}</Table.Body>
+      </Table>
+    </Segment>
+
   );
 };
 

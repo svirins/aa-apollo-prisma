@@ -11,6 +11,10 @@ type AggregateGroup {
   count: Int!
 }
 
+type AggregateImage {
+  count: Int!
+}
+
 type AggregateLocation {
   count: Int!
 }
@@ -35,9 +39,11 @@ type Event {
   name: String!
   date: DateTime!
   city: String!
+  location: Location
   description: String!
   agenda: String
   contact: String
+  image: Image
 }
 
 type EventConnection {
@@ -52,9 +58,11 @@ input EventCreateInput {
   name: String!
   date: DateTime!
   city: String!
+  location: LocationCreateOneInput
   description: String!
   agenda: String
   contact: String
+  image: ImageCreateOneInput
 }
 
 input EventCreateManyWithoutAuthorInput {
@@ -67,9 +75,11 @@ input EventCreateWithoutAuthorInput {
   name: String!
   date: DateTime!
   city: String!
+  location: LocationCreateOneInput
   description: String!
   agenda: String
   contact: String
+  image: ImageCreateOneInput
 }
 
 type EventEdge {
@@ -225,9 +235,11 @@ input EventUpdateInput {
   name: String
   date: DateTime
   city: String
+  location: LocationUpdateOneInput
   description: String
   agenda: String
   contact: String
+  image: ImageUpdateOneInput
 }
 
 input EventUpdateManyDataInput {
@@ -269,9 +281,11 @@ input EventUpdateWithoutAuthorDataInput {
   name: String
   date: DateTime
   city: String
+  location: LocationUpdateOneInput
   description: String
   agenda: String
   contact: String
+  image: ImageUpdateOneInput
 }
 
 input EventUpdateWithWhereUniqueWithoutAuthorInput {
@@ -337,6 +351,7 @@ input EventWhereInput {
   city_not_starts_with: String
   city_ends_with: String
   city_not_ends_with: String
+  location: LocationWhereInput
   description: String
   description_not: String
   description_in: [String!]
@@ -379,6 +394,7 @@ input EventWhereInput {
   contact_not_starts_with: String
   contact_ends_with: String
   contact_not_ends_with: String
+  image: ImageWhereInput
   AND: [EventWhereInput!]
   OR: [EventWhereInput!]
   NOT: [EventWhereInput!]
@@ -869,6 +885,148 @@ input GroupWhereUniqueInput {
   id: ID
 }
 
+type Image {
+  id: ID!
+  publicId: String!
+  cloudinaryUrl: String!
+}
+
+type ImageConnection {
+  pageInfo: PageInfo!
+  edges: [ImageEdge]!
+  aggregate: AggregateImage!
+}
+
+input ImageCreateInput {
+  id: ID
+  publicId: String!
+  cloudinaryUrl: String!
+}
+
+input ImageCreateOneInput {
+  create: ImageCreateInput
+  connect: ImageWhereUniqueInput
+}
+
+type ImageEdge {
+  node: Image!
+  cursor: String!
+}
+
+enum ImageOrderByInput {
+  id_ASC
+  id_DESC
+  publicId_ASC
+  publicId_DESC
+  cloudinaryUrl_ASC
+  cloudinaryUrl_DESC
+}
+
+type ImagePreviousValues {
+  id: ID!
+  publicId: String!
+  cloudinaryUrl: String!
+}
+
+type ImageSubscriptionPayload {
+  mutation: MutationType!
+  node: Image
+  updatedFields: [String!]
+  previousValues: ImagePreviousValues
+}
+
+input ImageSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ImageWhereInput
+  AND: [ImageSubscriptionWhereInput!]
+  OR: [ImageSubscriptionWhereInput!]
+  NOT: [ImageSubscriptionWhereInput!]
+}
+
+input ImageUpdateDataInput {
+  publicId: String
+  cloudinaryUrl: String
+}
+
+input ImageUpdateInput {
+  publicId: String
+  cloudinaryUrl: String
+}
+
+input ImageUpdateManyMutationInput {
+  publicId: String
+  cloudinaryUrl: String
+}
+
+input ImageUpdateOneInput {
+  create: ImageCreateInput
+  update: ImageUpdateDataInput
+  upsert: ImageUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: ImageWhereUniqueInput
+}
+
+input ImageUpsertNestedInput {
+  update: ImageUpdateDataInput!
+  create: ImageCreateInput!
+}
+
+input ImageWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  publicId: String
+  publicId_not: String
+  publicId_in: [String!]
+  publicId_not_in: [String!]
+  publicId_lt: String
+  publicId_lte: String
+  publicId_gt: String
+  publicId_gte: String
+  publicId_contains: String
+  publicId_not_contains: String
+  publicId_starts_with: String
+  publicId_not_starts_with: String
+  publicId_ends_with: String
+  publicId_not_ends_with: String
+  cloudinaryUrl: String
+  cloudinaryUrl_not: String
+  cloudinaryUrl_in: [String!]
+  cloudinaryUrl_not_in: [String!]
+  cloudinaryUrl_lt: String
+  cloudinaryUrl_lte: String
+  cloudinaryUrl_gt: String
+  cloudinaryUrl_gte: String
+  cloudinaryUrl_contains: String
+  cloudinaryUrl_not_contains: String
+  cloudinaryUrl_starts_with: String
+  cloudinaryUrl_not_starts_with: String
+  cloudinaryUrl_ends_with: String
+  cloudinaryUrl_not_ends_with: String
+  AND: [ImageWhereInput!]
+  OR: [ImageWhereInput!]
+  NOT: [ImageWhereInput!]
+}
+
+input ImageWhereUniqueInput {
+  id: ID
+}
+
 type Location {
   id: ID!
   lattitude: Float
@@ -1266,6 +1424,12 @@ type Mutation {
   upsertGroup(where: GroupWhereUniqueInput!, create: GroupCreateInput!, update: GroupUpdateInput!): Group!
   deleteGroup(where: GroupWhereUniqueInput!): Group
   deleteManyGroups(where: GroupWhereInput): BatchPayload!
+  createImage(data: ImageCreateInput!): Image!
+  updateImage(data: ImageUpdateInput!, where: ImageWhereUniqueInput!): Image
+  updateManyImages(data: ImageUpdateManyMutationInput!, where: ImageWhereInput): BatchPayload!
+  upsertImage(where: ImageWhereUniqueInput!, create: ImageCreateInput!, update: ImageUpdateInput!): Image!
+  deleteImage(where: ImageWhereUniqueInput!): Image
+  deleteManyImages(where: ImageWhereInput): BatchPayload!
   createLocation(data: LocationCreateInput!): Location!
   updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
   updateManyLocations(data: LocationUpdateManyMutationInput!, where: LocationWhereInput): BatchPayload!
@@ -1310,6 +1474,9 @@ type Query {
   group(where: GroupWhereUniqueInput!): Group
   groups(where: GroupWhereInput, orderBy: GroupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Group]!
   groupsConnection(where: GroupWhereInput, orderBy: GroupOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GroupConnection!
+  image(where: ImageWhereUniqueInput!): Image
+  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image]!
+  imagesConnection(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ImageConnection!
   location(where: LocationWhereUniqueInput!): Location
   locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
   locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
@@ -1335,6 +1502,7 @@ enum regionType {
 type Subscription {
   event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
   group(where: GroupSubscriptionWhereInput): GroupSubscriptionPayload
+  image(where: ImageSubscriptionWhereInput): ImageSubscriptionPayload
   location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
   meeting(where: MeetingSubscriptionWhereInput): MeetingSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload

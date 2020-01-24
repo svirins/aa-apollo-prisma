@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Statistic, Icon, Divider } from "semantic-ui-react";
+import { Container, Statistic, Icon, Divider, Segment } from "semantic-ui-react";
 import Error from "./error";
 import LoadingMessage from "./loader";
 
@@ -45,11 +45,12 @@ const StatisticBar = () => {
   }
 
   const nearCount = distanceArray.filter(value => value < 9000).length;
-  // calculate total amount of today's meetings
+  // calculate total amount of today's meetings style={{ marginTop: "1.5em" }
   const nowCount = meetings.filter(el => el.weekday === getToday()).length;
 
   return (
-    <Container style={{ marginTop: "1.5em" }}>
+    <Container>
+      <Segment basic>
       <Statistic.Group widths="six" size="mini">
         <Statistic color="blue">
           <Statistic.Value>
@@ -99,7 +100,7 @@ const StatisticBar = () => {
           <Statistic.Label>Events</Statistic.Label>
         </Statistic>
       </Statistic.Group>
-      <Divider />
+      </Segment>
     </Container>
   );
 };

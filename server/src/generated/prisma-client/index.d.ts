@@ -18,6 +18,7 @@ export type Maybe<T> = T | undefined | null;
 export interface Exists {
   event: (where?: EventWhereInput) => Promise<boolean>;
   group: (where?: GroupWhereInput) => Promise<boolean>;
+  image: (where?: ImageWhereInput) => Promise<boolean>;
   location: (where?: LocationWhereInput) => Promise<boolean>;
   meeting: (where?: MeetingWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
@@ -80,6 +81,25 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => GroupConnectionPromise;
+  image: (where: ImageWhereUniqueInput) => ImageNullablePromise;
+  images: (args?: {
+    where?: ImageWhereInput;
+    orderBy?: ImageOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Image>;
+  imagesConnection: (args?: {
+    where?: ImageWhereInput;
+    orderBy?: ImageOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ImageConnectionPromise;
   location: (where: LocationWhereUniqueInput) => LocationNullablePromise;
   locations: (args?: {
     where?: LocationWhereInput;
@@ -175,6 +195,22 @@ export interface Prisma {
   }) => GroupPromise;
   deleteGroup: (where: GroupWhereUniqueInput) => GroupPromise;
   deleteManyGroups: (where?: GroupWhereInput) => BatchPayloadPromise;
+  createImage: (data: ImageCreateInput) => ImagePromise;
+  updateImage: (args: {
+    data: ImageUpdateInput;
+    where: ImageWhereUniqueInput;
+  }) => ImagePromise;
+  updateManyImages: (args: {
+    data: ImageUpdateManyMutationInput;
+    where?: ImageWhereInput;
+  }) => BatchPayloadPromise;
+  upsertImage: (args: {
+    where: ImageWhereUniqueInput;
+    create: ImageCreateInput;
+    update: ImageUpdateInput;
+  }) => ImagePromise;
+  deleteImage: (where: ImageWhereUniqueInput) => ImagePromise;
+  deleteManyImages: (where?: ImageWhereInput) => BatchPayloadPromise;
   createLocation: (data: LocationCreateInput) => LocationPromise;
   updateLocation: (args: {
     data: LocationUpdateInput;
@@ -238,6 +274,9 @@ export interface Subscription {
   group: (
     where?: GroupSubscriptionWhereInput
   ) => GroupSubscriptionPayloadSubscription;
+  image: (
+    where?: ImageSubscriptionWhereInput
+  ) => ImageSubscriptionPayloadSubscription;
   location: (
     where?: LocationSubscriptionWhereInput
   ) => LocationSubscriptionPayloadSubscription;
@@ -325,6 +364,14 @@ export type EventOrderByInput =
   | "agenda_DESC"
   | "contact_ASC"
   | "contact_DESC";
+
+export type ImageOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "publicId_ASC"
+  | "publicId_DESC"
+  | "cloudinaryUrl_ASC"
+  | "cloudinaryUrl_DESC";
 
 export type LocationOrderByInput =
   | "id_ASC"
@@ -593,6 +640,7 @@ export interface EventWhereInput {
   city_not_starts_with?: Maybe<String>;
   city_ends_with?: Maybe<String>;
   city_not_ends_with?: Maybe<String>;
+  location?: Maybe<LocationWhereInput>;
   description?: Maybe<String>;
   description_not?: Maybe<String>;
   description_in?: Maybe<String[] | String>;
@@ -635,6 +683,7 @@ export interface EventWhereInput {
   contact_not_starts_with?: Maybe<String>;
   contact_ends_with?: Maybe<String>;
   contact_not_ends_with?: Maybe<String>;
+  image?: Maybe<ImageWhereInput>;
   AND?: Maybe<EventWhereInput[] | EventWhereInput>;
   OR?: Maybe<EventWhereInput[] | EventWhereInput>;
   NOT?: Maybe<EventWhereInput[] | EventWhereInput>;
@@ -674,6 +723,54 @@ export interface LocationWhereInput {
   AND?: Maybe<LocationWhereInput[] | LocationWhereInput>;
   OR?: Maybe<LocationWhereInput[] | LocationWhereInput>;
   NOT?: Maybe<LocationWhereInput[] | LocationWhereInput>;
+}
+
+export interface ImageWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  publicId?: Maybe<String>;
+  publicId_not?: Maybe<String>;
+  publicId_in?: Maybe<String[] | String>;
+  publicId_not_in?: Maybe<String[] | String>;
+  publicId_lt?: Maybe<String>;
+  publicId_lte?: Maybe<String>;
+  publicId_gt?: Maybe<String>;
+  publicId_gte?: Maybe<String>;
+  publicId_contains?: Maybe<String>;
+  publicId_not_contains?: Maybe<String>;
+  publicId_starts_with?: Maybe<String>;
+  publicId_not_starts_with?: Maybe<String>;
+  publicId_ends_with?: Maybe<String>;
+  publicId_not_ends_with?: Maybe<String>;
+  cloudinaryUrl?: Maybe<String>;
+  cloudinaryUrl_not?: Maybe<String>;
+  cloudinaryUrl_in?: Maybe<String[] | String>;
+  cloudinaryUrl_not_in?: Maybe<String[] | String>;
+  cloudinaryUrl_lt?: Maybe<String>;
+  cloudinaryUrl_lte?: Maybe<String>;
+  cloudinaryUrl_gt?: Maybe<String>;
+  cloudinaryUrl_gte?: Maybe<String>;
+  cloudinaryUrl_contains?: Maybe<String>;
+  cloudinaryUrl_not_contains?: Maybe<String>;
+  cloudinaryUrl_starts_with?: Maybe<String>;
+  cloudinaryUrl_not_starts_with?: Maybe<String>;
+  cloudinaryUrl_ends_with?: Maybe<String>;
+  cloudinaryUrl_not_ends_with?: Maybe<String>;
+  AND?: Maybe<ImageWhereInput[] | ImageWhereInput>;
+  OR?: Maybe<ImageWhereInput[] | ImageWhereInput>;
+  NOT?: Maybe<ImageWhereInput[] | ImageWhereInput>;
 }
 
 export interface MeetingWhereInput {
@@ -731,6 +828,10 @@ export type GroupWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
+export type ImageWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
 export type LocationWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
@@ -751,9 +852,11 @@ export interface EventCreateInput {
   name: String;
   date: DateTimeInput;
   city: String;
+  location?: Maybe<LocationCreateOneInput>;
   description: String;
   agenda?: Maybe<String>;
   contact?: Maybe<String>;
+  image?: Maybe<ImageCreateOneInput>;
 }
 
 export interface UserCreateOneWithoutEventsInput {
@@ -816,14 +919,27 @@ export interface MeetingCreateWithoutGroupInput {
   type?: Maybe<meetingType>;
 }
 
+export interface ImageCreateOneInput {
+  create?: Maybe<ImageCreateInput>;
+  connect?: Maybe<ImageWhereUniqueInput>;
+}
+
+export interface ImageCreateInput {
+  id?: Maybe<ID_Input>;
+  publicId: String;
+  cloudinaryUrl: String;
+}
+
 export interface EventUpdateInput {
   author?: Maybe<UserUpdateOneRequiredWithoutEventsInput>;
   name?: Maybe<String>;
   date?: Maybe<DateTimeInput>;
   city?: Maybe<String>;
+  location?: Maybe<LocationUpdateOneInput>;
   description?: Maybe<String>;
   agenda?: Maybe<String>;
   contact?: Maybe<String>;
+  image?: Maybe<ImageUpdateOneInput>;
 }
 
 export interface UserUpdateOneRequiredWithoutEventsInput {
@@ -1147,6 +1263,25 @@ export interface UserUpsertWithoutEventsInput {
   create: UserCreateWithoutEventsInput;
 }
 
+export interface ImageUpdateOneInput {
+  create?: Maybe<ImageCreateInput>;
+  update?: Maybe<ImageUpdateDataInput>;
+  upsert?: Maybe<ImageUpsertNestedInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<ImageWhereUniqueInput>;
+}
+
+export interface ImageUpdateDataInput {
+  publicId?: Maybe<String>;
+  cloudinaryUrl?: Maybe<String>;
+}
+
+export interface ImageUpsertNestedInput {
+  update: ImageUpdateDataInput;
+  create: ImageCreateInput;
+}
+
 export interface EventUpdateManyMutationInput {
   name?: Maybe<String>;
   date?: Maybe<DateTimeInput>;
@@ -1196,9 +1331,11 @@ export interface EventCreateWithoutAuthorInput {
   name: String;
   date: DateTimeInput;
   city: String;
+  location?: Maybe<LocationCreateOneInput>;
   description: String;
   agenda?: Maybe<String>;
   contact?: Maybe<String>;
+  image?: Maybe<ImageCreateOneInput>;
 }
 
 export interface GroupUpdateInput {
@@ -1260,9 +1397,11 @@ export interface EventUpdateWithoutAuthorDataInput {
   name?: Maybe<String>;
   date?: Maybe<DateTimeInput>;
   city?: Maybe<String>;
+  location?: Maybe<LocationUpdateOneInput>;
   description?: Maybe<String>;
   agenda?: Maybe<String>;
   contact?: Maybe<String>;
+  image?: Maybe<ImageUpdateOneInput>;
 }
 
 export interface EventUpsertWithWhereUniqueWithoutAuthorInput {
@@ -1399,6 +1538,16 @@ export interface GroupUpdateManyMutationInput {
   address?: Maybe<String>;
 }
 
+export interface ImageUpdateInput {
+  publicId?: Maybe<String>;
+  cloudinaryUrl?: Maybe<String>;
+}
+
+export interface ImageUpdateManyMutationInput {
+  publicId?: Maybe<String>;
+  cloudinaryUrl?: Maybe<String>;
+}
+
 export interface LocationUpdateInput {
   lattitude?: Maybe<Float>;
   longitude?: Maybe<Float>;
@@ -1522,6 +1671,17 @@ export interface GroupSubscriptionWhereInput {
   NOT?: Maybe<GroupSubscriptionWhereInput[] | GroupSubscriptionWhereInput>;
 }
 
+export interface ImageSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ImageWhereInput>;
+  AND?: Maybe<ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput>;
+  OR?: Maybe<ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput>;
+  NOT?: Maybe<ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput>;
+}
+
 export interface LocationSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
@@ -1579,9 +1739,11 @@ export interface EventPromise extends Promise<Event>, Fragmentable {
   name: () => Promise<String>;
   date: () => Promise<DateTimeOutput>;
   city: () => Promise<String>;
+  location: <T = LocationPromise>() => T;
   description: () => Promise<String>;
   agenda: () => Promise<String>;
   contact: () => Promise<String>;
+  image: <T = ImagePromise>() => T;
 }
 
 export interface EventSubscription
@@ -1592,9 +1754,11 @@ export interface EventSubscription
   name: () => Promise<AsyncIterator<String>>;
   date: () => Promise<AsyncIterator<DateTimeOutput>>;
   city: () => Promise<AsyncIterator<String>>;
+  location: <T = LocationSubscription>() => T;
   description: () => Promise<AsyncIterator<String>>;
   agenda: () => Promise<AsyncIterator<String>>;
   contact: () => Promise<AsyncIterator<String>>;
+  image: <T = ImageSubscription>() => T;
 }
 
 export interface EventNullablePromise
@@ -1605,9 +1769,11 @@ export interface EventNullablePromise
   name: () => Promise<String>;
   date: () => Promise<DateTimeOutput>;
   city: () => Promise<String>;
+  location: <T = LocationPromise>() => T;
   description: () => Promise<String>;
   agenda: () => Promise<String>;
   contact: () => Promise<String>;
+  image: <T = ImagePromise>() => T;
 }
 
 export interface User {
@@ -1852,6 +2018,34 @@ export interface MeetingNullablePromise
   type: () => Promise<meetingType>;
 }
 
+export interface Image {
+  id: ID_Output;
+  publicId: String;
+  cloudinaryUrl: String;
+}
+
+export interface ImagePromise extends Promise<Image>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  publicId: () => Promise<String>;
+  cloudinaryUrl: () => Promise<String>;
+}
+
+export interface ImageSubscription
+  extends Promise<AsyncIterator<Image>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  publicId: () => Promise<AsyncIterator<String>>;
+  cloudinaryUrl: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ImageNullablePromise
+  extends Promise<Image | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  publicId: () => Promise<String>;
+  cloudinaryUrl: () => Promise<String>;
+}
+
 export interface EventConnection {
   pageInfo: PageInfo;
   edges: EventEdge[];
@@ -1979,6 +2173,60 @@ export interface AggregateGroupPromise
 
 export interface AggregateGroupSubscription
   extends Promise<AsyncIterator<AggregateGroup>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ImageConnection {
+  pageInfo: PageInfo;
+  edges: ImageEdge[];
+}
+
+export interface ImageConnectionPromise
+  extends Promise<ImageConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ImageEdge>>() => T;
+  aggregate: <T = AggregateImagePromise>() => T;
+}
+
+export interface ImageConnectionSubscription
+  extends Promise<AsyncIterator<ImageConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ImageEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateImageSubscription>() => T;
+}
+
+export interface ImageEdge {
+  node: Image;
+  cursor: String;
+}
+
+export interface ImageEdgePromise extends Promise<ImageEdge>, Fragmentable {
+  node: <T = ImagePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ImageEdgeSubscription
+  extends Promise<AsyncIterator<ImageEdge>>,
+    Fragmentable {
+  node: <T = ImageSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateImage {
+  count: Int;
+}
+
+export interface AggregateImagePromise
+  extends Promise<AggregateImage>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateImageSubscription
+  extends Promise<AsyncIterator<AggregateImage>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -2290,6 +2538,53 @@ export interface GroupPreviousValuesSubscription
   address: () => Promise<AsyncIterator<String>>;
 }
 
+export interface ImageSubscriptionPayload {
+  mutation: MutationType;
+  node: Image;
+  updatedFields: String[];
+  previousValues: ImagePreviousValues;
+}
+
+export interface ImageSubscriptionPayloadPromise
+  extends Promise<ImageSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ImagePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ImagePreviousValuesPromise>() => T;
+}
+
+export interface ImageSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ImageSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ImageSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ImagePreviousValuesSubscription>() => T;
+}
+
+export interface ImagePreviousValues {
+  id: ID_Output;
+  publicId: String;
+  cloudinaryUrl: String;
+}
+
+export interface ImagePreviousValuesPromise
+  extends Promise<ImagePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  publicId: () => Promise<String>;
+  cloudinaryUrl: () => Promise<String>;
+}
+
+export interface ImagePreviousValuesSubscription
+  extends Promise<AsyncIterator<ImagePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  publicId: () => Promise<AsyncIterator<String>>;
+  cloudinaryUrl: () => Promise<AsyncIterator<String>>;
+}
+
 export interface LocationSubscriptionPayload {
   mutation: MutationType;
   node: Location;
@@ -2462,14 +2757,14 @@ DateTime scalar output type, which is always a string
 export type DateTimeOutput = string;
 
 /*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean;
-
-/*
 The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
 */
 export type Float = number;
+
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
 
 /*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
@@ -2501,6 +2796,10 @@ export const models: Model[] = [
   },
   {
     name: "Location",
+    embedded: false
+  },
+  {
+    name: "Image",
     embedded: false
   },
   {

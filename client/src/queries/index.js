@@ -10,6 +10,18 @@ export const GET_REGIONS = gql`
     }
   }
 `
+
+export const GET_CITIES = gql`
+  query getCities {
+    groupList {
+    groups {
+      city 
+    }
+  }
+}
+`
+
+
 export const GROUPS_LIST_QUERY = gql`
   query getGroupsList {
     groupList {
@@ -46,6 +58,14 @@ export const EVENTS_LIST_QUERY = gql`
         description
         agenda
         contact
+        image {
+          publicId
+          cloudinaryUrl
+        }
+        location {
+          lattitude
+          longitude
+        }
       }
     }
   }
@@ -71,6 +91,7 @@ export const GET_STATISTICS = gql`
   }
 `
 export const GET_POSITION = gql` 
+  query getPos
   {
     latitude @client
     longitude @client
@@ -78,8 +99,8 @@ export const GET_POSITION = gql`
   }
 `  
 export const GET_GROUPS_WITH_POSITION  = gql`
-  query getGroups($filter: String, $orderBy: GroupOrderByInput, $regionSelect: regionType ) {
-    groupList(filter: $filter, orderBy: $orderBy, regionSelect: $regionSelect){
+  query getGroups($filter: String, $orderBy: GroupOrderByInput, $regionSelect: regionType, $citySelect: String ) {
+    groupList(filter: $filter, orderBy: $orderBy, regionSelect: $regionSelect, citySelect: $citySelect) {
       count
       groups{
         id

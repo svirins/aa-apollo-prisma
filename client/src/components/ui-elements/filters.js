@@ -5,42 +5,46 @@ import {
   Icon,
   Dropdown,
   Label,
-  Checkbox, 
   Segment
 } from "semantic-ui-react";
-import { useInitialiseRegion } from "../../hooks/hooks";
-import { useQuery } from "@apollo/react-hooks";
-import { GET_POSITION } from "../../queries";
+import { useInitialiseRegion, useInitialiseCity } from "../../hooks/hooks";
 
 const Filters = props => {
-  const { data } = useQuery(GET_POSITION);
-  const { error: geoError } = data;
-  let disabled = geoError === "User denied Geolocation" ? true : false;
-  const { searchHandler, regionHandler, distanceHandler } = props;
-  const { filter, regionSelect, sortByDistance } = props.filterValues;
-  const options = useInitialiseRegion();
+  const { searchHandler, regionHandler, cityHandler } = props;
+  const { filter, regionSelect, citySelect } = props.filterValues;
+  const regionOptions = useInitialiseRegion();
+  const cityOptions = useInitialiseCity()
 
   let filterLabel,
-    regionSelectLabel = "";
+    regionSelectLabel,
+    citySelectLabel = "";
+
   if (filter) {
     filterLabel = (
-      <Label color="orange" tag>
+      <Label color="violet" tag>
         `{filter}`
       </Label>
     );
   }
   if (regionSelect) {
     regionSelectLabel = (
-      <Label color="teal" tag>
+      <Label color="purple" tag>
         {regionSelect}
+      </Label>
+    );
+  }
+  if (citySelect) {
+      citySelectLabel = (
+      <Label color="pink" tag>
+        {citySelect}
       </Label>
     );
   }
 
   return (
-    <Segment>
+    <Segment inverted color='blue' tertiary>
       <Grid stackable>
-        <Grid.Column width={4}>
+        <Grid.Column width={3}>
           <Input
             fluid
             icon={<Icon name="search" circular link />}
@@ -49,34 +53,35 @@ const Filters = props => {
             onChange={(e, { value }) => searchHandler(value)}
           />
         </Grid.Column>
-        <Grid.Column width={4}>
+        <Grid.Column width={3}>
           <Dropdown
             text="Choose Region"
-            placeholder="Select Friend"
+            placeholder="Choose Region"
             fluid
             selection
-            options={options}
+            options={regionOptions}
             defaultValue={regionSelect}
             onChange={(e, { value }) => regionHandler(value)}
           />
         </Grid.Column>
-        <Grid.Column width={2} verticalAlign="middle">
-        <Checkbox
-            toggle
-            disabled={disabled}
-            checked={sortByDistance}
-            label="Distance"
-            onChange={() => distanceHandler()}
+        <Grid.Column width={3}>
+          <Dropdown
+            text="Choose City"
+            placeholder="Choose City"
+            fluid
+            selection
+            options={cityOptions}
+            defaultValue={citySelect}
+            onChange={(e, { value }) => cityHandler(value)}
           />
         </Grid.Column>
-
-        <Grid.Column width={6} verticalAlign="middle" floated="right"  textAlign='right'>
-
+        <Grid.Column width={7} verticalAlign="middle" floated="right"  textAlign='right'>
           <Label color="olive" tag>
             {props.count} groups
           </Label>
           {filterLabel}
           {regionSelectLabel}
+          {citySelectLabel}       
         </Grid.Column>
       </Grid>
     </Segment>

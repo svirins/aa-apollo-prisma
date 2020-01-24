@@ -4,36 +4,9 @@ const faker = require('faker');
 // A `main` function so that we can use async/await
 async function main() {
   const newUser = await prisma.createUser({
-    name: 'Dmitriy Event Creator',
-    email: 's@gmail.com',
-    password: 'chupacabra',
-    groups: {
-      create: [
-        {
-        name: 'Effata',
-        description: faker.hacker.phrase(),
-        city: faker.address.city(),
-        region: 'Minskaya',
-        phone: '+375(25)940-95-91',
-        email: faker.internet.email(),
-        address: faker.address.streetAddress(),
-        lattitude: 27.77,
-        longitude: 54.33,
-        meetings: {
-          create: [{
-            name: faker.hacker.noun(),
-            weekday: 'Mo',
-            time: '19:00',
-            type: 'Closed',
-          },{
-            name: faker.hacker.noun(),
-            weekday: 'Tu',
-            time: '19:00',
-            type: 'Closed',
-          },],
-        },       
-      }]
-    },
+    name: '234345r',
+    email: 's342345@gmail.com',
+    password: '452343',
     events: {
       create: [{
         name: faker.hacker.noun(),
@@ -42,21 +15,20 @@ async function main() {
         description: faker.hacker.phrase(),
         agenda: faker.hacker.phrase(),
         contact: faker.hacker.phrase(),
-      },{
-        name: faker.hacker.noun(),
-        date: faker.date.past(),
-        city: faker.address.city(), 
-        description: faker.hacker.phrase(),
-        agenda: faker.hacker.phrase(),
-        contact: faker.hacker.phrase(),
-      },{
-        name: faker.hacker.noun(),
-        date: faker.date.past(),
-        city: faker.address.city(), 
-        description: faker.hacker.phrase(),
-        agenda: faker.hacker.phrase(),
-        contact: faker.hacker.phrase(),
-      }]
+        location: {
+          create: {
+            lattitude: 32,
+            longitude: 11
+          }
+        } ,
+        image: {
+          create: {
+            publicId: '22',
+            cloudinaryUrl: 'https://res.cloudinary.com/svirins/image/upload/v1565947500/AA-Belarus/iamsober_gqte3q.jpg', 
+          },
+        } 
+      }
+    ]
     }
   })
   console.log(`Created new user: ${newUser.name} (ID: ${newUser.id})`)

@@ -1,12 +1,14 @@
 // attention@ isActive works only on true values
 
 async function groupList(parent, args, context)  {
+  const citySelect = args.citySelect === "All" ? undefined : args.citySelect
   const regionSelect = args.regionSelect === "All" ? undefined : args.regionSelect
-  const where = (args.filter &&  args.filter !== "") || regionSelect
+  const where = (args.filter &&  args.filter !== "") || regionSelect || citySelect
     ? {
         AND: [
           { name_contains: args.filter },
           { region_in: regionSelect },
+          { city_in: citySelect }
         ],
       }
     : {}

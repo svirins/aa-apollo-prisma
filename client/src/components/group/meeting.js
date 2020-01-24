@@ -36,7 +36,7 @@ const Meeting = props => {
 
   return (
     <Table.Row negative={isToday}>
-      <Table.Cell textAlign='right'>
+      <Table.Cell textAlign='left'>
         <Label
           size="mini"
           color={
@@ -53,7 +53,7 @@ const Meeting = props => {
           position="bottom right"
           size="mini"
           trigger={
-            <Icon name={iconName} color={colorName} size="small" circular />
+            <Icon name={iconName} color={colorName} size="small"  />
           }
         />
       </Table.Cell>

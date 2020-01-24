@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery } from '@apollo/react-hooks';
-import { GET_REGIONS } from '../queries'
+import { GET_REGIONS, GET_CITIES } from '../queries'
 
 
 export const useDebounce = (value, delay) => {
@@ -30,3 +30,22 @@ export const useInitialiseRegion = () => {
   return options
 }
 
+export const useInitialiseCity = () => {
+  const { data, loading, error } = useQuery(GET_CITIES);
+  if (loading || error) return []
+  const options = [{
+      key: 0 ,
+      text: 'All',
+      value: 'All'
+  }];
+  const sorted = [...new Set(data.groupList.groups.map(el=>el.city))].sort()
+  sorted.map((city, index) =>
+    options.push({
+      key: index + 1,
+      text: city,
+      value: city
+    })
+  )
+
+  return options
+}

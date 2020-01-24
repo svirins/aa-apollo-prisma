@@ -25,6 +25,10 @@ var models = [
     embedded: false
   },
   {
+    name: "Image",
+    embedded: false
+  },
+  {
     name: "Weekday",
     embedded: false
   },
@@ -40,6 +44,6 @@ var models = [
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `https://eu1.prisma.sh/dzmitry-sviryn-c0647b/aa-server/dev`
+  endpoint: `https://eu1.prisma.sh/dzmitry-sviryn-c0647b/aa_s/dev`
 });
 exports.prisma = new exports.Prisma();

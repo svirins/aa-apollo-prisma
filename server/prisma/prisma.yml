@@ -1,5 +1,5 @@
 #endpoint: ''
-endpoint: https://eu1.prisma.sh/dzmitry-sviryn-c0647b/aa-server/dev
+endpoint: https://eu1.prisma.sh/dzmitry-sviryn-c0647b/aa_s/dev
 datamodel: 
   - types.prisma
   - enums.prisma
