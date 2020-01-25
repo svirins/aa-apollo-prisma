@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Input,
   Grid,
@@ -9,9 +9,21 @@ import {
 } from "semantic-ui-react";
 import { useInitialiseRegion, useInitialiseCity } from "../../hooks/hooks";
 import { ruRegions } from '../../const/globalConst'
-import { fromUnixTime } from "date-fns";
+import { useDebounce } from "../../hooks/hooks";
 
 const Filters = props => {
+  // managing debounced value
+  const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  useEffect(
+    () => {
+      if (debouncedSearchTerm) {
+        searchHandler(debouncedSearchTerm)
+      }}, 
+    [debouncedSearchTerm] // Only call effect if debounced search term changes
+  );
+
+  // rest of it
   const { searchHandler, regionHandler, cityHandler } = props;
   const { filter, regionSelect, citySelect } = props.filterValues;
   const regionOptions = useInitialiseRegion();
@@ -43,6 +55,8 @@ const Filters = props => {
     );
   }
 
+
+
   return (
     <Segment inverted color='blue' tertiary>
       <Grid stackable>
@@ -52,7 +66,7 @@ const Filters = props => {
             icon={<Icon name="search" circular link />}
             placeholder="Search..."
             value={filter}
-            onChange={(e, { value }) => searchHandler(value)}
+            onChange={(e, { value }) => setSearchTerm(value)}
           />
         </Grid.Column>
         <Grid.Column width={3}>

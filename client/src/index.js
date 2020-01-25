@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
 import "mapbox-gl/dist/mapbox-gl.css";
-import 'semantic-ui-css/semantic.min.css';
+import 'semantic-ui-less/semantic.less'
 import './App.css';
 
 import { ApolloClient } from 'apollo-client';
