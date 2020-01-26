@@ -28,9 +28,11 @@ export const GROUPS_LIST_QUERY = gql`
       groups {
         id
         name
+        birthday
         city
         region    
         address
+        website
         location {
           lattitude
           longitude
@@ -105,6 +107,7 @@ export const GET_GROUPS_WITH_POSITION  = gql`
       groups{
         id
         name
+        birthday
         isActive
         description
         city
@@ -112,6 +115,7 @@ export const GET_GROUPS_WITH_POSITION  = gql`
         phone
         email
         address
+        website
         distance @client
         location {
           lattitude

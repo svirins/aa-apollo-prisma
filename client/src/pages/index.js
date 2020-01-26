@@ -14,8 +14,8 @@ const Groups = React.lazy(() => import("./groups"));
 const Map = React.lazy(() => import("./map"));
 const Events = React.lazy(() => import("./events"));
 const FourZeroFour = React.lazy(() => import("./notFound"));
-const Profile = React.lazy(() => import("./profile"));
 const LoginPage = React.lazy(() => import("./login"));
+const About = React.lazy(() => import("./about"));
 
 const Pages = props => {
   const {
@@ -45,7 +45,7 @@ const Pages = props => {
           <Switch>
             <Route path="/map" render={() => <Map />} />
             <Route path="/events" render={() => <Events />} />
-            <Route path="/profile" render={() => <Profile />} />
+            <Route path="/about" render={() => <About />} />
             <Route path="/login" render={() => <LoginPage />} />
             <Route path="/" exact render={() => <Groups />} />
             <Route path="*" render={() => <FourZeroFour />} />

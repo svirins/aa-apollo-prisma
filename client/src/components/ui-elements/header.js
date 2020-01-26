@@ -16,42 +16,46 @@ const Header = () => {
           as={Link}
           to="/"
           name="groups"
+          color='blue'
           active={activeItem === "groups"}
           onClick={(e, { name }) => setActiveItem(name)}
         >
-          <Icon name="group" color="black" />
-          Groups
+          <Icon name="group" color="blue" />
+          Группы
         </Menu.Item>
         <Menu.Item
           as={Link}
           to="/map"
           name="map"
+          color='orange'
           active={activeItem === "map"}
           onClick={(e, { name }) => setActiveItem(name)}
         >
-          <Icon name="compass" color="black" />
-          Map
+          <Icon name="compass" color="orange" />
+          Карта
         </Menu.Item>
         <Menu.Item
           as={Link}
           to="/events"
           name="events"
+          color='orange'
           active={activeItem === "events"}
           onClick={(e, { name }) => setActiveItem(name)}
         >
           <Icon name="birthday cake" color="black" />
-          Events
+          События
         </Menu.Item>
         <Menu.Menu position="right">
           <Menu.Item
             as={Link}
             to="/login"
             name="login"
+            color='violet'
             active={activeItem === "login"}
             onClick={(e, { name }) => setActiveItem(name)}
           >
             <Icon name="user" color="black" />
-            login
+            Вход
           </Menu.Item>
         </Menu.Menu>
       </Menu>

@@ -11,19 +11,19 @@ const Meeting = props => {
   let colorName = "";
   switch (props.type) {
     case "Open":
-      iconName = "lock open";
+      iconName = "bullhorn";
       colorName = "green";
       break;
     case "Closed":
-      iconName = "lock";
+      iconName = "comment";
       colorName = "grey";
       break;
     case "Speaker":
-      iconName = "microphone";
+      iconName = "lightning";
       colorName = "orange";
       break;
     case "Twelve":
-      iconName = "sort amount up";
+      iconName = "pointing up";
       colorName = "teal";
       break;
     case "Reflections":
@@ -31,7 +31,7 @@ const Meeting = props => {
       colorName = "blue";
       break;
     default:
-      iconName = "file outline";
+      iconName = "talk";
       colorName = "black";
   }
 

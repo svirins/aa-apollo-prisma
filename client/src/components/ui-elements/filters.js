@@ -29,50 +29,33 @@ const Filters = props => {
   const regionOptions = useInitialiseRegion();
   const cityOptions = useInitialiseCity()
 
-  let filterLabel,
-    regionSelectLabel,
-    citySelectLabel = "";
+  const foundGroupsCount = `Найдено ${props.count} групп АА `   
+  const filterLabel = filter ? `Поиск по '${filter}' /` : ''
+  const regionLabel = regionSelect ? ` / Регион: '${ruRegions.get(regionSelect)}'` : ''
+  const cityLabel = citySelect !== 'All' ? ' / Город: ' + citySelect : ' / Город: Все города'
+  
+  
 
-  if (filter) {
-    filterLabel = (
-      <Label color="violet" tag>
-        `{filter}`
-      </Label>
-    );
-  }
-  if (regionSelect) {
-    regionSelectLabel = (
-      <Label color="purple" tag>
-        {ruRegions.get(regionSelect)}
-      </Label>
-    );
-  }
-  if (citySelect) {
-      citySelectLabel = (
-      <Label color="pink" tag>
-        {citySelect}
-      </Label>
-    );
-  }
-
+  const constructedFiltersString = foundGroupsCount + filterLabel + regionLabel + cityLabel
 
 
   return (
     <Segment inverted color='blue' tertiary>
       <Grid stackable>
-        <Grid.Column width={3}>
+        <Grid.Row columns={3}>
+        <Grid.Column>
           <Input
             fluid
             icon={<Icon name="search" circular link />}
-            placeholder="Search..."
+            placeholder="Искать по названию"
             value={filter}
             onChange={(e, { value }) => setSearchTerm(value)}
           />
         </Grid.Column>
-        <Grid.Column width={3}>
+        <Grid.Column>
           <Dropdown
-            text="Choose Region"
-            placeholder="Choose Region"
+            text="Выберите регион"
+            placeholder="Выберите регион"
             fluid
             selection
             options={regionOptions}
@@ -80,10 +63,10 @@ const Filters = props => {
             onChange={(e, { value }) => regionHandler(value)}
           />
         </Grid.Column>
-        <Grid.Column width={3}>
+        <Grid.Column>
           <Dropdown
-            text="Choose City"
-            placeholder="Choose City"
+            text="Выберите город"
+            placeholder="Выберите город"
             fluid
             selection
             options={cityOptions}
@@ -91,14 +74,14 @@ const Filters = props => {
             onChange={(e, { value }) => cityHandler(value)}
           />
         </Grid.Column>
-        <Grid.Column width={7} verticalAlign="middle" floated="right"  textAlign='right'>
-          <Label color="olive" tag>
-            {props.count} groups
-          </Label>
-          {filterLabel}
-          {regionSelectLabel}
-          {citySelectLabel}       
-        </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={1} verticalAlign="middle">
+          <Grid.Column>
+            <Label color="olive" tag>
+              {constructedFiltersString}
+            </Label>  
+          </Grid.Column>
+        </Grid.Row>
       </Grid>
     </Segment>
   );

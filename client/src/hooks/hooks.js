@@ -35,7 +35,7 @@ export const useInitialiseCity = () => {
   if (loading || error) return []
   const options = [{
       key: 0 ,
-      text: 'All',
+      text: 'Все города',
       value: 'All'
   }];
   const sorted = [...new Set(data.groupList.groups.map(el=>el.city))].sort()

@@ -4,7 +4,7 @@ import { Message } from 'semantic-ui-react'
 const Error = props =>  (
   <Message
     icon='info'
-    header='Something went wrong'
+    header='Что-то пошло не так, как планировалось...'
     content={props.errorMessage}
     error
   />

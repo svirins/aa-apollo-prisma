@@ -5,32 +5,33 @@ import {
   Header,
   Image,
   List,
-  Segment,
+  Segment
 } from 'semantic-ui-react'
+import { Link } from "react-router-dom";
 
 import logo from "../../assets/images/logo.svg";
 
 
 const Footer = () => (
-  <Segment inverted vertical style={{ margin: '5em 0em 0em', padding: '5em 0em' }}>
+  <Segment inverted vertical style={{ margin: '0em 0em 0em', padding: '2em 0em' }}>
     <Container textAlign='center'>
-      <Header inverted as='h4' content='Footer Header' />          
-      <Divider inverted section />
-      <Image centered size='mini' src={logo} />
       <List horizontal inverted divided link size='small'>
-        <List.Item as='a' href='#'>
-          Groups 
+        <List.Item as={Link} to="/">
+          Группы 
         </List.Item>
-        <List.Item as='a' href='#'>
-          Near Me
+        <List.Item as={Link} to="/map">
+          Карта
         </List.Item>
-        <List.Item as='a' href='#'>
-          Events
+        <List.Item as={Link} to="/events">
+          События
         </List.Item>
-        <List.Item as='a' href='#'>
-          Profile
+        <List.Item as={Link} to="/about">
+          О проекте
         </List.Item>
       </List>
+      <Divider inverted section />
+
+      <Image centered size='mini' src={logo} />
     </Container>
   </Segment>
 )

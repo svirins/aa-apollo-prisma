@@ -11,16 +11,18 @@ type User {
 type Group {
   id:               ID!           @id
   createdAt:        DateTime!     @createdAt
+  birthday:         DateTime     
   author:           User!         @relation(link: INLINE)
   name:             String!       @default(value: "New AA Group")
-  description:      String!       @default(value: "Some descriptive description")
+  description:      String        @default(value: "Some descriptive description")
   city:             String!
   region:           regionType!   
-  isActive:         Boolean       @default(value: true)
+  isActive:         Boolean!      @default(value: true)
   phone:            String
   email:            String
   address:          String
-  location:         Location
+  website:          String
+  location:         Location!
   meetings:         [Meeting!]! 
 }
 
@@ -54,6 +56,6 @@ type Location {
 
 type Image {
   id:               ID!           @id
-  publicId:         String!      
+  publicId:         String      
   cloudinaryUrl:    String!       
 }

@@ -320,6 +320,8 @@ export type GroupOrderByInput =
   | "id_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
+  | "birthday_ASC"
+  | "birthday_DESC"
   | "name_ASC"
   | "name_DESC"
   | "description_ASC"
@@ -335,7 +337,9 @@ export type GroupOrderByInput =
   | "email_ASC"
   | "email_DESC"
   | "address_ASC"
-  | "address_DESC";
+  | "address_DESC"
+  | "website_ASC"
+  | "website_DESC";
 
 export type MeetingOrderByInput =
   | "id_ASC"
@@ -420,6 +424,14 @@ export interface GroupWhereInput {
   createdAt_lte?: Maybe<DateTimeInput>;
   createdAt_gt?: Maybe<DateTimeInput>;
   createdAt_gte?: Maybe<DateTimeInput>;
+  birthday?: Maybe<DateTimeInput>;
+  birthday_not?: Maybe<DateTimeInput>;
+  birthday_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  birthday_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  birthday_lt?: Maybe<DateTimeInput>;
+  birthday_lte?: Maybe<DateTimeInput>;
+  birthday_gt?: Maybe<DateTimeInput>;
+  birthday_gte?: Maybe<DateTimeInput>;
   author?: Maybe<UserWhereInput>;
   name?: Maybe<String>;
   name_not?: Maybe<String>;
@@ -511,6 +523,20 @@ export interface GroupWhereInput {
   address_not_starts_with?: Maybe<String>;
   address_ends_with?: Maybe<String>;
   address_not_ends_with?: Maybe<String>;
+  website?: Maybe<String>;
+  website_not?: Maybe<String>;
+  website_in?: Maybe<String[] | String>;
+  website_not_in?: Maybe<String[] | String>;
+  website_lt?: Maybe<String>;
+  website_lte?: Maybe<String>;
+  website_gt?: Maybe<String>;
+  website_gte?: Maybe<String>;
+  website_contains?: Maybe<String>;
+  website_not_contains?: Maybe<String>;
+  website_starts_with?: Maybe<String>;
+  website_not_starts_with?: Maybe<String>;
+  website_ends_with?: Maybe<String>;
+  website_not_ends_with?: Maybe<String>;
   location?: Maybe<LocationWhereInput>;
   meetings_every?: Maybe<MeetingWhereInput>;
   meetings_some?: Maybe<MeetingWhereInput>;
@@ -881,6 +907,7 @@ export interface GroupCreateManyWithoutAuthorInput {
 
 export interface GroupCreateWithoutAuthorInput {
   id?: Maybe<ID_Input>;
+  birthday?: Maybe<DateTimeInput>;
   name?: Maybe<String>;
   description?: Maybe<String>;
   city: String;
@@ -889,7 +916,8 @@ export interface GroupCreateWithoutAuthorInput {
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
-  location?: Maybe<LocationCreateOneInput>;
+  website?: Maybe<String>;
+  location: LocationCreateOneInput;
   meetings?: Maybe<MeetingCreateManyWithoutGroupInput>;
 }
 
@@ -926,7 +954,7 @@ export interface ImageCreateOneInput {
 
 export interface ImageCreateInput {
   id?: Maybe<ID_Input>;
-  publicId: String;
+  publicId?: Maybe<String>;
   cloudinaryUrl: String;
 }
 
@@ -984,6 +1012,7 @@ export interface GroupUpdateWithWhereUniqueWithoutAuthorInput {
 }
 
 export interface GroupUpdateWithoutAuthorDataInput {
+  birthday?: Maybe<DateTimeInput>;
   name?: Maybe<String>;
   description?: Maybe<String>;
   city?: Maybe<String>;
@@ -992,16 +1021,15 @@ export interface GroupUpdateWithoutAuthorDataInput {
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
-  location?: Maybe<LocationUpdateOneInput>;
+  website?: Maybe<String>;
+  location?: Maybe<LocationUpdateOneRequiredInput>;
   meetings?: Maybe<MeetingUpdateManyWithoutGroupInput>;
 }
 
-export interface LocationUpdateOneInput {
+export interface LocationUpdateOneRequiredInput {
   create?: Maybe<LocationCreateInput>;
   update?: Maybe<LocationUpdateDataInput>;
   upsert?: Maybe<LocationUpsertNestedInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
   connect?: Maybe<LocationWhereUniqueInput>;
 }
 
@@ -1147,6 +1175,14 @@ export interface GroupScalarWhereInput {
   createdAt_lte?: Maybe<DateTimeInput>;
   createdAt_gt?: Maybe<DateTimeInput>;
   createdAt_gte?: Maybe<DateTimeInput>;
+  birthday?: Maybe<DateTimeInput>;
+  birthday_not?: Maybe<DateTimeInput>;
+  birthday_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  birthday_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  birthday_lt?: Maybe<DateTimeInput>;
+  birthday_lte?: Maybe<DateTimeInput>;
+  birthday_gt?: Maybe<DateTimeInput>;
+  birthday_gte?: Maybe<DateTimeInput>;
   name?: Maybe<String>;
   name_not?: Maybe<String>;
   name_in?: Maybe<String[] | String>;
@@ -1237,6 +1273,20 @@ export interface GroupScalarWhereInput {
   address_not_starts_with?: Maybe<String>;
   address_ends_with?: Maybe<String>;
   address_not_ends_with?: Maybe<String>;
+  website?: Maybe<String>;
+  website_not?: Maybe<String>;
+  website_in?: Maybe<String[] | String>;
+  website_not_in?: Maybe<String[] | String>;
+  website_lt?: Maybe<String>;
+  website_lte?: Maybe<String>;
+  website_gt?: Maybe<String>;
+  website_gte?: Maybe<String>;
+  website_contains?: Maybe<String>;
+  website_not_contains?: Maybe<String>;
+  website_starts_with?: Maybe<String>;
+  website_not_starts_with?: Maybe<String>;
+  website_ends_with?: Maybe<String>;
+  website_not_ends_with?: Maybe<String>;
   AND?: Maybe<GroupScalarWhereInput[] | GroupScalarWhereInput>;
   OR?: Maybe<GroupScalarWhereInput[] | GroupScalarWhereInput>;
   NOT?: Maybe<GroupScalarWhereInput[] | GroupScalarWhereInput>;
@@ -1248,6 +1298,7 @@ export interface GroupUpdateManyWithWhereNestedInput {
 }
 
 export interface GroupUpdateManyDataInput {
+  birthday?: Maybe<DateTimeInput>;
   name?: Maybe<String>;
   description?: Maybe<String>;
   city?: Maybe<String>;
@@ -1256,11 +1307,21 @@ export interface GroupUpdateManyDataInput {
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
+  website?: Maybe<String>;
 }
 
 export interface UserUpsertWithoutEventsInput {
   update: UserUpdateWithoutEventsDataInput;
   create: UserCreateWithoutEventsInput;
+}
+
+export interface LocationUpdateOneInput {
+  create?: Maybe<LocationCreateInput>;
+  update?: Maybe<LocationUpdateDataInput>;
+  upsert?: Maybe<LocationUpsertNestedInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<LocationWhereUniqueInput>;
 }
 
 export interface ImageUpdateOneInput {
@@ -1293,6 +1354,7 @@ export interface EventUpdateManyMutationInput {
 
 export interface GroupCreateInput {
   id?: Maybe<ID_Input>;
+  birthday?: Maybe<DateTimeInput>;
   author: UserCreateOneWithoutGroupsInput;
   name?: Maybe<String>;
   description?: Maybe<String>;
@@ -1302,7 +1364,8 @@ export interface GroupCreateInput {
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
-  location?: Maybe<LocationCreateOneInput>;
+  website?: Maybe<String>;
+  location: LocationCreateOneInput;
   meetings?: Maybe<MeetingCreateManyWithoutGroupInput>;
 }
 
@@ -1339,6 +1402,7 @@ export interface EventCreateWithoutAuthorInput {
 }
 
 export interface GroupUpdateInput {
+  birthday?: Maybe<DateTimeInput>;
   author?: Maybe<UserUpdateOneRequiredWithoutGroupsInput>;
   name?: Maybe<String>;
   description?: Maybe<String>;
@@ -1348,7 +1412,8 @@ export interface GroupUpdateInput {
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
-  location?: Maybe<LocationUpdateOneInput>;
+  website?: Maybe<String>;
+  location?: Maybe<LocationUpdateOneRequiredInput>;
   meetings?: Maybe<MeetingUpdateManyWithoutGroupInput>;
 }
 
@@ -1528,6 +1593,7 @@ export interface UserUpsertWithoutGroupsInput {
 }
 
 export interface GroupUpdateManyMutationInput {
+  birthday?: Maybe<DateTimeInput>;
   name?: Maybe<String>;
   description?: Maybe<String>;
   city?: Maybe<String>;
@@ -1536,6 +1602,7 @@ export interface GroupUpdateManyMutationInput {
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
+  website?: Maybe<String>;
 }
 
 export interface ImageUpdateInput {
@@ -1574,6 +1641,7 @@ export interface GroupCreateOneWithoutMeetingsInput {
 
 export interface GroupCreateWithoutMeetingsInput {
   id?: Maybe<ID_Input>;
+  birthday?: Maybe<DateTimeInput>;
   author: UserCreateOneWithoutGroupsInput;
   name?: Maybe<String>;
   description?: Maybe<String>;
@@ -1583,7 +1651,8 @@ export interface GroupCreateWithoutMeetingsInput {
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
-  location?: Maybe<LocationCreateOneInput>;
+  website?: Maybe<String>;
+  location: LocationCreateOneInput;
 }
 
 export interface MeetingUpdateInput {
@@ -1602,6 +1671,7 @@ export interface GroupUpdateOneRequiredWithoutMeetingsInput {
 }
 
 export interface GroupUpdateWithoutMeetingsDataInput {
+  birthday?: Maybe<DateTimeInput>;
   author?: Maybe<UserUpdateOneRequiredWithoutGroupsInput>;
   name?: Maybe<String>;
   description?: Maybe<String>;
@@ -1611,7 +1681,8 @@ export interface GroupUpdateWithoutMeetingsDataInput {
   phone?: Maybe<String>;
   email?: Maybe<String>;
   address?: Maybe<String>;
-  location?: Maybe<LocationUpdateOneInput>;
+  website?: Maybe<String>;
+  location?: Maybe<LocationUpdateOneRequiredInput>;
 }
 
 export interface GroupUpsertWithoutMeetingsInput {
@@ -1865,19 +1936,22 @@ export interface UserNullablePromise
 export interface Group {
   id: ID_Output;
   createdAt: DateTimeOutput;
+  birthday?: DateTimeOutput;
   name: String;
-  description: String;
+  description?: String;
   city: String;
   region: regionType;
-  isActive?: Boolean;
+  isActive: Boolean;
   phone?: String;
   email?: String;
   address?: String;
+  website?: String;
 }
 
 export interface GroupPromise extends Promise<Group>, Fragmentable {
   id: () => Promise<ID_Output>;
   createdAt: () => Promise<DateTimeOutput>;
+  birthday: () => Promise<DateTimeOutput>;
   author: <T = UserPromise>() => T;
   name: () => Promise<String>;
   description: () => Promise<String>;
@@ -1887,6 +1961,7 @@ export interface GroupPromise extends Promise<Group>, Fragmentable {
   phone: () => Promise<String>;
   email: () => Promise<String>;
   address: () => Promise<String>;
+  website: () => Promise<String>;
   location: <T = LocationPromise>() => T;
   meetings: <T = FragmentableArray<Meeting>>(args?: {
     where?: MeetingWhereInput;
@@ -1904,6 +1979,7 @@ export interface GroupSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  birthday: () => Promise<AsyncIterator<DateTimeOutput>>;
   author: <T = UserSubscription>() => T;
   name: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
@@ -1913,6 +1989,7 @@ export interface GroupSubscription
   phone: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   address: () => Promise<AsyncIterator<String>>;
+  website: () => Promise<AsyncIterator<String>>;
   location: <T = LocationSubscription>() => T;
   meetings: <T = Promise<AsyncIterator<MeetingSubscription>>>(args?: {
     where?: MeetingWhereInput;
@@ -1930,6 +2007,7 @@ export interface GroupNullablePromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   createdAt: () => Promise<DateTimeOutput>;
+  birthday: () => Promise<DateTimeOutput>;
   author: <T = UserPromise>() => T;
   name: () => Promise<String>;
   description: () => Promise<String>;
@@ -1939,6 +2017,7 @@ export interface GroupNullablePromise
   phone: () => Promise<String>;
   email: () => Promise<String>;
   address: () => Promise<String>;
+  website: () => Promise<String>;
   location: <T = LocationPromise>() => T;
   meetings: <T = FragmentableArray<Meeting>>(args?: {
     where?: MeetingWhereInput;
@@ -2020,7 +2099,7 @@ export interface MeetingNullablePromise
 
 export interface Image {
   id: ID_Output;
-  publicId: String;
+  publicId?: String;
   cloudinaryUrl: String;
 }
 
@@ -2498,14 +2577,16 @@ export interface GroupSubscriptionPayloadSubscription
 export interface GroupPreviousValues {
   id: ID_Output;
   createdAt: DateTimeOutput;
+  birthday?: DateTimeOutput;
   name: String;
-  description: String;
+  description?: String;
   city: String;
   region: regionType;
-  isActive?: Boolean;
+  isActive: Boolean;
   phone?: String;
   email?: String;
   address?: String;
+  website?: String;
 }
 
 export interface GroupPreviousValuesPromise
@@ -2513,6 +2594,7 @@ export interface GroupPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   createdAt: () => Promise<DateTimeOutput>;
+  birthday: () => Promise<DateTimeOutput>;
   name: () => Promise<String>;
   description: () => Promise<String>;
   city: () => Promise<String>;
@@ -2521,6 +2603,7 @@ export interface GroupPreviousValuesPromise
   phone: () => Promise<String>;
   email: () => Promise<String>;
   address: () => Promise<String>;
+  website: () => Promise<String>;
 }
 
 export interface GroupPreviousValuesSubscription
@@ -2528,6 +2611,7 @@ export interface GroupPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  birthday: () => Promise<AsyncIterator<DateTimeOutput>>;
   name: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
   city: () => Promise<AsyncIterator<String>>;
@@ -2536,6 +2620,7 @@ export interface GroupPreviousValuesSubscription
   phone: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   address: () => Promise<AsyncIterator<String>>;
+  website: () => Promise<AsyncIterator<String>>;
 }
 
 export interface ImageSubscriptionPayload {
@@ -2565,7 +2650,7 @@ export interface ImageSubscriptionPayloadSubscription
 
 export interface ImagePreviousValues {
   id: ID_Output;
-  publicId: String;
+  publicId?: String;
   cloudinaryUrl: String;
 }
 

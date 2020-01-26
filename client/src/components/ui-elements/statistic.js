@@ -52,12 +52,12 @@ const StatisticBar = () => {
     <Container>
       <Segment basic>
       <Statistic.Group widths="six" size="mini">
-        <Statistic color="blue">
+        <Statistic color="blue" >
           <Statistic.Value>
             <Icon name="users" />
             {groupCount}
           </Statistic.Value>
-          <Statistic.Label>Groups</Statistic.Label>
+          <Statistic.Label size="mini">Групп АА</Statistic.Label>
         </Statistic>
 
         <Statistic color="orange">
@@ -65,7 +65,7 @@ const StatisticBar = () => {
             <Icon name="map signs" />
             {citiesCount}
           </Statistic.Value>
-          <Statistic.Label>Cities</Statistic.Label>
+          <Statistic.Label>Городов</Statistic.Label>
         </Statistic>
 
         <Statistic color="purple">
@@ -73,7 +73,7 @@ const StatisticBar = () => {
             <Icon name="coffee" />
             {meetingCount}
           </Statistic.Value>
-          <Statistic.Label>Meetings</Statistic.Label>
+          <Statistic.Label>Собраний</Statistic.Label>
         </Statistic>
 
         <Statistic color="olive">
@@ -81,7 +81,7 @@ const StatisticBar = () => {
             <Icon name="clock" />
             {nowCount}
           </Statistic.Value>
-          <Statistic.Label>Today</Statistic.Label>
+          <Statistic.Label>Сегодня</Statistic.Label>
         </Statistic>
 
         <Statistic color="green">
@@ -89,7 +89,7 @@ const StatisticBar = () => {
             <Icon name="map marker alternate" />
             {nearCount}
           </Statistic.Value>
-          <Statistic.Label>Near</Statistic.Label>
+          <Statistic.Label>Рядом</Statistic.Label>
         </Statistic>
 
         <Statistic color="yellow">
@@ -97,7 +97,7 @@ const StatisticBar = () => {
             <Icon name="gift" />
             {eventsCount}
           </Statistic.Value>
-          <Statistic.Label>Events</Statistic.Label>
+          <Statistic.Label>Событий</Statistic.Label>
         </Statistic>
       </Statistic.Group>
       </Segment>

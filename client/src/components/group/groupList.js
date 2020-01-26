@@ -15,6 +15,8 @@ const GroupList = props => {
           <DisabledLabel disabled={group.isActive} />
           <GroupDataDisplay
             name={group.name}
+            website={group.website}
+            birthday={group.birthday}
             description={group.description}
             city={group.city}
             region={group.region}

@@ -407,16 +407,18 @@ input EventWhereUniqueInput {
 type Group {
   id: ID!
   createdAt: DateTime!
+  birthday: DateTime
   author: User!
   name: String!
-  description: String!
+  description: String
   city: String!
   region: regionType!
-  isActive: Boolean
+  isActive: Boolean!
   phone: String
   email: String
   address: String
-  location: Location
+  website: String
+  location: Location!
   meetings(where: MeetingWhereInput, orderBy: MeetingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Meeting!]
 }
 
@@ -428,6 +430,7 @@ type GroupConnection {
 
 input GroupCreateInput {
   id: ID
+  birthday: DateTime
   author: UserCreateOneWithoutGroupsInput!
   name: String
   description: String
@@ -437,7 +440,8 @@ input GroupCreateInput {
   phone: String
   email: String
   address: String
-  location: LocationCreateOneInput
+  website: String
+  location: LocationCreateOneInput!
   meetings: MeetingCreateManyWithoutGroupInput
 }
 
@@ -453,6 +457,7 @@ input GroupCreateOneWithoutMeetingsInput {
 
 input GroupCreateWithoutAuthorInput {
   id: ID
+  birthday: DateTime
   name: String
   description: String
   city: String!
@@ -461,12 +466,14 @@ input GroupCreateWithoutAuthorInput {
   phone: String
   email: String
   address: String
-  location: LocationCreateOneInput
+  website: String
+  location: LocationCreateOneInput!
   meetings: MeetingCreateManyWithoutGroupInput
 }
 
 input GroupCreateWithoutMeetingsInput {
   id: ID
+  birthday: DateTime
   author: UserCreateOneWithoutGroupsInput!
   name: String
   description: String
@@ -476,7 +483,8 @@ input GroupCreateWithoutMeetingsInput {
   phone: String
   email: String
   address: String
-  location: LocationCreateOneInput
+  website: String
+  location: LocationCreateOneInput!
 }
 
 type GroupEdge {
@@ -489,6 +497,8 @@ enum GroupOrderByInput {
   id_DESC
   createdAt_ASC
   createdAt_DESC
+  birthday_ASC
+  birthday_DESC
   name_ASC
   name_DESC
   description_ASC
@@ -505,19 +515,23 @@ enum GroupOrderByInput {
   email_DESC
   address_ASC
   address_DESC
+  website_ASC
+  website_DESC
 }
 
 type GroupPreviousValues {
   id: ID!
   createdAt: DateTime!
+  birthday: DateTime
   name: String!
-  description: String!
+  description: String
   city: String!
   region: regionType!
-  isActive: Boolean
+  isActive: Boolean!
   phone: String
   email: String
   address: String
+  website: String
 }
 
 input GroupScalarWhereInput {
@@ -543,6 +557,14 @@ input GroupScalarWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
+  birthday: DateTime
+  birthday_not: DateTime
+  birthday_in: [DateTime!]
+  birthday_not_in: [DateTime!]
+  birthday_lt: DateTime
+  birthday_lte: DateTime
+  birthday_gt: DateTime
+  birthday_gte: DateTime
   name: String
   name_not: String
   name_in: [String!]
@@ -633,6 +655,20 @@ input GroupScalarWhereInput {
   address_not_starts_with: String
   address_ends_with: String
   address_not_ends_with: String
+  website: String
+  website_not: String
+  website_in: [String!]
+  website_not_in: [String!]
+  website_lt: String
+  website_lte: String
+  website_gt: String
+  website_gte: String
+  website_contains: String
+  website_not_contains: String
+  website_starts_with: String
+  website_not_starts_with: String
+  website_ends_with: String
+  website_not_ends_with: String
   AND: [GroupScalarWhereInput!]
   OR: [GroupScalarWhereInput!]
   NOT: [GroupScalarWhereInput!]
@@ -657,6 +693,7 @@ input GroupSubscriptionWhereInput {
 }
 
 input GroupUpdateInput {
+  birthday: DateTime
   author: UserUpdateOneRequiredWithoutGroupsInput
   name: String
   description: String
@@ -666,11 +703,13 @@ input GroupUpdateInput {
   phone: String
   email: String
   address: String
-  location: LocationUpdateOneInput
+  website: String
+  location: LocationUpdateOneRequiredInput
   meetings: MeetingUpdateManyWithoutGroupInput
 }
 
 input GroupUpdateManyDataInput {
+  birthday: DateTime
   name: String
   description: String
   city: String
@@ -679,9 +718,11 @@ input GroupUpdateManyDataInput {
   phone: String
   email: String
   address: String
+  website: String
 }
 
 input GroupUpdateManyMutationInput {
+  birthday: DateTime
   name: String
   description: String
   city: String
@@ -690,6 +731,7 @@ input GroupUpdateManyMutationInput {
   phone: String
   email: String
   address: String
+  website: String
 }
 
 input GroupUpdateManyWithoutAuthorInput {
@@ -717,6 +759,7 @@ input GroupUpdateOneRequiredWithoutMeetingsInput {
 }
 
 input GroupUpdateWithoutAuthorDataInput {
+  birthday: DateTime
   name: String
   description: String
   city: String
@@ -725,11 +768,13 @@ input GroupUpdateWithoutAuthorDataInput {
   phone: String
   email: String
   address: String
-  location: LocationUpdateOneInput
+  website: String
+  location: LocationUpdateOneRequiredInput
   meetings: MeetingUpdateManyWithoutGroupInput
 }
 
 input GroupUpdateWithoutMeetingsDataInput {
+  birthday: DateTime
   author: UserUpdateOneRequiredWithoutGroupsInput
   name: String
   description: String
@@ -739,7 +784,8 @@ input GroupUpdateWithoutMeetingsDataInput {
   phone: String
   email: String
   address: String
-  location: LocationUpdateOneInput
+  website: String
+  location: LocationUpdateOneRequiredInput
 }
 
 input GroupUpdateWithWhereUniqueWithoutAuthorInput {
@@ -781,6 +827,14 @@ input GroupWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
+  birthday: DateTime
+  birthday_not: DateTime
+  birthday_in: [DateTime!]
+  birthday_not_in: [DateTime!]
+  birthday_lt: DateTime
+  birthday_lte: DateTime
+  birthday_gt: DateTime
+  birthday_gte: DateTime
   author: UserWhereInput
   name: String
   name_not: String
@@ -872,6 +926,20 @@ input GroupWhereInput {
   address_not_starts_with: String
   address_ends_with: String
   address_not_ends_with: String
+  website: String
+  website_not: String
+  website_in: [String!]
+  website_not_in: [String!]
+  website_lt: String
+  website_lte: String
+  website_gt: String
+  website_gte: String
+  website_contains: String
+  website_not_contains: String
+  website_starts_with: String
+  website_not_starts_with: String
+  website_ends_with: String
+  website_not_ends_with: String
   location: LocationWhereInput
   meetings_every: MeetingWhereInput
   meetings_some: MeetingWhereInput
@@ -887,7 +955,7 @@ input GroupWhereUniqueInput {
 
 type Image {
   id: ID!
-  publicId: String!
+  publicId: String
   cloudinaryUrl: String!
 }
 
@@ -899,7 +967,7 @@ type ImageConnection {
 
 input ImageCreateInput {
   id: ID
-  publicId: String!
+  publicId: String
   cloudinaryUrl: String!
 }
 
@@ -924,7 +992,7 @@ enum ImageOrderByInput {
 
 type ImagePreviousValues {
   id: ID!
-  publicId: String!
+  publicId: String
   cloudinaryUrl: String!
 }
 
@@ -1109,6 +1177,13 @@ input LocationUpdateOneInput {
   upsert: LocationUpsertNestedInput
   delete: Boolean
   disconnect: Boolean
+  connect: LocationWhereUniqueInput
+}
+
+input LocationUpdateOneRequiredInput {
+  create: LocationCreateInput
+  update: LocationUpdateDataInput
+  upsert: LocationUpsertNestedInput
   connect: LocationWhereUniqueInput
 }
 

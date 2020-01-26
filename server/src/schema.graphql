@@ -9,15 +9,17 @@ type User {
 
 type Group {
   id:            ID!
-  author:        User!         
+  author:        User!   
+  birthday:      DateTime          
   name:          String!       
-  description:   String!       
+  description:   String      
   city:          String!
   region:        regionType! 
-  isActive:      Boolean
+  isActive:      Boolean!
   phone:         String
   email:         String
   address:       String
+  website:       String
   meetings:      [Meeting!]  
   location:      Location! 
 }
@@ -52,7 +54,7 @@ type Location {
 
 type Image {
   id:           ID!           
-  publicId:     String!       
+  publicId:     String       
   cloudinaryUrl:String!     
 }
 

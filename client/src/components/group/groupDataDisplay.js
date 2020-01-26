@@ -6,51 +6,75 @@ import {
   Button,
   Modal,
   Header,
-  Divider,
   List
 } from "semantic-ui-react";
 import MapDataDisplay from "../ui-elements/mapDataDisplay";
+import { ruRegions } from '../../const/globalConst'
+import { format, parseISO } from "date-fns";
+import  ru  from 'date-fns/locale/ru'
+
 
 const GroupDataDisplay = props => {
+
   const distanceString = (props.distance / 1000).toFixed(1);
+  const birthday =  props.birthday ? format(parseISO(props.birthday), "MMMM' 'yyyy", {locale: ru}) : ''
+  const description = props.description ? ` (${props.description})` : ''
+  const phone = props.phone ? <a href="tel:{props.phone}">{props.phone}</a> : ''
+  const mail = props.email ? <a href="mailto:{props.email}">{props.email}</a> : ''
+  const website = props.website ? <a href="{props.website}">{props.website}</a> : ''
+
+
+
   return (
     <Fragment>
-      <Header as="h2">
+      <Header as="h3">
         {props.name}{" "}
         <Label horizontal color="pink" size="tiny">
-          {distanceString} {" km"}
+          {distanceString} {" км"}
         </Label>
       </Header>
-
-
       <List>
         <List.Item>
           <List.Icon name="home" />
           <List.Content>
-            {props.city} / {props.region}
+            {props.city} , {ruRegions.get(props.region)}
           </List.Content>
         </List.Item>
         <List.Item>
           <List.Icon name="marker" />
           <List.Content>
-            {props.address} ({props.description})
+            {props.address}{description}
           </List.Content>
         </List.Item>
         <List.Item>
           <List.Icon name="phone" />
-          <List.Content>{props.phone}</List.Content>
+          <List.Content>
+            {phone}
+          </List.Content>
         </List.Item>
         <List.Item>
-          <List.Icon name="mail" />
+          <List.Icon name="envelope open outline" />
           <List.Content>
-            <a href="mailto:{props.email}">{props.email}</a>
+            {mail}
+          </List.Content>
+        </List.Item>
+        <List.Item>
+          <List.Icon name="globe" />
+          <List.Content>          
+            {website}
+          </List.Content>
+        </List.Item>
+        <List.Item>
+          <List.Icon name="birthday" />
+          <List.Content>
+          {birthday}
           </List.Content>
         </List.Item>
       </List>
       <Modal
         closeIcon
         trigger={
-          <Button compact basic icon="map" color="pink" content="Map" />
+          <Button compact basic icon="map" color="pink " content="Карта" />
         }
       >
         <Header icon="map marker alternate" content={props.name} />
