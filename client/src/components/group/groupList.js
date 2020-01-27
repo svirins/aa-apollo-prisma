@@ -25,6 +25,7 @@ const GroupList = props => {
             email={group.email}
             distance={group.distance}
             location={group.location}
+            isActive={!group.isActive}
           />
         </Grid.Column>
         <Grid.Column width={4} verticalAlign='middle'>

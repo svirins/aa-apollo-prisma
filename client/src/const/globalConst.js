@@ -25,3 +25,18 @@ export const ruMeetingType = new Map([
   ["Twelve", "12 шагов"],
   ["Reflections", "Ежедневник АА"]
 ]);
+
+export const ruMonth = new Map([
+  ["January", "Январь"],
+  ["February", "Февраль"],
+  ["March", "Март"],
+  ["April", "Апрель"],
+  ["May", "Май"],
+  ["June", "Июнь"],
+  ["July", "Июль"],  
+  ["August", "Август"],
+  ["September", "Сентябрь"],
+  ["October", "Октябрь"],
+  ["November", "Ноябрь"],
+  ["December", "Декабрь"]
+]);

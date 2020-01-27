@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React, { Fragment } from "react";
 import {
   Icon,
   Segment,
@@ -6,24 +6,105 @@ import {
   Button,
   Modal,
   Header,
-  List
+  List,
+  Table
 } from "semantic-ui-react";
 import MapDataDisplay from "../ui-elements/mapDataDisplay";
-import { ruRegions } from '../../const/globalConst'
+import { ruRegions, ruMonth } from "../../const/globalConst";
 import { format, parseISO } from "date-fns";
-import  ru  from 'date-fns/locale/ru'
-
 
 const GroupDataDisplay = props => {
-
   const distanceString = (props.distance / 1000).toFixed(1);
-  const birthday =  props.birthday ? format(parseISO(props.birthday), "MMMM' 'yyyy", {locale: ru}) : ''
-  const description = props.description ? ` (${props.description})` : ''
-  const phone = props.phone ? <a href="tel:{props.phone}">{props.phone}</a> : ''
-  const mail = props.email ? <a href="mailto:{props.email}">{props.email}</a> : ''
-  const website = props.website ? <a href="{props.website}">{props.website}</a> : ''
+  const birthday = props.birthday
+    ? ruMonth.get(format(parseISO(props.birthday), "MMMM")) +
+      " " +
+      format(parseISO(props.birthday), "yyyy")
+    : "";
+  const description = props.description ? ` (${props.description})` : "";
+  const phone = props.phone ? (
+    <a href="tel:{props.phone}">{props.phone}</a>
+  ) : (
+    ""
+  );
+  const mail = props.email ? (
+    <a href="mailto:{props.email}">{props.email}</a>
+  ) : (
+    ""
+  );
+  const website = props.website ? (
+    <a href="{props.website}">{props.website}</a>
+  ) : (
+    ""
+  );
 
+  let birthdayDisplay,
+    phoneDisplay,
+    mailDisplay,
+    websiteDisplay = "";
 
+  if (birthday) {
+    birthdayDisplay = (
+      <Table.Row disabled={props.isActive}>
+        <Table.Cell textAlign="left">
+          <Icon
+            name="birthday"
+            color="black"
+            size="small"
+            style={{ marginRight: "1em" }}
+          />
+          {birthday}
+        </Table.Cell>
+      </Table.Row>
+    );
+  }
+
+  if (phone) {
+    phoneDisplay = (
+      <Table.Row disabled={props.isActive}>
+        <Table.Cell textAlign="left">
+          <Icon
+            name="phone"
+            color="black"
+            size="small"
+            style={{ marginRight: "1em" }}
+          />
+          {phone}
+        </Table.Cell>
+      </Table.Row>
+    );
+  }
+
+  if (mail) {
+    mailDisplay = (
+      <Table.Row disabled={props.isActive}>
+        <Table.Cell textAlign="left">
+          <Icon
+            name="mail"
+            color="black"
+            size="small"
+            style={{ marginRight: "1em" }}
+          />
+          {mail}
+        </Table.Cell>
+      </Table.Row>
+    );
+  }
+
+  if (website) {
+    websiteDisplay = (
+      <Table.Row disabled={props.isActive}>
+        <Table.Cell textAlign="left">
+          <Icon
+            name="globe"
+            color="black"
+            size="small"
+            style={{ marginRight: "1em" }}
+          />
+          {website}
+        </Table.Cell>
+      </Table.Row>
+    );
+  }
 
   return (
     <Fragment>
@@ -33,44 +114,37 @@ const GroupDataDisplay = props => {
           {distanceString} {" км"}
         </Label>
       </Header>
-      <List>
-        <List.Item>
-          <List.Icon name="home" />
-          <List.Content>
-            {props.city} , {ruRegions.get(props.region)}
-          </List.Content>
-        </List.Item>
-        <List.Item>
-          <List.Icon name="marker" />
-          <List.Content>
-            {props.address}{description}
-          </List.Content>
-        </List.Item>
-        <List.Item>
-          <List.Icon name="phone" />
-          <List.Content>
-            {phone}
-          </List.Content>
-        </List.Item>
-        <List.Item>
-          <List.Icon name="envelope open outline" />
-          <List.Content>
-            {mail}
-          </List.Content>
-        </List.Item>
-        <List.Item>
-          <List.Icon name="globe" />
-          <List.Content>          
-            {website}
-          </List.Content>
-        </List.Item>
-        <List.Item>
-          <List.Icon name="birthday" />
-          <List.Content>
-          {birthday}
-          </List.Content>
-        </List.Item>
-      </List>
+      <Table compact="very" basic="very" unstackable collapsing size="small">
+        <Table.Body>
+          <Table.Row disabled={props.isActive}>
+            <Table.Cell textAlign="left">
+              <Icon
+                name="home"
+                color="black"
+                size="small"
+                style={{ marginRight: "1em" }}
+              />
+              {props.city} , {ruRegions.get(props.region)}
+            </Table.Cell>
+          </Table.Row>
+          <Table.Row disabled={props.isActive}>
+            <Table.Cell textAlign="left">
+              <Icon
+                name="location arrow"
+                color="black"
+                size="small"
+                style={{ marginRight: "1em" }}
+              />
+              {props.address}
+              {description}
+            </Table.Cell>
+          </Table.Row>
+          {phoneDisplay}
+          {mailDisplay}
+          {websiteDisplay}
+          {birthdayDisplay}
+        </Table.Body>
+      </Table>
       <Modal
         closeIcon
         trigger={

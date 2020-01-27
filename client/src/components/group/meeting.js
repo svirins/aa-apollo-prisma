@@ -15,8 +15,8 @@ const Meeting = props => {
       colorName = "green";
       break;
     case "Closed":
-      iconName = "comment";
-      colorName = "grey";
+      iconName = "coffee";
+      colorName = "teal";
       break;
     case "Speaker":
       iconName = "lightning";
@@ -39,9 +39,10 @@ const Meeting = props => {
     <Table.Row negative={isToday}>
       <Table.Cell textAlign='left'>
         <Label
-          size="mini"
+          size="tiny"
+          horizontal
           color={
-            props.weekday === "Su" || props.weekday === "Sa" ? "orange" : "grey"
+            props.weekday === "Su" || props.weekday === "Sa" ? "orange" : "blue"
           }
         >
           {ruWeekdays.get(props.weekday)}
