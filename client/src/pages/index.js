@@ -36,10 +36,16 @@ const Pages = props => {
   const memoizedStatistics = useMemo(()=>(<StatisticBar />)
   ,[])
 
+  const memoizedHeader = useMemo(()=>(<Header />)
+  ,[])
+
+  const memoizedFooter = useMemo(()=>(<Footer />)
+  ,[])
+
+
   return (
     <Fragment>
-      <Header />
-      {memoizedStatistics}
+      {memoizedHeader}
       <PageContainer>
         <Suspense fallback={<Loader active inline="centered" />}>
           <Switch>
@@ -51,8 +57,9 @@ const Pages = props => {
             <Route path="*" render={() => <FourZeroFour />} />
           </Switch>
         </Suspense>
+        {memoizedStatistics}
       </PageContainer>
-      <Footer />
+      {memoizedFooter}
     </Fragment>
   );
 };

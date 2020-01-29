@@ -12,7 +12,7 @@ const Meeting = props => {
   switch (props.type) {
     case "Open":
       iconName = "bullhorn";
-      colorName = "green";
+      colorName = "teal";
       break;
     case "Closed":
       iconName = "coffee";
@@ -37,19 +37,19 @@ const Meeting = props => {
 
   return (
     <Table.Row negative={isToday}>
-      <Table.Cell textAlign='left'>
+      <Table.Cell textAlign='center'>
         <Label
           size="tiny"
           horizontal
           color={
-            props.weekday === "Su" || props.weekday === "Sa" ? "orange" : "blue"
+            props.weekday === "Su" || props.weekday === "Sa" ? "orange" : "grey"
           }
         >
           {ruWeekdays.get(props.weekday)}
         </Label>
       </Table.Cell>
-      <Table.Cell textAlign='right'>{timeSubstr}</Table.Cell>
-      <Table.Cell textAlign='right'>
+      <Table.Cell textAlign='center'>{timeSubstr}</Table.Cell>
+      <Table.Cell textAlign='center'>
         <Popup
           content={ruMeetingType.get(props.type)}
           position="bottom right"

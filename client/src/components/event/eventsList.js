@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 import Event from './event'
 
 const EventList = props => {
@@ -7,9 +7,9 @@ const EventList = props => {
     <Event key={event.id} {...event} />
   ));
   return (
-    <Container>
+    <Grid columns={2} stackable>
       {events}
-    </Container>
+    </Grid>
   )
 }
 

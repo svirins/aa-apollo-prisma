@@ -10,7 +10,7 @@ import getDistance from "geolib/es/getDistance";
 import { getToday } from "../../utils/utils";
 
 const StatisticBar = () => {
-  const { data, loading, error } = useQuery(GET_STATISTICS);
+  const { data, loading, error, client } = useQuery(GET_STATISTICS);
   const { data: geoData } = useQuery(GET_POSITION);
 
   if (loading && !data) return <LoadingMessage />;
@@ -48,8 +48,18 @@ const StatisticBar = () => {
   // calculate total amount of today's meetings style={{ marginTop: "1.5em" }
   const nowCount = meetings.filter(el => el.weekday === getToday()).length;
 
+  client.writeData({
+    data: {
+      nearCount: nearCount,
+      nowCount: nowCount,
+      groupCount: groupCount,
+      eventCount: eventsCount
+    }
+  });
+
   return (
     <Container>
+      <Divider />
       <Segment basic>
       <Statistic.Group widths="six" size="mini">
         <Statistic color="blue" >

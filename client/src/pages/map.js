@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
+
 import ReactMapGL, {
   Marker,
   Popup,
@@ -12,15 +13,18 @@ import LoadingMessage from "../components/ui-elements/loader";
 import { useQuery } from "@apollo/react-hooks";
 import { GROUPS_LIST_QUERY } from "../queries";
 import mapMarker from "../assets/images/logoMarker.svg";
+import { ruRegions } from "../const/globalConst";
 
 const Map = () => {
+  let zoomLevel = 5.15;
+
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [viewport, setViewport] = useState({
     latitude: 53.7211,
     longitude: 27.6903,
-    zoom: 6.5,
+    zoom: zoomLevel,
     width: "100%",
-    height: "85vh"    
+    height: "85vh"
   });
 
   useEffect(() => {
@@ -37,12 +41,10 @@ const Map = () => {
 
   const { data, loading, error } = useQuery(GROUPS_LIST_QUERY);
 
-  if (loading) return <LoadingMessage />;
-  if (error)
-    return (
-      <Error errorMessage="GraphQL server signal an error to the client" />
-    );
-
+  const memoizedError = useMemo(() => <Error />, []);
+  const memoizedLoading = useMemo(() => <LoadingMessage />, []);
+  if (loading) return memoizedLoading;
+  if (error) return memoizedError;
 
   const markersList = data.groupList.groups.map(element => (
     <Marker
@@ -64,7 +66,7 @@ const Map = () => {
 
   return (
     <Container fluid>
-      <ReactMapGL        
+      <ReactMapGL
         {...viewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
         mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
@@ -76,7 +78,7 @@ const Map = () => {
           positionOptions={{ enableHighAccuracy: true }}
           trackUserLocation={true}
         />
-        <NavigationControl />
+        <NavigationControl showCompass={false} />
         {markersList}
         {selectedMarker ? (
           <Popup
@@ -87,8 +89,10 @@ const Map = () => {
             }}
           >
             <div>
-              <h4>{selectedMarker.name}</h4>
-              <p>{selectedMarker.city} / {selectedMarker.region}</p>
+              <h5>{selectedMarker.name}</h5>
+              <p>
+                {selectedMarker.city}, {ruRegions.get(selectedMarker.region)}
+              </p>
               <p>{selectedMarker.address}</p>
             </div>
           </Popup>

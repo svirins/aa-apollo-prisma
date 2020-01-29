@@ -6,7 +6,7 @@ import {
 
 export default function PageContainer(props) {
   return (
-      <Container>
+      <Container style={{paddingTop: "1em", paddingBottom: "1em"}}>
         {props.children}
       </Container>
   );

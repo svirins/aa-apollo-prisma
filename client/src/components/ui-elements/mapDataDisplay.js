@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ReactMapGL, { Marker } from 'react-map-gl'
+import ReactMapGL, { Marker, Popup } from 'react-map-gl'
 import { Container } from 'semantic-ui-react';
 
 import mapMarker from "../../assets/images/logoMarker.svg";
@@ -8,7 +8,7 @@ const MapDataDisplay = (props) => {
   const [viewport, setViewport] = useState({
     latitude: props.location.lattitude,
     longitude: props.location.longitude,
-    zoom: 8.5,
+    zoom: 13.5,
     width: '100%',
     height: '30vh', 
     language: 'ru'

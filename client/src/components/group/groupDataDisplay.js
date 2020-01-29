@@ -1,14 +1,5 @@
 import React, { Fragment } from "react";
-import {
-  Icon,
-  Segment,
-  Label,
-  Button,
-  Modal,
-  Header,
-  List,
-  Table
-} from "semantic-ui-react";
+import { Icon, Label, Button, Modal, Header, Table, Divider } from "semantic-ui-react";
 import MapDataDisplay from "../ui-elements/mapDataDisplay";
 import { ruRegions, ruMonth } from "../../const/globalConst";
 import { format, parseISO } from "date-fns";
@@ -36,6 +27,13 @@ const GroupDataDisplay = props => {
   ) : (
     ""
   );
+  const disabledLabel = props.isActive ? (
+    ""
+  ) : (
+    <Label horizontal color="red" size="small">
+      временно не работает
+    </Label>
+  );
 
   let birthdayDisplay,
     phoneDisplay,
@@ -44,7 +42,7 @@ const GroupDataDisplay = props => {
 
   if (birthday) {
     birthdayDisplay = (
-      <Table.Row disabled={props.isActive}>
+      <Table.Row>
         <Table.Cell textAlign="left">
           <Icon
             name="birthday"
@@ -60,7 +58,7 @@ const GroupDataDisplay = props => {
 
   if (phone) {
     phoneDisplay = (
-      <Table.Row disabled={props.isActive}>
+      <Table.Row>
         <Table.Cell textAlign="left">
           <Icon
             name="phone"
@@ -76,7 +74,7 @@ const GroupDataDisplay = props => {
 
   if (mail) {
     mailDisplay = (
-      <Table.Row disabled={props.isActive}>
+      <Table.Row>
         <Table.Cell textAlign="left">
           <Icon
             name="mail"
@@ -92,7 +90,7 @@ const GroupDataDisplay = props => {
 
   if (website) {
     websiteDisplay = (
-      <Table.Row disabled={props.isActive}>
+      <Table.Row>
         <Table.Cell textAlign="left">
           <Icon
             name="globe"
@@ -110,13 +108,17 @@ const GroupDataDisplay = props => {
     <Fragment>
       <Header as="h3">
         {props.name}{" "}
-        <Label horizontal color="pink" size="tiny">
+        <Label horizontal color="teal" size="small">
           {distanceString} {" км"}
-        </Label>
+        </Label>      
+
+          
       </Header>
+      <Divider/>   
+      {disabledLabel}
       <Table compact="very" basic="very" unstackable collapsing size="small">
         <Table.Body>
-          <Table.Row disabled={props.isActive}>
+          <Table.Row>
             <Table.Cell textAlign="left">
               <Icon
                 name="home"
@@ -127,7 +129,7 @@ const GroupDataDisplay = props => {
               {props.city} , {ruRegions.get(props.region)}
             </Table.Cell>
           </Table.Row>
-          <Table.Row disabled={props.isActive}>
+          <Table.Row>
             <Table.Cell textAlign="left">
               <Icon
                 name="location arrow"
@@ -146,19 +148,27 @@ const GroupDataDisplay = props => {
         </Table.Body>
       </Table>
       <Modal
-        closeIcon
-        trigger={
-          <Button compact basic icon="map" color="pink " content="Карта" />
-        }
-      >
-        <Header icon="map marker alternate" content={props.name} />
-        <Modal.Content>
-          <Modal.Description>
-            <MapDataDisplay location={props.location} name={props.name} />
-            {props.city} / {props.address}
-          </Modal.Description>
-        </Modal.Content>
-      </Modal>
+            closeIcon
+            trigger={
+              <Button
+                compact
+                
+                icon="map marker alternate"
+                color="blue"
+                content="На карте"
+                size="mini"
+                float="right"
+              />
+            }
+          >
+          <Header icon="map marker alternate" content={props.name} />
+          <Modal.Content>
+            <Modal.Description>
+              <MapDataDisplay location={props.location} name={props.name} />
+              {props.city} / {props.address}
+            </Modal.Description>
+          </Modal.Content>
+        </Modal>
     </Fragment>
   );
 };

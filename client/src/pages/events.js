@@ -8,12 +8,13 @@ import { EVENTS_LIST_QUERY } from '../queries'
 
 const Events = () => {
   const { data, loading, error } = useQuery(EVENTS_LIST_QUERY);
+  const memoizedError = useMemo(()=>(<Error />), [])
+  const memoizedLoading = useMemo(()=>(<LoadingMessage />), [])
+  
+  if (loading) return memoizedLoading;
+  if (error) return memoizedError
 
-  if (loading) return (<LoadingMessage />)
-  if (error) return <Error errorMessage="GraphQL server signal an error to the client"/>;
-  return (
-    <EventList {...data}/>
-  )
+  return (<EventList {...data}/>)
 }
 
 export default Events;

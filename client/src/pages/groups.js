@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import GroupList from "../components/group/groupList";
 import Filters from "../components/ui-elements/filters";
 import Error from "../components/ui-elements/error";
@@ -22,11 +22,10 @@ const Groups = () => {
   }, [variables, refetch]);
 
 
-  if (loading) return <LoadingMessage />;
-  if (error)
-    return (
-      <Error errorMessage="GraphQL server signal an error to the client" />
-    );
+  const memoizedError = useMemo(()=>(<Error />), [])
+  const memoizedLoading = useMemo(()=>(<LoadingMessage />), [])
+  if (loading) return memoizedLoading;
+  if (error) return memoizedError
 
   const onFilterChangeHandler = value => {
     setVariables(prevState => {

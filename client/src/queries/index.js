@@ -100,6 +100,16 @@ export const GET_POSITION = gql`
     error @client  
   }
 `  
+export const GET_CLIENT_STATISTICS = gql` 
+  query getClientStats
+  {
+    nearCount @client
+    nowCount @client
+    groupCount @client  
+    eventCount @client
+  }
+` 
+
 export const GET_GROUPS_WITH_POSITION  = gql`
   query getGroups($filter: String, $orderBy: GroupOrderByInput, $regionSelect: regionType, $citySelect: String ) {
     groupList(filter: $filter, orderBy: $orderBy, regionSelect: $regionSelect, citySelect: $citySelect) {
