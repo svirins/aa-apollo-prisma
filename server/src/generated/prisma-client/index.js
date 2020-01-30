@@ -29,6 +29,10 @@ var models = [
     embedded: false
   },
   {
+    name: "Contact",
+    embedded: false
+  },
+  {
     name: "Weekday",
     embedded: false
   },

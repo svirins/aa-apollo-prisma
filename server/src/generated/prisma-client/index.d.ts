@@ -16,6 +16,7 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
+  contact: (where?: ContactWhereInput) => Promise<boolean>;
   event: (where?: EventWhereInput) => Promise<boolean>;
   group: (where?: GroupWhereInput) => Promise<boolean>;
   image: (where?: ImageWhereInput) => Promise<boolean>;
@@ -43,6 +44,25 @@ export interface Prisma {
    * Queries
    */
 
+  contact: (where: ContactWhereUniqueInput) => ContactNullablePromise;
+  contacts: (args?: {
+    where?: ContactWhereInput;
+    orderBy?: ContactOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Contact>;
+  contactsConnection: (args?: {
+    where?: ContactWhereInput;
+    orderBy?: ContactOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ContactConnectionPromise;
   event: (where: EventWhereUniqueInput) => EventNullablePromise;
   events: (args?: {
     where?: EventWhereInput;
@@ -163,6 +183,22 @@ export interface Prisma {
    * Mutations
    */
 
+  createContact: (data: ContactCreateInput) => ContactPromise;
+  updateContact: (args: {
+    data: ContactUpdateInput;
+    where: ContactWhereUniqueInput;
+  }) => ContactPromise;
+  updateManyContacts: (args: {
+    data: ContactUpdateManyMutationInput;
+    where?: ContactWhereInput;
+  }) => BatchPayloadPromise;
+  upsertContact: (args: {
+    where: ContactWhereUniqueInput;
+    create: ContactCreateInput;
+    update: ContactUpdateInput;
+  }) => ContactPromise;
+  deleteContact: (where: ContactWhereUniqueInput) => ContactPromise;
+  deleteManyContacts: (where?: ContactWhereInput) => BatchPayloadPromise;
   createEvent: (data: EventCreateInput) => EventPromise;
   updateEvent: (args: {
     data: EventUpdateInput;
@@ -268,6 +304,9 @@ export interface Prisma {
 }
 
 export interface Subscription {
+  contact: (
+    where?: ContactSubscriptionWhereInput
+  ) => ContactSubscriptionPayloadSubscription;
   event: (
     where?: EventSubscriptionWhereInput
   ) => EventSubscriptionPayloadSubscription;
@@ -295,6 +334,16 @@ export interface ClientConstructor<T> {
 /**
  * Types
  */
+
+export type ContactOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "phone_ASC"
+  | "phone_DESC"
+  | "responsibility_ASC"
+  | "responsibility_DESC";
 
 export type regionType =
   | "All"
@@ -358,16 +407,20 @@ export type EventOrderByInput =
   | "id_DESC"
   | "name_ASC"
   | "name_DESC"
-  | "date_ASC"
-  | "date_DESC"
+  | "dateStart_ASC"
+  | "dateStart_DESC"
+  | "dateEnd_ASC"
+  | "dateEnd_DESC"
   | "city_ASC"
   | "city_DESC"
+  | "address_ASC"
+  | "address_DESC"
   | "description_ASC"
   | "description_DESC"
   | "agenda_ASC"
   | "agenda_DESC"
-  | "contact_ASC"
-  | "contact_DESC";
+  | "programUrl_ASC"
+  | "programUrl_DESC";
 
 export type ImageOrderByInput =
   | "id_ASC"
@@ -396,6 +449,72 @@ export type UserOrderByInput =
   | "password_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
+
+export type ContactWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface ContactWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  phone?: Maybe<String>;
+  phone_not?: Maybe<String>;
+  phone_in?: Maybe<String[] | String>;
+  phone_not_in?: Maybe<String[] | String>;
+  phone_lt?: Maybe<String>;
+  phone_lte?: Maybe<String>;
+  phone_gt?: Maybe<String>;
+  phone_gte?: Maybe<String>;
+  phone_contains?: Maybe<String>;
+  phone_not_contains?: Maybe<String>;
+  phone_starts_with?: Maybe<String>;
+  phone_not_starts_with?: Maybe<String>;
+  phone_ends_with?: Maybe<String>;
+  phone_not_ends_with?: Maybe<String>;
+  responsibility?: Maybe<String>;
+  responsibility_not?: Maybe<String>;
+  responsibility_in?: Maybe<String[] | String>;
+  responsibility_not_in?: Maybe<String[] | String>;
+  responsibility_lt?: Maybe<String>;
+  responsibility_lte?: Maybe<String>;
+  responsibility_gt?: Maybe<String>;
+  responsibility_gte?: Maybe<String>;
+  responsibility_contains?: Maybe<String>;
+  responsibility_not_contains?: Maybe<String>;
+  responsibility_starts_with?: Maybe<String>;
+  responsibility_not_starts_with?: Maybe<String>;
+  responsibility_ends_with?: Maybe<String>;
+  responsibility_not_ends_with?: Maybe<String>;
+  AND?: Maybe<ContactWhereInput[] | ContactWhereInput>;
+  OR?: Maybe<ContactWhereInput[] | ContactWhereInput>;
+  NOT?: Maybe<ContactWhereInput[] | ContactWhereInput>;
+}
 
 export type EventWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
@@ -644,14 +763,22 @@ export interface EventWhereInput {
   name_not_starts_with?: Maybe<String>;
   name_ends_with?: Maybe<String>;
   name_not_ends_with?: Maybe<String>;
-  date?: Maybe<DateTimeInput>;
-  date_not?: Maybe<DateTimeInput>;
-  date_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  date_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  date_lt?: Maybe<DateTimeInput>;
-  date_lte?: Maybe<DateTimeInput>;
-  date_gt?: Maybe<DateTimeInput>;
-  date_gte?: Maybe<DateTimeInput>;
+  dateStart?: Maybe<DateTimeInput>;
+  dateStart_not?: Maybe<DateTimeInput>;
+  dateStart_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  dateStart_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  dateStart_lt?: Maybe<DateTimeInput>;
+  dateStart_lte?: Maybe<DateTimeInput>;
+  dateStart_gt?: Maybe<DateTimeInput>;
+  dateStart_gte?: Maybe<DateTimeInput>;
+  dateEnd?: Maybe<DateTimeInput>;
+  dateEnd_not?: Maybe<DateTimeInput>;
+  dateEnd_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  dateEnd_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  dateEnd_lt?: Maybe<DateTimeInput>;
+  dateEnd_lte?: Maybe<DateTimeInput>;
+  dateEnd_gt?: Maybe<DateTimeInput>;
+  dateEnd_gte?: Maybe<DateTimeInput>;
   city?: Maybe<String>;
   city_not?: Maybe<String>;
   city_in?: Maybe<String[] | String>;
@@ -667,6 +794,20 @@ export interface EventWhereInput {
   city_ends_with?: Maybe<String>;
   city_not_ends_with?: Maybe<String>;
   location?: Maybe<LocationWhereInput>;
+  address?: Maybe<String>;
+  address_not?: Maybe<String>;
+  address_in?: Maybe<String[] | String>;
+  address_not_in?: Maybe<String[] | String>;
+  address_lt?: Maybe<String>;
+  address_lte?: Maybe<String>;
+  address_gt?: Maybe<String>;
+  address_gte?: Maybe<String>;
+  address_contains?: Maybe<String>;
+  address_not_contains?: Maybe<String>;
+  address_starts_with?: Maybe<String>;
+  address_not_starts_with?: Maybe<String>;
+  address_ends_with?: Maybe<String>;
+  address_not_ends_with?: Maybe<String>;
   description?: Maybe<String>;
   description_not?: Maybe<String>;
   description_in?: Maybe<String[] | String>;
@@ -695,21 +836,24 @@ export interface EventWhereInput {
   agenda_not_starts_with?: Maybe<String>;
   agenda_ends_with?: Maybe<String>;
   agenda_not_ends_with?: Maybe<String>;
-  contact?: Maybe<String>;
-  contact_not?: Maybe<String>;
-  contact_in?: Maybe<String[] | String>;
-  contact_not_in?: Maybe<String[] | String>;
-  contact_lt?: Maybe<String>;
-  contact_lte?: Maybe<String>;
-  contact_gt?: Maybe<String>;
-  contact_gte?: Maybe<String>;
-  contact_contains?: Maybe<String>;
-  contact_not_contains?: Maybe<String>;
-  contact_starts_with?: Maybe<String>;
-  contact_not_starts_with?: Maybe<String>;
-  contact_ends_with?: Maybe<String>;
-  contact_not_ends_with?: Maybe<String>;
+  contact_every?: Maybe<ContactWhereInput>;
+  contact_some?: Maybe<ContactWhereInput>;
+  contact_none?: Maybe<ContactWhereInput>;
   image?: Maybe<ImageWhereInput>;
+  programUrl?: Maybe<String>;
+  programUrl_not?: Maybe<String>;
+  programUrl_in?: Maybe<String[] | String>;
+  programUrl_not_in?: Maybe<String[] | String>;
+  programUrl_lt?: Maybe<String>;
+  programUrl_lte?: Maybe<String>;
+  programUrl_gt?: Maybe<String>;
+  programUrl_gte?: Maybe<String>;
+  programUrl_contains?: Maybe<String>;
+  programUrl_not_contains?: Maybe<String>;
+  programUrl_starts_with?: Maybe<String>;
+  programUrl_not_starts_with?: Maybe<String>;
+  programUrl_ends_with?: Maybe<String>;
+  programUrl_not_ends_with?: Maybe<String>;
   AND?: Maybe<EventWhereInput[] | EventWhereInput>;
   OR?: Maybe<EventWhereInput[] | EventWhereInput>;
   NOT?: Maybe<EventWhereInput[] | EventWhereInput>;
@@ -872,17 +1016,39 @@ export type UserWhereUniqueInput = AtLeastOne<{
   email?: Maybe<String>;
 }>;
 
+export interface ContactCreateInput {
+  id?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  phone?: Maybe<String>;
+  responsibility?: Maybe<String>;
+}
+
+export interface ContactUpdateInput {
+  name?: Maybe<String>;
+  phone?: Maybe<String>;
+  responsibility?: Maybe<String>;
+}
+
+export interface ContactUpdateManyMutationInput {
+  name?: Maybe<String>;
+  phone?: Maybe<String>;
+  responsibility?: Maybe<String>;
+}
+
 export interface EventCreateInput {
   id?: Maybe<ID_Input>;
   author: UserCreateOneWithoutEventsInput;
   name: String;
-  date: DateTimeInput;
+  dateStart: DateTimeInput;
+  dateEnd?: Maybe<DateTimeInput>;
   city: String;
   location?: Maybe<LocationCreateOneInput>;
+  address: String;
   description: String;
   agenda?: Maybe<String>;
-  contact?: Maybe<String>;
+  contact?: Maybe<ContactCreateManyInput>;
   image?: Maybe<ImageCreateOneInput>;
+  programUrl?: Maybe<String>;
 }
 
 export interface UserCreateOneWithoutEventsInput {
@@ -947,6 +1113,11 @@ export interface MeetingCreateWithoutGroupInput {
   type?: Maybe<meetingType>;
 }
 
+export interface ContactCreateManyInput {
+  create?: Maybe<ContactCreateInput[] | ContactCreateInput>;
+  connect?: Maybe<ContactWhereUniqueInput[] | ContactWhereUniqueInput>;
+}
+
 export interface ImageCreateOneInput {
   create?: Maybe<ImageCreateInput>;
   connect?: Maybe<ImageWhereUniqueInput>;
@@ -961,13 +1132,16 @@ export interface ImageCreateInput {
 export interface EventUpdateInput {
   author?: Maybe<UserUpdateOneRequiredWithoutEventsInput>;
   name?: Maybe<String>;
-  date?: Maybe<DateTimeInput>;
+  dateStart?: Maybe<DateTimeInput>;
+  dateEnd?: Maybe<DateTimeInput>;
   city?: Maybe<String>;
   location?: Maybe<LocationUpdateOneInput>;
+  address?: Maybe<String>;
   description?: Maybe<String>;
   agenda?: Maybe<String>;
-  contact?: Maybe<String>;
+  contact?: Maybe<ContactUpdateManyInput>;
   image?: Maybe<ImageUpdateOneInput>;
+  programUrl?: Maybe<String>;
 }
 
 export interface UserUpdateOneRequiredWithoutEventsInput {
@@ -1324,6 +1498,117 @@ export interface LocationUpdateOneInput {
   connect?: Maybe<LocationWhereUniqueInput>;
 }
 
+export interface ContactUpdateManyInput {
+  create?: Maybe<ContactCreateInput[] | ContactCreateInput>;
+  update?: Maybe<
+    | ContactUpdateWithWhereUniqueNestedInput[]
+    | ContactUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | ContactUpsertWithWhereUniqueNestedInput[]
+    | ContactUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<ContactWhereUniqueInput[] | ContactWhereUniqueInput>;
+  connect?: Maybe<ContactWhereUniqueInput[] | ContactWhereUniqueInput>;
+  set?: Maybe<ContactWhereUniqueInput[] | ContactWhereUniqueInput>;
+  disconnect?: Maybe<ContactWhereUniqueInput[] | ContactWhereUniqueInput>;
+  deleteMany?: Maybe<ContactScalarWhereInput[] | ContactScalarWhereInput>;
+  updateMany?: Maybe<
+    | ContactUpdateManyWithWhereNestedInput[]
+    | ContactUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface ContactUpdateWithWhereUniqueNestedInput {
+  where: ContactWhereUniqueInput;
+  data: ContactUpdateDataInput;
+}
+
+export interface ContactUpdateDataInput {
+  name?: Maybe<String>;
+  phone?: Maybe<String>;
+  responsibility?: Maybe<String>;
+}
+
+export interface ContactUpsertWithWhereUniqueNestedInput {
+  where: ContactWhereUniqueInput;
+  update: ContactUpdateDataInput;
+  create: ContactCreateInput;
+}
+
+export interface ContactScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  phone?: Maybe<String>;
+  phone_not?: Maybe<String>;
+  phone_in?: Maybe<String[] | String>;
+  phone_not_in?: Maybe<String[] | String>;
+  phone_lt?: Maybe<String>;
+  phone_lte?: Maybe<String>;
+  phone_gt?: Maybe<String>;
+  phone_gte?: Maybe<String>;
+  phone_contains?: Maybe<String>;
+  phone_not_contains?: Maybe<String>;
+  phone_starts_with?: Maybe<String>;
+  phone_not_starts_with?: Maybe<String>;
+  phone_ends_with?: Maybe<String>;
+  phone_not_ends_with?: Maybe<String>;
+  responsibility?: Maybe<String>;
+  responsibility_not?: Maybe<String>;
+  responsibility_in?: Maybe<String[] | String>;
+  responsibility_not_in?: Maybe<String[] | String>;
+  responsibility_lt?: Maybe<String>;
+  responsibility_lte?: Maybe<String>;
+  responsibility_gt?: Maybe<String>;
+  responsibility_gte?: Maybe<String>;
+  responsibility_contains?: Maybe<String>;
+  responsibility_not_contains?: Maybe<String>;
+  responsibility_starts_with?: Maybe<String>;
+  responsibility_not_starts_with?: Maybe<String>;
+  responsibility_ends_with?: Maybe<String>;
+  responsibility_not_ends_with?: Maybe<String>;
+  AND?: Maybe<ContactScalarWhereInput[] | ContactScalarWhereInput>;
+  OR?: Maybe<ContactScalarWhereInput[] | ContactScalarWhereInput>;
+  NOT?: Maybe<ContactScalarWhereInput[] | ContactScalarWhereInput>;
+}
+
+export interface ContactUpdateManyWithWhereNestedInput {
+  where: ContactScalarWhereInput;
+  data: ContactUpdateManyDataInput;
+}
+
+export interface ContactUpdateManyDataInput {
+  name?: Maybe<String>;
+  phone?: Maybe<String>;
+  responsibility?: Maybe<String>;
+}
+
 export interface ImageUpdateOneInput {
   create?: Maybe<ImageCreateInput>;
   update?: Maybe<ImageUpdateDataInput>;
@@ -1345,11 +1630,13 @@ export interface ImageUpsertNestedInput {
 
 export interface EventUpdateManyMutationInput {
   name?: Maybe<String>;
-  date?: Maybe<DateTimeInput>;
+  dateStart?: Maybe<DateTimeInput>;
+  dateEnd?: Maybe<DateTimeInput>;
   city?: Maybe<String>;
+  address?: Maybe<String>;
   description?: Maybe<String>;
   agenda?: Maybe<String>;
-  contact?: Maybe<String>;
+  programUrl?: Maybe<String>;
 }
 
 export interface GroupCreateInput {
@@ -1392,13 +1679,16 @@ export interface EventCreateManyWithoutAuthorInput {
 export interface EventCreateWithoutAuthorInput {
   id?: Maybe<ID_Input>;
   name: String;
-  date: DateTimeInput;
+  dateStart: DateTimeInput;
+  dateEnd?: Maybe<DateTimeInput>;
   city: String;
   location?: Maybe<LocationCreateOneInput>;
+  address: String;
   description: String;
   agenda?: Maybe<String>;
-  contact?: Maybe<String>;
+  contact?: Maybe<ContactCreateManyInput>;
   image?: Maybe<ImageCreateOneInput>;
+  programUrl?: Maybe<String>;
 }
 
 export interface GroupUpdateInput {
@@ -1460,13 +1750,16 @@ export interface EventUpdateWithWhereUniqueWithoutAuthorInput {
 
 export interface EventUpdateWithoutAuthorDataInput {
   name?: Maybe<String>;
-  date?: Maybe<DateTimeInput>;
+  dateStart?: Maybe<DateTimeInput>;
+  dateEnd?: Maybe<DateTimeInput>;
   city?: Maybe<String>;
   location?: Maybe<LocationUpdateOneInput>;
+  address?: Maybe<String>;
   description?: Maybe<String>;
   agenda?: Maybe<String>;
-  contact?: Maybe<String>;
+  contact?: Maybe<ContactUpdateManyInput>;
   image?: Maybe<ImageUpdateOneInput>;
+  programUrl?: Maybe<String>;
 }
 
 export interface EventUpsertWithWhereUniqueWithoutAuthorInput {
@@ -1504,14 +1797,22 @@ export interface EventScalarWhereInput {
   name_not_starts_with?: Maybe<String>;
   name_ends_with?: Maybe<String>;
   name_not_ends_with?: Maybe<String>;
-  date?: Maybe<DateTimeInput>;
-  date_not?: Maybe<DateTimeInput>;
-  date_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  date_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  date_lt?: Maybe<DateTimeInput>;
-  date_lte?: Maybe<DateTimeInput>;
-  date_gt?: Maybe<DateTimeInput>;
-  date_gte?: Maybe<DateTimeInput>;
+  dateStart?: Maybe<DateTimeInput>;
+  dateStart_not?: Maybe<DateTimeInput>;
+  dateStart_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  dateStart_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  dateStart_lt?: Maybe<DateTimeInput>;
+  dateStart_lte?: Maybe<DateTimeInput>;
+  dateStart_gt?: Maybe<DateTimeInput>;
+  dateStart_gte?: Maybe<DateTimeInput>;
+  dateEnd?: Maybe<DateTimeInput>;
+  dateEnd_not?: Maybe<DateTimeInput>;
+  dateEnd_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  dateEnd_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  dateEnd_lt?: Maybe<DateTimeInput>;
+  dateEnd_lte?: Maybe<DateTimeInput>;
+  dateEnd_gt?: Maybe<DateTimeInput>;
+  dateEnd_gte?: Maybe<DateTimeInput>;
   city?: Maybe<String>;
   city_not?: Maybe<String>;
   city_in?: Maybe<String[] | String>;
@@ -1526,6 +1827,20 @@ export interface EventScalarWhereInput {
   city_not_starts_with?: Maybe<String>;
   city_ends_with?: Maybe<String>;
   city_not_ends_with?: Maybe<String>;
+  address?: Maybe<String>;
+  address_not?: Maybe<String>;
+  address_in?: Maybe<String[] | String>;
+  address_not_in?: Maybe<String[] | String>;
+  address_lt?: Maybe<String>;
+  address_lte?: Maybe<String>;
+  address_gt?: Maybe<String>;
+  address_gte?: Maybe<String>;
+  address_contains?: Maybe<String>;
+  address_not_contains?: Maybe<String>;
+  address_starts_with?: Maybe<String>;
+  address_not_starts_with?: Maybe<String>;
+  address_ends_with?: Maybe<String>;
+  address_not_ends_with?: Maybe<String>;
   description?: Maybe<String>;
   description_not?: Maybe<String>;
   description_in?: Maybe<String[] | String>;
@@ -1554,20 +1869,20 @@ export interface EventScalarWhereInput {
   agenda_not_starts_with?: Maybe<String>;
   agenda_ends_with?: Maybe<String>;
   agenda_not_ends_with?: Maybe<String>;
-  contact?: Maybe<String>;
-  contact_not?: Maybe<String>;
-  contact_in?: Maybe<String[] | String>;
-  contact_not_in?: Maybe<String[] | String>;
-  contact_lt?: Maybe<String>;
-  contact_lte?: Maybe<String>;
-  contact_gt?: Maybe<String>;
-  contact_gte?: Maybe<String>;
-  contact_contains?: Maybe<String>;
-  contact_not_contains?: Maybe<String>;
-  contact_starts_with?: Maybe<String>;
-  contact_not_starts_with?: Maybe<String>;
-  contact_ends_with?: Maybe<String>;
-  contact_not_ends_with?: Maybe<String>;
+  programUrl?: Maybe<String>;
+  programUrl_not?: Maybe<String>;
+  programUrl_in?: Maybe<String[] | String>;
+  programUrl_not_in?: Maybe<String[] | String>;
+  programUrl_lt?: Maybe<String>;
+  programUrl_lte?: Maybe<String>;
+  programUrl_gt?: Maybe<String>;
+  programUrl_gte?: Maybe<String>;
+  programUrl_contains?: Maybe<String>;
+  programUrl_not_contains?: Maybe<String>;
+  programUrl_starts_with?: Maybe<String>;
+  programUrl_not_starts_with?: Maybe<String>;
+  programUrl_ends_with?: Maybe<String>;
+  programUrl_not_ends_with?: Maybe<String>;
   AND?: Maybe<EventScalarWhereInput[] | EventScalarWhereInput>;
   OR?: Maybe<EventScalarWhereInput[] | EventScalarWhereInput>;
   NOT?: Maybe<EventScalarWhereInput[] | EventScalarWhereInput>;
@@ -1580,11 +1895,13 @@ export interface EventUpdateManyWithWhereNestedInput {
 
 export interface EventUpdateManyDataInput {
   name?: Maybe<String>;
-  date?: Maybe<DateTimeInput>;
+  dateStart?: Maybe<DateTimeInput>;
+  dateEnd?: Maybe<DateTimeInput>;
   city?: Maybe<String>;
+  address?: Maybe<String>;
   description?: Maybe<String>;
   agenda?: Maybe<String>;
-  contact?: Maybe<String>;
+  programUrl?: Maybe<String>;
 }
 
 export interface UserUpsertWithoutGroupsInput {
@@ -1720,6 +2037,17 @@ export interface UserUpdateManyMutationInput {
   password?: Maybe<String>;
 }
 
+export interface ContactSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ContactWhereInput>;
+  AND?: Maybe<ContactSubscriptionWhereInput[] | ContactSubscriptionWhereInput>;
+  OR?: Maybe<ContactSubscriptionWhereInput[] | ContactSubscriptionWhereInput>;
+  NOT?: Maybe<ContactSubscriptionWhereInput[] | ContactSubscriptionWhereInput>;
+}
+
 export interface EventSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
@@ -1794,27 +2122,149 @@ export interface NodeNode {
   id: ID_Output;
 }
 
+export interface Contact {
+  id: ID_Output;
+  name?: String;
+  phone?: String;
+  responsibility?: String;
+}
+
+export interface ContactPromise extends Promise<Contact>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  phone: () => Promise<String>;
+  responsibility: () => Promise<String>;
+}
+
+export interface ContactSubscription
+  extends Promise<AsyncIterator<Contact>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  phone: () => Promise<AsyncIterator<String>>;
+  responsibility: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ContactNullablePromise
+  extends Promise<Contact | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  phone: () => Promise<String>;
+  responsibility: () => Promise<String>;
+}
+
+export interface ContactConnection {
+  pageInfo: PageInfo;
+  edges: ContactEdge[];
+}
+
+export interface ContactConnectionPromise
+  extends Promise<ContactConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ContactEdge>>() => T;
+  aggregate: <T = AggregateContactPromise>() => T;
+}
+
+export interface ContactConnectionSubscription
+  extends Promise<AsyncIterator<ContactConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ContactEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateContactSubscription>() => T;
+}
+
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
+    Fragmentable {
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ContactEdge {
+  node: Contact;
+  cursor: String;
+}
+
+export interface ContactEdgePromise extends Promise<ContactEdge>, Fragmentable {
+  node: <T = ContactPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ContactEdgeSubscription
+  extends Promise<AsyncIterator<ContactEdge>>,
+    Fragmentable {
+  node: <T = ContactSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateContact {
+  count: Int;
+}
+
+export interface AggregateContactPromise
+  extends Promise<AggregateContact>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateContactSubscription
+  extends Promise<AsyncIterator<AggregateContact>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
 export interface Event {
   id: ID_Output;
   name: String;
-  date: DateTimeOutput;
+  dateStart: DateTimeOutput;
+  dateEnd?: DateTimeOutput;
   city: String;
+  address: String;
   description: String;
   agenda?: String;
-  contact?: String;
+  programUrl?: String;
 }
 
 export interface EventPromise extends Promise<Event>, Fragmentable {
   id: () => Promise<ID_Output>;
   author: <T = UserPromise>() => T;
   name: () => Promise<String>;
-  date: () => Promise<DateTimeOutput>;
+  dateStart: () => Promise<DateTimeOutput>;
+  dateEnd: () => Promise<DateTimeOutput>;
   city: () => Promise<String>;
   location: <T = LocationPromise>() => T;
+  address: () => Promise<String>;
   description: () => Promise<String>;
   agenda: () => Promise<String>;
-  contact: () => Promise<String>;
+  contact: <T = FragmentableArray<Contact>>(args?: {
+    where?: ContactWhereInput;
+    orderBy?: ContactOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
   image: <T = ImagePromise>() => T;
+  programUrl: () => Promise<String>;
 }
 
 export interface EventSubscription
@@ -1823,13 +2273,24 @@ export interface EventSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   author: <T = UserSubscription>() => T;
   name: () => Promise<AsyncIterator<String>>;
-  date: () => Promise<AsyncIterator<DateTimeOutput>>;
+  dateStart: () => Promise<AsyncIterator<DateTimeOutput>>;
+  dateEnd: () => Promise<AsyncIterator<DateTimeOutput>>;
   city: () => Promise<AsyncIterator<String>>;
   location: <T = LocationSubscription>() => T;
+  address: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
   agenda: () => Promise<AsyncIterator<String>>;
-  contact: () => Promise<AsyncIterator<String>>;
+  contact: <T = Promise<AsyncIterator<ContactSubscription>>>(args?: {
+    where?: ContactWhereInput;
+    orderBy?: ContactOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
   image: <T = ImageSubscription>() => T;
+  programUrl: () => Promise<AsyncIterator<String>>;
 }
 
 export interface EventNullablePromise
@@ -1838,13 +2299,24 @@ export interface EventNullablePromise
   id: () => Promise<ID_Output>;
   author: <T = UserPromise>() => T;
   name: () => Promise<String>;
-  date: () => Promise<DateTimeOutput>;
+  dateStart: () => Promise<DateTimeOutput>;
+  dateEnd: () => Promise<DateTimeOutput>;
   city: () => Promise<String>;
   location: <T = LocationPromise>() => T;
+  address: () => Promise<String>;
   description: () => Promise<String>;
   agenda: () => Promise<String>;
-  contact: () => Promise<String>;
+  contact: <T = FragmentableArray<Contact>>(args?: {
+    where?: ContactWhereInput;
+    orderBy?: ContactOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
   image: <T = ImagePromise>() => T;
+  programUrl: () => Promise<String>;
 }
 
 export interface User {
@@ -2144,29 +2616,6 @@ export interface EventConnectionSubscription
   pageInfo: <T = PageInfoSubscription>() => T;
   edges: <T = Promise<AsyncIterator<EventEdgeSubscription>>>() => T;
   aggregate: <T = AggregateEventSubscription>() => T;
-}
-
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface EventEdge {
@@ -2490,6 +2939,56 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
+export interface ContactSubscriptionPayload {
+  mutation: MutationType;
+  node: Contact;
+  updatedFields: String[];
+  previousValues: ContactPreviousValues;
+}
+
+export interface ContactSubscriptionPayloadPromise
+  extends Promise<ContactSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ContactPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ContactPreviousValuesPromise>() => T;
+}
+
+export interface ContactSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ContactSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ContactSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ContactPreviousValuesSubscription>() => T;
+}
+
+export interface ContactPreviousValues {
+  id: ID_Output;
+  name?: String;
+  phone?: String;
+  responsibility?: String;
+}
+
+export interface ContactPreviousValuesPromise
+  extends Promise<ContactPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  phone: () => Promise<String>;
+  responsibility: () => Promise<String>;
+}
+
+export interface ContactPreviousValuesSubscription
+  extends Promise<AsyncIterator<ContactPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  phone: () => Promise<AsyncIterator<String>>;
+  responsibility: () => Promise<AsyncIterator<String>>;
+}
+
 export interface EventSubscriptionPayload {
   mutation: MutationType;
   node: Event;
@@ -2518,11 +3017,13 @@ export interface EventSubscriptionPayloadSubscription
 export interface EventPreviousValues {
   id: ID_Output;
   name: String;
-  date: DateTimeOutput;
+  dateStart: DateTimeOutput;
+  dateEnd?: DateTimeOutput;
   city: String;
+  address: String;
   description: String;
   agenda?: String;
-  contact?: String;
+  programUrl?: String;
 }
 
 export interface EventPreviousValuesPromise
@@ -2530,11 +3031,13 @@ export interface EventPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   name: () => Promise<String>;
-  date: () => Promise<DateTimeOutput>;
+  dateStart: () => Promise<DateTimeOutput>;
+  dateEnd: () => Promise<DateTimeOutput>;
   city: () => Promise<String>;
+  address: () => Promise<String>;
   description: () => Promise<String>;
   agenda: () => Promise<String>;
-  contact: () => Promise<String>;
+  programUrl: () => Promise<String>;
 }
 
 export interface EventPreviousValuesSubscription
@@ -2542,11 +3045,13 @@ export interface EventPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   name: () => Promise<AsyncIterator<String>>;
-  date: () => Promise<AsyncIterator<DateTimeOutput>>;
+  dateStart: () => Promise<AsyncIterator<DateTimeOutput>>;
+  dateEnd: () => Promise<AsyncIterator<DateTimeOutput>>;
   city: () => Promise<AsyncIterator<String>>;
+  address: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
   agenda: () => Promise<AsyncIterator<String>>;
-  contact: () => Promise<AsyncIterator<String>>;
+  programUrl: () => Promise<AsyncIterator<String>>;
 }
 
 export interface GroupSubscriptionPayload {
@@ -2832,6 +3337,16 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string;
 
 /*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+*/
+export type Int = number;
+
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
+
+/*
 DateTime scalar input type, allowing Date
 */
 export type DateTimeInput = Date | string;
@@ -2845,16 +3360,6 @@ export type DateTimeOutput = string;
 The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
 */
 export type Float = number;
-
-/*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean;
-
-/*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
-*/
-export type Int = number;
 
 export type Long = string;
 
@@ -2885,6 +3390,10 @@ export const models: Model[] = [
   },
   {
     name: "Image",
+    embedded: false
+  },
+  {
+    name: "Contact",
     embedded: false
   },
   {

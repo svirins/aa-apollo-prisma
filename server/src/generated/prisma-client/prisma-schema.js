@@ -3,7 +3,11 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateEvent {
+/* GraphQL */ `type AggregateContact {
+  count: Int!
+}
+
+type AggregateEvent {
   count: Int!
 }
 
@@ -31,19 +35,268 @@ type BatchPayload {
   count: Long!
 }
 
+type Contact {
+  id: ID!
+  name: String
+  phone: String
+  responsibility: String
+}
+
+type ContactConnection {
+  pageInfo: PageInfo!
+  edges: [ContactEdge]!
+  aggregate: AggregateContact!
+}
+
+input ContactCreateInput {
+  id: ID
+  name: String
+  phone: String
+  responsibility: String
+}
+
+input ContactCreateManyInput {
+  create: [ContactCreateInput!]
+  connect: [ContactWhereUniqueInput!]
+}
+
+type ContactEdge {
+  node: Contact!
+  cursor: String!
+}
+
+enum ContactOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  phone_ASC
+  phone_DESC
+  responsibility_ASC
+  responsibility_DESC
+}
+
+type ContactPreviousValues {
+  id: ID!
+  name: String
+  phone: String
+  responsibility: String
+}
+
+input ContactScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  phone: String
+  phone_not: String
+  phone_in: [String!]
+  phone_not_in: [String!]
+  phone_lt: String
+  phone_lte: String
+  phone_gt: String
+  phone_gte: String
+  phone_contains: String
+  phone_not_contains: String
+  phone_starts_with: String
+  phone_not_starts_with: String
+  phone_ends_with: String
+  phone_not_ends_with: String
+  responsibility: String
+  responsibility_not: String
+  responsibility_in: [String!]
+  responsibility_not_in: [String!]
+  responsibility_lt: String
+  responsibility_lte: String
+  responsibility_gt: String
+  responsibility_gte: String
+  responsibility_contains: String
+  responsibility_not_contains: String
+  responsibility_starts_with: String
+  responsibility_not_starts_with: String
+  responsibility_ends_with: String
+  responsibility_not_ends_with: String
+  AND: [ContactScalarWhereInput!]
+  OR: [ContactScalarWhereInput!]
+  NOT: [ContactScalarWhereInput!]
+}
+
+type ContactSubscriptionPayload {
+  mutation: MutationType!
+  node: Contact
+  updatedFields: [String!]
+  previousValues: ContactPreviousValues
+}
+
+input ContactSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ContactWhereInput
+  AND: [ContactSubscriptionWhereInput!]
+  OR: [ContactSubscriptionWhereInput!]
+  NOT: [ContactSubscriptionWhereInput!]
+}
+
+input ContactUpdateDataInput {
+  name: String
+  phone: String
+  responsibility: String
+}
+
+input ContactUpdateInput {
+  name: String
+  phone: String
+  responsibility: String
+}
+
+input ContactUpdateManyDataInput {
+  name: String
+  phone: String
+  responsibility: String
+}
+
+input ContactUpdateManyInput {
+  create: [ContactCreateInput!]
+  update: [ContactUpdateWithWhereUniqueNestedInput!]
+  upsert: [ContactUpsertWithWhereUniqueNestedInput!]
+  delete: [ContactWhereUniqueInput!]
+  connect: [ContactWhereUniqueInput!]
+  set: [ContactWhereUniqueInput!]
+  disconnect: [ContactWhereUniqueInput!]
+  deleteMany: [ContactScalarWhereInput!]
+  updateMany: [ContactUpdateManyWithWhereNestedInput!]
+}
+
+input ContactUpdateManyMutationInput {
+  name: String
+  phone: String
+  responsibility: String
+}
+
+input ContactUpdateManyWithWhereNestedInput {
+  where: ContactScalarWhereInput!
+  data: ContactUpdateManyDataInput!
+}
+
+input ContactUpdateWithWhereUniqueNestedInput {
+  where: ContactWhereUniqueInput!
+  data: ContactUpdateDataInput!
+}
+
+input ContactUpsertWithWhereUniqueNestedInput {
+  where: ContactWhereUniqueInput!
+  update: ContactUpdateDataInput!
+  create: ContactCreateInput!
+}
+
+input ContactWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  phone: String
+  phone_not: String
+  phone_in: [String!]
+  phone_not_in: [String!]
+  phone_lt: String
+  phone_lte: String
+  phone_gt: String
+  phone_gte: String
+  phone_contains: String
+  phone_not_contains: String
+  phone_starts_with: String
+  phone_not_starts_with: String
+  phone_ends_with: String
+  phone_not_ends_with: String
+  responsibility: String
+  responsibility_not: String
+  responsibility_in: [String!]
+  responsibility_not_in: [String!]
+  responsibility_lt: String
+  responsibility_lte: String
+  responsibility_gt: String
+  responsibility_gte: String
+  responsibility_contains: String
+  responsibility_not_contains: String
+  responsibility_starts_with: String
+  responsibility_not_starts_with: String
+  responsibility_ends_with: String
+  responsibility_not_ends_with: String
+  AND: [ContactWhereInput!]
+  OR: [ContactWhereInput!]
+  NOT: [ContactWhereInput!]
+}
+
+input ContactWhereUniqueInput {
+  id: ID
+}
+
 scalar DateTime
 
 type Event {
   id: ID!
   author: User!
   name: String!
-  date: DateTime!
+  dateStart: DateTime!
+  dateEnd: DateTime
   city: String!
   location: Location
+  address: String!
   description: String!
   agenda: String
-  contact: String
+  contact(where: ContactWhereInput, orderBy: ContactOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Contact!]
   image: Image
+  programUrl: String
 }
 
 type EventConnection {
@@ -56,13 +309,16 @@ input EventCreateInput {
   id: ID
   author: UserCreateOneWithoutEventsInput!
   name: String!
-  date: DateTime!
+  dateStart: DateTime!
+  dateEnd: DateTime
   city: String!
   location: LocationCreateOneInput
+  address: String!
   description: String!
   agenda: String
-  contact: String
+  contact: ContactCreateManyInput
   image: ImageCreateOneInput
+  programUrl: String
 }
 
 input EventCreateManyWithoutAuthorInput {
@@ -73,13 +329,16 @@ input EventCreateManyWithoutAuthorInput {
 input EventCreateWithoutAuthorInput {
   id: ID
   name: String!
-  date: DateTime!
+  dateStart: DateTime!
+  dateEnd: DateTime
   city: String!
   location: LocationCreateOneInput
+  address: String!
   description: String!
   agenda: String
-  contact: String
+  contact: ContactCreateManyInput
   image: ImageCreateOneInput
+  programUrl: String
 }
 
 type EventEdge {
@@ -92,26 +351,32 @@ enum EventOrderByInput {
   id_DESC
   name_ASC
   name_DESC
-  date_ASC
-  date_DESC
+  dateStart_ASC
+  dateStart_DESC
+  dateEnd_ASC
+  dateEnd_DESC
   city_ASC
   city_DESC
+  address_ASC
+  address_DESC
   description_ASC
   description_DESC
   agenda_ASC
   agenda_DESC
-  contact_ASC
-  contact_DESC
+  programUrl_ASC
+  programUrl_DESC
 }
 
 type EventPreviousValues {
   id: ID!
   name: String!
-  date: DateTime!
+  dateStart: DateTime!
+  dateEnd: DateTime
   city: String!
+  address: String!
   description: String!
   agenda: String
-  contact: String
+  programUrl: String
 }
 
 input EventScalarWhereInput {
@@ -143,14 +408,22 @@ input EventScalarWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
-  date: DateTime
-  date_not: DateTime
-  date_in: [DateTime!]
-  date_not_in: [DateTime!]
-  date_lt: DateTime
-  date_lte: DateTime
-  date_gt: DateTime
-  date_gte: DateTime
+  dateStart: DateTime
+  dateStart_not: DateTime
+  dateStart_in: [DateTime!]
+  dateStart_not_in: [DateTime!]
+  dateStart_lt: DateTime
+  dateStart_lte: DateTime
+  dateStart_gt: DateTime
+  dateStart_gte: DateTime
+  dateEnd: DateTime
+  dateEnd_not: DateTime
+  dateEnd_in: [DateTime!]
+  dateEnd_not_in: [DateTime!]
+  dateEnd_lt: DateTime
+  dateEnd_lte: DateTime
+  dateEnd_gt: DateTime
+  dateEnd_gte: DateTime
   city: String
   city_not: String
   city_in: [String!]
@@ -165,6 +438,20 @@ input EventScalarWhereInput {
   city_not_starts_with: String
   city_ends_with: String
   city_not_ends_with: String
+  address: String
+  address_not: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_lt: String
+  address_lte: String
+  address_gt: String
+  address_gte: String
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
   description: String
   description_not: String
   description_in: [String!]
@@ -193,20 +480,20 @@ input EventScalarWhereInput {
   agenda_not_starts_with: String
   agenda_ends_with: String
   agenda_not_ends_with: String
-  contact: String
-  contact_not: String
-  contact_in: [String!]
-  contact_not_in: [String!]
-  contact_lt: String
-  contact_lte: String
-  contact_gt: String
-  contact_gte: String
-  contact_contains: String
-  contact_not_contains: String
-  contact_starts_with: String
-  contact_not_starts_with: String
-  contact_ends_with: String
-  contact_not_ends_with: String
+  programUrl: String
+  programUrl_not: String
+  programUrl_in: [String!]
+  programUrl_not_in: [String!]
+  programUrl_lt: String
+  programUrl_lte: String
+  programUrl_gt: String
+  programUrl_gte: String
+  programUrl_contains: String
+  programUrl_not_contains: String
+  programUrl_starts_with: String
+  programUrl_not_starts_with: String
+  programUrl_ends_with: String
+  programUrl_not_ends_with: String
   AND: [EventScalarWhereInput!]
   OR: [EventScalarWhereInput!]
   NOT: [EventScalarWhereInput!]
@@ -233,31 +520,38 @@ input EventSubscriptionWhereInput {
 input EventUpdateInput {
   author: UserUpdateOneRequiredWithoutEventsInput
   name: String
-  date: DateTime
+  dateStart: DateTime
+  dateEnd: DateTime
   city: String
   location: LocationUpdateOneInput
+  address: String
   description: String
   agenda: String
-  contact: String
+  contact: ContactUpdateManyInput
   image: ImageUpdateOneInput
+  programUrl: String
 }
 
 input EventUpdateManyDataInput {
   name: String
-  date: DateTime
+  dateStart: DateTime
+  dateEnd: DateTime
   city: String
+  address: String
   description: String
   agenda: String
-  contact: String
+  programUrl: String
 }
 
 input EventUpdateManyMutationInput {
   name: String
-  date: DateTime
+  dateStart: DateTime
+  dateEnd: DateTime
   city: String
+  address: String
   description: String
   agenda: String
-  contact: String
+  programUrl: String
 }
 
 input EventUpdateManyWithoutAuthorInput {
@@ -279,13 +573,16 @@ input EventUpdateManyWithWhereNestedInput {
 
 input EventUpdateWithoutAuthorDataInput {
   name: String
-  date: DateTime
+  dateStart: DateTime
+  dateEnd: DateTime
   city: String
   location: LocationUpdateOneInput
+  address: String
   description: String
   agenda: String
-  contact: String
+  contact: ContactUpdateManyInput
   image: ImageUpdateOneInput
+  programUrl: String
 }
 
 input EventUpdateWithWhereUniqueWithoutAuthorInput {
@@ -329,14 +626,22 @@ input EventWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
-  date: DateTime
-  date_not: DateTime
-  date_in: [DateTime!]
-  date_not_in: [DateTime!]
-  date_lt: DateTime
-  date_lte: DateTime
-  date_gt: DateTime
-  date_gte: DateTime
+  dateStart: DateTime
+  dateStart_not: DateTime
+  dateStart_in: [DateTime!]
+  dateStart_not_in: [DateTime!]
+  dateStart_lt: DateTime
+  dateStart_lte: DateTime
+  dateStart_gt: DateTime
+  dateStart_gte: DateTime
+  dateEnd: DateTime
+  dateEnd_not: DateTime
+  dateEnd_in: [DateTime!]
+  dateEnd_not_in: [DateTime!]
+  dateEnd_lt: DateTime
+  dateEnd_lte: DateTime
+  dateEnd_gt: DateTime
+  dateEnd_gte: DateTime
   city: String
   city_not: String
   city_in: [String!]
@@ -352,6 +657,20 @@ input EventWhereInput {
   city_ends_with: String
   city_not_ends_with: String
   location: LocationWhereInput
+  address: String
+  address_not: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_lt: String
+  address_lte: String
+  address_gt: String
+  address_gte: String
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
   description: String
   description_not: String
   description_in: [String!]
@@ -380,21 +699,24 @@ input EventWhereInput {
   agenda_not_starts_with: String
   agenda_ends_with: String
   agenda_not_ends_with: String
-  contact: String
-  contact_not: String
-  contact_in: [String!]
-  contact_not_in: [String!]
-  contact_lt: String
-  contact_lte: String
-  contact_gt: String
-  contact_gte: String
-  contact_contains: String
-  contact_not_contains: String
-  contact_starts_with: String
-  contact_not_starts_with: String
-  contact_ends_with: String
-  contact_not_ends_with: String
+  contact_every: ContactWhereInput
+  contact_some: ContactWhereInput
+  contact_none: ContactWhereInput
   image: ImageWhereInput
+  programUrl: String
+  programUrl_not: String
+  programUrl_in: [String!]
+  programUrl_not_in: [String!]
+  programUrl_lt: String
+  programUrl_lte: String
+  programUrl_gt: String
+  programUrl_gte: String
+  programUrl_contains: String
+  programUrl_not_contains: String
+  programUrl_starts_with: String
+  programUrl_not_starts_with: String
+  programUrl_ends_with: String
+  programUrl_not_ends_with: String
   AND: [EventWhereInput!]
   OR: [EventWhereInput!]
   NOT: [EventWhereInput!]
@@ -1487,6 +1809,12 @@ input MeetingWhereUniqueInput {
 }
 
 type Mutation {
+  createContact(data: ContactCreateInput!): Contact!
+  updateContact(data: ContactUpdateInput!, where: ContactWhereUniqueInput!): Contact
+  updateManyContacts(data: ContactUpdateManyMutationInput!, where: ContactWhereInput): BatchPayload!
+  upsertContact(where: ContactWhereUniqueInput!, create: ContactCreateInput!, update: ContactUpdateInput!): Contact!
+  deleteContact(where: ContactWhereUniqueInput!): Contact
+  deleteManyContacts(where: ContactWhereInput): BatchPayload!
   createEvent(data: EventCreateInput!): Event!
   updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
   updateManyEvents(data: EventUpdateManyMutationInput!, where: EventWhereInput): BatchPayload!
@@ -1543,6 +1871,9 @@ type PageInfo {
 }
 
 type Query {
+  contact(where: ContactWhereUniqueInput!): Contact
+  contacts(where: ContactWhereInput, orderBy: ContactOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Contact]!
+  contactsConnection(where: ContactWhereInput, orderBy: ContactOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ContactConnection!
   event(where: EventWhereUniqueInput!): Event
   events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event]!
   eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
@@ -1575,6 +1906,7 @@ enum regionType {
 }
 
 type Subscription {
+  contact(where: ContactSubscriptionWhereInput): ContactSubscriptionPayload
   event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
   group(where: GroupSubscriptionWhereInput): GroupSubscriptionPayload
   image(where: ImageSubscriptionWhereInput): ImageSubscriptionPayload

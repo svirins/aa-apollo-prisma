@@ -3,6 +3,7 @@ import { Icon, Label, Button, Modal, Header, Table, Divider } from "semantic-ui-
 import MapDataDisplay from "../ui-elements/mapDataDisplay";
 import { ruRegions, ruMonth } from "../../const/globalConst";
 import { format, parseISO } from "date-fns";
+import  TableRow  from '../ui-elements/tableRow'
 
 const GroupDataDisplay = props => {
   const distanceString = (props.distance / 1000).toFixed(1);
@@ -12,18 +13,23 @@ const GroupDataDisplay = props => {
       format(parseISO(props.birthday), "yyyy")
     : "";
   const description = props.description ? ` (${props.description})` : "";
-  const phone = props.phone ? (
-    <a href="tel:{props.phone}">{props.phone}</a>
-  ) : (
-    ""
-  );
+  let phone = ''
+  if (props.phone && props.phone.indexOf('/') === -1) {
+    phone = (<a href={`tel:${props.phone}`}>{props.phone}</a>)
+  } else if (props.phone.indexOf('/') !== -1) {
+      let part1 = props.phone.substr(0, props.phone.indexOf('/'))
+      let part2 = props.phone.substr(props.phone.indexOf('/') +2, props.phone.length )
+    phone = (<Fragment><a href={`tel:${part1}`}>{part1}</a>/<a href={`tel:${part2}`}> {part2}</a></Fragment>
+     ) 
+  }
+
   const mail = props.email ? (
-    <a href="mailto:{props.email}">{props.email}</a>
+    <a href={`mailto:${props.email}`}>{props.email}</a>
   ) : (
     ""
   );
   const website = props.website ? (
-    <a href="{props.website}">{props.website}</a>
+    <a href={props.website}>{props.website}</a>
   ) : (
     ""
   );
@@ -40,69 +46,11 @@ const GroupDataDisplay = props => {
     mailDisplay,
     websiteDisplay = "";
 
-  if (birthday) {
-    birthdayDisplay = (
-      <Table.Row>
-        <Table.Cell textAlign="left">
-          <Icon
-            name="birthday"
-            color="black"
-            size="small"
-            style={{ marginRight: "1em" }}
-          />
-          {birthday}
-        </Table.Cell>
-      </Table.Row>
-    );
-  }
-
-  if (phone) {
-    phoneDisplay = (
-      <Table.Row>
-        <Table.Cell textAlign="left">
-          <Icon
-            name="phone"
-            color="black"
-            size="small"
-            style={{ marginRight: "1em" }}
-          />
-          {phone}
-        </Table.Cell>
-      </Table.Row>
-    );
-  }
-
-  if (mail) {
-    mailDisplay = (
-      <Table.Row>
-        <Table.Cell textAlign="left">
-          <Icon
-            name="mail"
-            color="black"
-            size="small"
-            style={{ marginRight: "1em" }}
-          />
-          {mail}
-        </Table.Cell>
-      </Table.Row>
-    );
-  }
-
-  if (website) {
-    websiteDisplay = (
-      <Table.Row>
-        <Table.Cell textAlign="left">
-          <Icon
-            name="globe"
-            color="black"
-            size="small"
-            style={{ marginRight: "1em" }}
-          />
-          {website}
-        </Table.Cell>
-      </Table.Row>
-    );
-  }
+  if (birthday) birthdayDisplay =  ( <TableRow icon="birthday" content={birthday} />);
+  if (phone) phoneDisplay = ( <TableRow icon="phone" content={phone} />);
+  if (mail) mailDisplay = ( <TableRow icon="mail" content={mail} />);
+  if (website) websiteDisplay = ( <TableRow icon="globe" content={website} />);
+     
 
   return (
     <Fragment>
@@ -118,29 +66,8 @@ const GroupDataDisplay = props => {
       {disabledLabel}
       <Table compact="very" basic="very" unstackable collapsing size="small">
         <Table.Body>
-          <Table.Row>
-            <Table.Cell textAlign="left">
-              <Icon
-                name="home"
-                color="black"
-                size="small"
-                style={{ marginRight: "1em" }}
-              />
-              {props.city} , {ruRegions.get(props.region)}
-            </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell textAlign="left">
-              <Icon
-                name="location arrow"
-                color="black"
-                size="small"
-                style={{ marginRight: "1em" }}
-              />
-              {props.address}
-              {description}
-            </Table.Cell>
-          </Table.Row>
+          <TableRow icon="home" content={`${props.city} , ${ruRegions.get(props.region)}`} />
+          <TableRow icon="location arrow" content={`${props.address}${description}`} />
           {phoneDisplay}
           {mailDisplay}
           {websiteDisplay}

@@ -50,16 +50,23 @@ export const GROUPS_LIST_QUERY = gql`
 `
 export const EVENTS_LIST_QUERY = gql`
   query getEvents {
-    eventList(orderBy: date_ASC) {
+    eventList(orderBy: dateStart_ASC) {
       count
       events {
         id
         name
-        date
+        dateStart
+        dateEnd
         city
         description
         agenda
-        contact
+        address
+        contact {
+          id
+          name
+          phone
+          responsibility
+        }
         image {
           publicId
           cloudinaryUrl

@@ -20,8 +20,8 @@ type Group {
   email:         String
   address:       String
   website:       String
-  meetings:      [Meeting!]  
   location:      Location! 
+  meetings:      [Meeting!]  
 }
 
 type Meeting {
@@ -37,13 +37,18 @@ type Event {
   id:           ID!   
   author:       User!             
   name:         String!        
-  date:         DateTime!     
+  dateStart:    DateTime!
+  dateEnd:      DateTime
   city:         String!
+  location:     Location
+  address:      String!  
+
   description:  String!       
   agenda:       String
-  contact:      String
-  location:     Location
+  contact:      [Contact] 
   image:        Image
+  programUrl:   String
+
 }
 
 type Location {
@@ -133,8 +138,13 @@ enum GroupOrderByInput {
 }
 
 enum EventOrderByInput {
-  date_ASC
-  date_DESC
-  city_ASC
-  city_DESC
+  dateStart_ASC
+  dateStart_DESC
+}
+
+type Contact {
+  id:               ID!          
+  name:             String
+  phone:            String
+  responsibility:   String      
 }

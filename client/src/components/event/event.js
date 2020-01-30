@@ -1,56 +1,28 @@
 import React from 'react';
 import { Segment, Icon, Table, Header, Image, Modal, Button, Grid, Divider } from 'semantic-ui-react'
 import MapDataDisplay from '../ui-elements/mapDataDisplay'
+import  TableRow  from '../ui-elements/tableRow'
 
 const Event = props => {
-  const dateConverted = props.date.substr(0, props.date.indexOf('T'))
-  const cityDisplay = (
-    <Table.Row>
-      <Table.Cell textAlign="left">
-        <Icon
-          name="home"
-          color="black"
-          size="small"
-          style={{ marginRight: "1em" }}
-        />
-        {props.city}
-      </Table.Cell>
-    </Table.Row>
-  );
-  
-  const contactDisplay = (
-    <Table.Row>
-      <Table.Cell textAlign="left">
-        <Icon
-          name="home"
-          color="black"
-          size="small"
-          style={{ marginRight: "1em" }}
-        />
-        {props.contact}
-      </Table.Cell>
-    </Table.Row>
-  );
-  const addressDisplay = (
-    <Table.Row>
-      <Table.Cell textAlign="left">
-        <Icon
-          name="home"
-          color="black"
-          size="small"
-          style={{ marginRight: "1em" }}
-        />
-        {props.address}
-      </Table.Cell>
-    </Table.Row>
-  );
+  const start = props.dateStart.substr(0, props.dateStart.indexOf('T'))
+  const end = props.dateEnd ? ` - ${props.dateEnd.substr(0, props.dateEnd.indexOf('T'))}` : ''
+  const dateCityHeader = `${start}${end} , ${props.city}`
+ 
+  const cityDisplay = ( <TableRow icon="home" content={props.city} />);
+  const contactDisplay = ( <TableRow icon="phone" content={props.contact} />);
+  const addressDisplay = ( <TableRow icon="marker" content={props.address} />);
+
   const agendaDisplay = ''
   return (
     <Grid.Column>
     <Segment stacked raised>
         <Header as='h3'>{props.name}</Header>
+        <Header as='h5'>{dateCityHeader}</Header>
+
         {props.description}
         <Divider />
+        <Image src={props.image.cloudinaryUrl} size='small' floated='right'/>
+
         <Table compact="very" basic="very" unstackable collapsing size="small">
           {cityDisplay} 
           {contactDisplay}
@@ -58,7 +30,6 @@ const Event = props => {
         </Table>
         {agendaDisplay}
 
-        <Image src={props.image.cloudinaryUrl} size='small' />
      
         <Modal
           closeIcon

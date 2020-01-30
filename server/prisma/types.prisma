@@ -39,13 +39,16 @@ type Event {
   id:               ID!           @id
   author:           User!         @relation(link: INLINE)
   name:             String!       
-  date:             DateTime!
+  dateStart:        DateTime!
+  dateEnd:          DateTime
   city:             String!
   location:         Location
+  address:          String!  
   description:      String!       
   agenda:           String        
-  contact:          String
+  contact:          [Contact]     
   image:            Image
+  programUrl:       String
 }
 
 type Location {
@@ -58,4 +61,11 @@ type Image {
   id:               ID!           @id
   publicId:         String      
   cloudinaryUrl:    String!       
+}
+
+type Contact {
+  id:               ID!           @id
+  name:             String
+  phone:            String
+  responsibility:   String       @default(value: "Координатор")
 }
