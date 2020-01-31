@@ -36,7 +36,7 @@ const GroupDataDisplay = props => {
   const disabledLabel = props.isActive ? (
     ""
   ) : (
-    <Label horizontal color="red" size="small">
+    <Label horizontal color="pink" basic size="small">
       временно не работает
     </Label>
   );
@@ -56,7 +56,7 @@ const GroupDataDisplay = props => {
     <Fragment>
       <Header as="h3">
         {props.name}{" "}
-        <Label horizontal color="teal" size="small">
+        <Label horizontal as='a' color="blue" size="small" basic>
           {distanceString} {" км"}
         </Label>      
 
@@ -77,15 +77,9 @@ const GroupDataDisplay = props => {
       <Modal
             closeIcon
             trigger={
-              <Button
-                compact
-                
-                icon="map marker alternate"
-                color="blue"
-                content="На карте"
-                size="mini"
-                float="right"
-              />
+              <Button color='blue' size="mini">
+                <Icon name='map signs' /> {`На карте`}
+              </Button>
             }
           >
           <Header icon="map marker alternate" content={props.name} />

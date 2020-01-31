@@ -33,7 +33,7 @@ const Filters = props => {
   const cityLabel = citySelect !== "All" ? citySelect : "Все города";
   const filterDisplay = filter ? (
     <Label color="blue" basic horizontal>
-      {`Поиск - ${filter}`}
+      {`Строка поиска - '${filter}'`}
     </Label>
   ) : (
     ""
@@ -44,13 +44,16 @@ const Filters = props => {
       <Grid stackable>
         <Grid.Row columns={1}>
           <Grid.Column>
-            <Label color="blue" basic horizontal>
+            <Label color="black" basic horizontal size='large' style={{marginBottom: ".25em", marginTop: ".25em"}}> 
+              {`Поиск по группам АА Беларуси   `}
+            </Label>
+            <Label color="blue" basic horizontal size='large' style={{marginBottom: ".25em", marginTop: ".25em"}}> 
               {`Найдено ${props.count} групп`}
             </Label>
-            <Label color="blue" basic horizontal>
+            <Label color="blue" basic horizontal size='large' style={{marginBottom: ".25em", marginTop: ".25em"}}> 
               {`Регион - ${ruRegions.get(regionSelect)}`}
             </Label>
-            <Label color="blue" basic horizontal>
+            <Label color="blue" basic horizontal size='large' style={{marginBottom: ".25em" ,marginTop: ".25em"}}> 
               {`Город - ${cityLabel}`}
             </Label>
             {filterDisplay}

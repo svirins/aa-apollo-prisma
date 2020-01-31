@@ -12,11 +12,11 @@ const Meeting = props => {
   switch (props.type) {
     case "Open":
       iconName = "bullhorn";
-      colorName = "teal";
+      colorName = "blue";
       break;
     case "Closed":
       iconName = "coffee";
-      colorName = "teal";
+      colorName = "blue";
       break;
     case "Speaker":
       iconName = "lightning";
@@ -37,25 +37,29 @@ const Meeting = props => {
 
   return (
     <Table.Row negative={isToday}>
-      <Table.Cell textAlign='center'>
+      <Table.Cell textAlign='left'>
         <Label
+          style={{ marginLeft: "0.5em" }}
+
           size="tiny"
           horizontal
+          basic
           color={
-            props.weekday === "Su" || props.weekday === "Sa" ? "orange" : "grey"
+            props.weekday === "Su" || props.weekday === "Sa" ? "pink" : "black"
           }
         >
           {ruWeekdays.get(props.weekday)}
         </Label>
       </Table.Cell>
       <Table.Cell textAlign='center'>{timeSubstr}</Table.Cell>
-      <Table.Cell textAlign='center'>
+      <Table.Cell textAlign='right'>
         <Popup
           content={ruMeetingType.get(props.type)}
           position="bottom right"
           size="mini"
           trigger={
-            <Icon name={iconName} color={colorName} size="small"  />
+            <Icon           style={{ marginRight: "0.5em" }}
+            name={iconName} color={colorName} size="small"  />
           }
         />
       </Table.Cell>

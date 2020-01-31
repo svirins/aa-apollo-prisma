@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Statistic, Icon, Divider, Segment } from "semantic-ui-react";
+import { Container, Statistic, Icon, Divider, Segment, Grid } from "semantic-ui-react";
 import Error from "./error";
 import LoadingMessage from "./loader";
 
@@ -61,55 +61,60 @@ const StatisticBar = () => {
     <Container>
       <Divider />
       <Segment basic>
-      <Statistic.Group widths="six" size="mini">
-        <Statistic color="blue" >
-          <Statistic.Value>
-            <Icon name="users" />
-            {groupCount}
-          </Statistic.Value>
-          <Statistic.Label size="mini">Групп АА</Statistic.Label>
-        </Statistic>
+      <Grid columns={2} stackable>
+        <Grid.Column>
+          <Statistic.Group widths="three" size="mini">
+            <Statistic color="blue" >
+              <Statistic.Value>
+                <Icon name="users" />
+                {groupCount}
+              </Statistic.Value>
+              <Statistic.Label size="mini">Групп АА</Statistic.Label>
+            </Statistic>
+            <Statistic color="orange">
+              <Statistic.Value>
+                <Icon name="map signs" />
+                {citiesCount}
+              </Statistic.Value>
+              <Statistic.Label>Городов</Statistic.Label>
+            </Statistic>
+            <Statistic color="purple">
+              <Statistic.Value>
+                <Icon name="coffee" />
+                {meetingCount}
+              </Statistic.Value>
+              <Statistic.Label>Собраний</Statistic.Label>
+            </Statistic>
+          </Statistic.Group>
+        </Grid.Column>
+        <Grid.Column>
+          <Statistic.Group widths="three" size="mini">
+            <Statistic color="olive">
+              <Statistic.Value>
+                <Icon name="clock" />
+                {nowCount}
+              </Statistic.Value>
+              <Statistic.Label>Сегодня</Statistic.Label>
+            </Statistic>
 
-        <Statistic color="orange">
-          <Statistic.Value>
-            <Icon name="map signs" />
-            {citiesCount}
-          </Statistic.Value>
-          <Statistic.Label>Городов</Statistic.Label>
-        </Statistic>
+            <Statistic color="green">
+              <Statistic.Value>
+                <Icon name="map marker alternate" />
+                {nearCount}
+              </Statistic.Value>
+              <Statistic.Label>Рядом</Statistic.Label>
+            </Statistic>
 
-        <Statistic color="purple">
-          <Statistic.Value>
-            <Icon name="coffee" />
-            {meetingCount}
-          </Statistic.Value>
-          <Statistic.Label>Собраний</Statistic.Label>
-        </Statistic>
-
-        <Statistic color="olive">
-          <Statistic.Value>
-            <Icon name="clock" />
-            {nowCount}
-          </Statistic.Value>
-          <Statistic.Label>Сегодня</Statistic.Label>
-        </Statistic>
-
-        <Statistic color="green">
-          <Statistic.Value>
-            <Icon name="map marker alternate" />
-            {nearCount}
-          </Statistic.Value>
-          <Statistic.Label>Рядом</Statistic.Label>
-        </Statistic>
-
-        <Statistic color="yellow">
-          <Statistic.Value>
-            <Icon name="gift" />
-            {eventsCount}
-          </Statistic.Value>
-          <Statistic.Label>Событий</Statistic.Label>
-        </Statistic>
-      </Statistic.Group>
+            <Statistic color="yellow">
+              <Statistic.Value>
+                <Icon name="gift" />
+                {eventsCount}
+              </Statistic.Value>
+              <Statistic.Label>Событий</Statistic.Label>
+            </Statistic>
+          </Statistic.Group>
+        </Grid.Column>  
+      </Grid>
       </Segment>
     </Container>
   );

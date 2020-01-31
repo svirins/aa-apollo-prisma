@@ -2,22 +2,22 @@
      User Global Variables
 *******************************/
 
-@headerFont        : 'Open Sans', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-@pageFont          : 'Open Sans', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@headerFont        : 'PT Sans', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@pageFont          : 'PT Sans', 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
 @fontSmoothing     : antialiased;
 
 @importGoogleFonts : true;
-@googleFontName    : 'Open Sans';
+@googleFontName    : 'PT Sans';
 @googleFontSizes   : '400,700,400italic,700italic';
-@googleFontFamily  : '@{googleFontName}:@{googleFontSizes}';
+@googleFontFamily  : '@{googleFontName}:@{googleFontSizes}&display=swap&subset=cyrillic-ext';
 
 
 /*-------------------
     Base Sizes
 --------------------*/
 
-@emSize      : 14px;
-@fontSize    : 14px;
+@emSize      : 15px;
+@fontSize    : 15px;
 
 /*-------------------
     Site Colors
