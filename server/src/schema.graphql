@@ -20,8 +20,8 @@ type Group {
   email:         String
   address:       String
   website:       String
-  location:      Location! 
-  meetings:      [Meeting!]  
+  location:      Location
+  meetings:      [Meeting]  
 }
 
 type Meeting {

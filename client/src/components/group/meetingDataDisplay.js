@@ -1,6 +1,6 @@
-import React, {Fragment} from "react";
+import React, { Fragment } from "react";
 import Meeting from "./meeting";
-import { Table, Segment } from "semantic-ui-react";
+import { Table } from "semantic-ui-react";
 import sortBy from 'lodash/sortBy'
 
 const weekdays = ["Mo","Tu","We","Th","Fr","Sa","Su"]

@@ -34,6 +34,20 @@ const Meeting = props => {
       iconName = "talk";
       colorName = "black";
   }
+  let additionalInfo = (<Table.Cell textAlign='left'></Table.Cell>)
+  if (props.name !== 'Собрание') {
+      additionalInfo = (<Table.Cell textAlign='left'><Popup
+      content={props.name}
+      position="bottom right"
+      size="mini"
+      trigger={
+        <Icon           style={{ marginRight: "0.5em" }}
+        name="info" color="pink" size="small"  />
+      }
+    /></Table.Cell>
+)
+  } 
+
 
   return (
     <Table.Row negative={isToday}>
@@ -51,6 +65,8 @@ const Meeting = props => {
           {ruWeekdays.get(props.weekday)}
         </Label>
       </Table.Cell>
+     {additionalInfo}
+
       <Table.Cell textAlign='center'>{timeSubstr}</Table.Cell>
       <Table.Cell textAlign='right'>
         <Popup

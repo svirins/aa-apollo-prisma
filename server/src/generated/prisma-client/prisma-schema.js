@@ -740,7 +740,7 @@ type Group {
   email: String
   address: String
   website: String
-  location: Location!
+  location: Location
   meetings(where: MeetingWhereInput, orderBy: MeetingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Meeting!]
 }
 
@@ -763,7 +763,7 @@ input GroupCreateInput {
   email: String
   address: String
   website: String
-  location: LocationCreateOneInput!
+  location: LocationCreateOneInput
   meetings: MeetingCreateManyWithoutGroupInput
 }
 
@@ -789,7 +789,7 @@ input GroupCreateWithoutAuthorInput {
   email: String
   address: String
   website: String
-  location: LocationCreateOneInput!
+  location: LocationCreateOneInput
   meetings: MeetingCreateManyWithoutGroupInput
 }
 
@@ -806,7 +806,7 @@ input GroupCreateWithoutMeetingsInput {
   email: String
   address: String
   website: String
-  location: LocationCreateOneInput!
+  location: LocationCreateOneInput
 }
 
 type GroupEdge {
@@ -1026,7 +1026,7 @@ input GroupUpdateInput {
   email: String
   address: String
   website: String
-  location: LocationUpdateOneRequiredInput
+  location: LocationUpdateOneInput
   meetings: MeetingUpdateManyWithoutGroupInput
 }
 
@@ -1091,7 +1091,7 @@ input GroupUpdateWithoutAuthorDataInput {
   email: String
   address: String
   website: String
-  location: LocationUpdateOneRequiredInput
+  location: LocationUpdateOneInput
   meetings: MeetingUpdateManyWithoutGroupInput
 }
 
@@ -1107,7 +1107,7 @@ input GroupUpdateWithoutMeetingsDataInput {
   email: String
   address: String
   website: String
-  location: LocationUpdateOneRequiredInput
+  location: LocationUpdateOneInput
 }
 
 input GroupUpdateWithWhereUniqueWithoutAuthorInput {
@@ -1499,13 +1499,6 @@ input LocationUpdateOneInput {
   upsert: LocationUpsertNestedInput
   delete: Boolean
   disconnect: Boolean
-  connect: LocationWhereUniqueInput
-}
-
-input LocationUpdateOneRequiredInput {
-  create: LocationCreateInput
-  update: LocationUpdateDataInput
-  upsert: LocationUpsertNestedInput
   connect: LocationWhereUniqueInput
 }
 

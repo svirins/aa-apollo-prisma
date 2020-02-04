@@ -1,68 +1,108 @@
-import React from 'react';
-import { Segment, Icon, Table, Header, Image, Modal, Button, Grid, Divider } from 'semantic-ui-react'
-import MapDataDisplay from '../ui-elements/mapDataDisplay'
-import  TableRow  from '../ui-elements/tableRow'
+import React from "react";
+import {
+  Segment,
+  Icon,
+  Table,
+  Header,
+  Image,
+  Modal,
+  Button,
+  Grid,
+  Divider
+} from "semantic-ui-react";
+import MapDataDisplay from "../ui-elements/mapDataDisplay";
+import TableRow from "../ui-elements/tableRow";
+const ReactMarkdown = require("react-markdown");
 
 const Event = props => {
-  const start = props.dateStart.substr(0, props.dateStart.indexOf('T'))
-  const end = props.dateEnd ? ` - ${props.dateEnd.substr(0, props.dateEnd.indexOf('T'))}` : ''
-  const dateCityHeader = `${start}${end} , ${props.city}`
- 
-  const cityDisplay = ( <TableRow icon="home" content={props.city} />);
-  const contactDisplay = ( <TableRow icon="phone" content={props.contact} />);
-  const addressDisplay = ( <TableRow icon="marker" content={props.address} />);
+  const start = props.dateStart.substr(0, props.dateStart.indexOf("T"));
+  const end = props.dateEnd
+    ? ` - ${props.dateEnd.substr(0, props.dateEnd.indexOf("T"))}`
+    : "";
+  const dateHeader = `${start}${end}`;
 
-  const agendaDisplay = ''
+  let cityDisplay, contactDisplay,
+    addressDisplay,
+    agendaDisplay,
+    descriptionDisplay,
+    urlDisplay = "";
+
+  if (props.city) {
+    cityDisplay = <TableRow icon="home" content={props.city} />;
+  }
+  // construct contact table
+  if (props.address) {
+    addressDisplay = <TableRow icon="marker" content={props.address} />;
+  }
+  if (props.programUrl) {
+    urlDisplay = <a href={props.programUrl}>Скачать программу</a>;
+  }
+
+  if (props.description) {
+    descriptionDisplay = props.description;
+  }
+
+  if (props.contact) {
+    contactDisplay = props.contact.map(el => (
+      <TableRow
+        key={el.id}
+        icon="phone"
+        content={<a href={`tel:${el.phone}`}>{el.phone}</a>}
+        extraContent={el.name}
+        extraExtraContent={el.responsibility}
+      />
+    ));
+  }
+
+  if (props.agenda) {
+    agendaDisplay = <ReactMarkdown source={props.agenda} />;
+  }
+
   return (
     <Grid.Column>
-    <Segment stacked raised>
-        <Header as='h3'>{props.name}</Header>
-        <Header as='h5'>{dateCityHeader}</Header>
+      <Segment stacked raised>
+        <Image src={props.image.cloudinaryUrl} size="small" floated="right" />
+        <Header as="h3">{props.name}</Header>
+        {descriptionDisplay}
 
-        {props.description}
+
         <Divider />
-        <Image src={props.image.cloudinaryUrl} size='small' floated='right'/>
+        <Header as="h4">{props.city}</Header>
 
+        <Header as="h5">{dateHeader}</Header>
+        {descriptionDisplay}
         <Table compact="very" basic="very" unstackable collapsing size="small">
-          {cityDisplay} 
+          {cityDisplay}
+          {addressDisplay}
+          {urlDisplay}
+        </Table>
+        <Header as="h5">Контакты</Header>
+        <Table compact="very" basic="very" unstackable collapsing size="small">
           {contactDisplay}
-          {addressDisplay} 
         </Table>
         {agendaDisplay}
 
-     
         <Modal
           closeIcon
-            trigger={
-              <Button
-                compact
-                icon="map marker alternate"
-                color="blue"
-                content="На карте"
-                size="mini"
-                float="right"
-              />
-            }
-          >
-          <Header icon="map marker alternate" content={props.name} />
+          trigger={
+            <Button color="blue" size="mini">
+              <Icon name="map signs" /> {`На карте`}
+            </Button>
+          }
+        >
+          <Header as="h4"
+            icon="map signs"
+            content={`${props.name}, ${props.city}, ${props.address}`}
+          />
           <Modal.Content>
             <Modal.Description>
               <MapDataDisplay location={props.location} name={props.name} />
-              {props.city} / {props.address}
             </Modal.Description>
           </Modal.Content>
         </Modal>
-    </Segment>
+      </Segment>
     </Grid.Column>
-    
-  )
-}
+  );
+};
 
-export default Event
-
-
-
-
-
-
-      
+export default Event;

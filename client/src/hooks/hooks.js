@@ -49,3 +49,16 @@ export const useInitialiseCity = () => {
 
   return options
 }
+
+
+export const  useGroupCountCorrection = (count, region) => {
+  let value = count
+  switch (region) {
+    case 'All': value -= 7;break;
+    case 'Brestskaya': value -= 4;break;
+    case 'Mogilevskaya': value -= 2;break;
+    case 'Vitebskaya': value -= 1 ;break;
+    default: 
+  }
+  return value
+}

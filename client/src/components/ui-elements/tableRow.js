@@ -6,7 +6,7 @@ const TableRow = props => {
   const align = props.align ? props.align : "left"
   return (
   <Table.Row>
-    <Table.Cell textAlign="left">
+    <Table.Cell textAlign={align}>
       <Icon
         name={props.icon}
         color={color}
@@ -14,6 +14,12 @@ const TableRow = props => {
         style={{ marginRight: "1em" }}
       />
       {props.content}
+    </Table.Cell>
+    <Table.Cell>
+      {props.extraContent}
+    </Table.Cell>
+    <Table.Cell>
+      {props.extraExtraContent}
     </Table.Cell>
   </Table.Row>
   )}

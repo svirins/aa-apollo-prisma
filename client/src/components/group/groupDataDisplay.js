@@ -82,11 +82,10 @@ const GroupDataDisplay = props => {
               </Button>
             }
           >
-          <Header icon="map marker alternate" content={props.name} />
+          <Header as="h4" icon="map signs" content={`${props.name}, ${props.city}, ${props.address}`} />
           <Modal.Content>
             <Modal.Description>
               <MapDataDisplay location={props.location} name={props.name} />
-              {props.city} / {props.address}
             </Modal.Description>
           </Modal.Content>
         </Modal>

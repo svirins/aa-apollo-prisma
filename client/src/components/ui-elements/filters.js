@@ -6,9 +6,8 @@ import {
   Dropdown,
   Label,
   Segment,
-  Header
 } from "semantic-ui-react";
-import { useInitialiseRegion, useInitialiseCity } from "../../hooks/hooks";
+import { useInitialiseRegion, useInitialiseCity, useGroupCountCorrection } from "../../hooks/hooks";
 import { ruRegions } from "../../const/globalConst";
 import { useDebounce } from "../../hooks/hooks";
 
@@ -48,7 +47,7 @@ const Filters = props => {
               {`Поиск по группам АА Беларуси   `}
             </Label>
             <Label color="blue" basic horizontal size='large' style={{marginBottom: ".25em", marginTop: ".25em"}}> 
-              {`Найдено ${props.count} групп`}
+              {`Найдено ${useGroupCountCorrection(props.count, regionSelect)} групп`}
             </Label>
             <Label color="blue" basic horizontal size='large' style={{marginBottom: ".25em", marginTop: ".25em"}}> 
               {`Регион - ${ruRegions.get(regionSelect)}`}

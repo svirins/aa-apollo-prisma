@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, Menu, Container, Icon, Label } from "semantic-ui-react";
+import { Image, Menu, Container, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.svg";
 import { GET_CLIENT_STATISTICS } from '../../queries'

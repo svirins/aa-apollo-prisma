@@ -1083,7 +1083,7 @@ export interface GroupCreateWithoutAuthorInput {
   email?: Maybe<String>;
   address?: Maybe<String>;
   website?: Maybe<String>;
-  location: LocationCreateOneInput;
+  location?: Maybe<LocationCreateOneInput>;
   meetings?: Maybe<MeetingCreateManyWithoutGroupInput>;
 }
 
@@ -1196,14 +1196,16 @@ export interface GroupUpdateWithoutAuthorDataInput {
   email?: Maybe<String>;
   address?: Maybe<String>;
   website?: Maybe<String>;
-  location?: Maybe<LocationUpdateOneRequiredInput>;
+  location?: Maybe<LocationUpdateOneInput>;
   meetings?: Maybe<MeetingUpdateManyWithoutGroupInput>;
 }
 
-export interface LocationUpdateOneRequiredInput {
+export interface LocationUpdateOneInput {
   create?: Maybe<LocationCreateInput>;
   update?: Maybe<LocationUpdateDataInput>;
   upsert?: Maybe<LocationUpsertNestedInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
   connect?: Maybe<LocationWhereUniqueInput>;
 }
 
@@ -1489,15 +1491,6 @@ export interface UserUpsertWithoutEventsInput {
   create: UserCreateWithoutEventsInput;
 }
 
-export interface LocationUpdateOneInput {
-  create?: Maybe<LocationCreateInput>;
-  update?: Maybe<LocationUpdateDataInput>;
-  upsert?: Maybe<LocationUpsertNestedInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<LocationWhereUniqueInput>;
-}
-
 export interface ContactUpdateManyInput {
   create?: Maybe<ContactCreateInput[] | ContactCreateInput>;
   update?: Maybe<
@@ -1652,7 +1645,7 @@ export interface GroupCreateInput {
   email?: Maybe<String>;
   address?: Maybe<String>;
   website?: Maybe<String>;
-  location: LocationCreateOneInput;
+  location?: Maybe<LocationCreateOneInput>;
   meetings?: Maybe<MeetingCreateManyWithoutGroupInput>;
 }
 
@@ -1703,7 +1696,7 @@ export interface GroupUpdateInput {
   email?: Maybe<String>;
   address?: Maybe<String>;
   website?: Maybe<String>;
-  location?: Maybe<LocationUpdateOneRequiredInput>;
+  location?: Maybe<LocationUpdateOneInput>;
   meetings?: Maybe<MeetingUpdateManyWithoutGroupInput>;
 }
 
@@ -1969,7 +1962,7 @@ export interface GroupCreateWithoutMeetingsInput {
   email?: Maybe<String>;
   address?: Maybe<String>;
   website?: Maybe<String>;
-  location: LocationCreateOneInput;
+  location?: Maybe<LocationCreateOneInput>;
 }
 
 export interface MeetingUpdateInput {
@@ -1999,7 +1992,7 @@ export interface GroupUpdateWithoutMeetingsDataInput {
   email?: Maybe<String>;
   address?: Maybe<String>;
   website?: Maybe<String>;
-  location?: Maybe<LocationUpdateOneRequiredInput>;
+  location?: Maybe<LocationUpdateOneInput>;
 }
 
 export interface GroupUpsertWithoutMeetingsInput {

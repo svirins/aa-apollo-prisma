@@ -61,6 +61,7 @@ export const EVENTS_LIST_QUERY = gql`
         description
         agenda
         address
+        programUrl
         contact {
           id
           name

@@ -14,10 +14,7 @@ const StatisticBar = () => {
   const { data: geoData } = useQuery(GET_POSITION);
 
   if (loading && !data) return <LoadingMessage />;
-  if (error)
-    return (
-      <Error errorMessage="GraphQL server signal an error to the client" />
-    );
+  if (error) return <Error  />
 
   const {
     groupCount,
@@ -44,15 +41,18 @@ const StatisticBar = () => {
     }
   }
 
-  const nearCount = distanceArray.filter(value => value < 9000).length;
+  const nearCount = distanceArray.filter(value => value < 5000).length;
   // calculate total amount of today's meetings style={{ marginTop: "1.5em" }
   const nowCount = meetings.filter(el => el.weekday === getToday()).length;
+
+  // correct groups count mog-2 bre-4 vit-1
+  let correctedGroupCount = groupCount - 7
 
   client.writeData({
     data: {
       nearCount: nearCount,
       nowCount: nowCount,
-      groupCount: groupCount,
+      groupCount: correctedGroupCount,
       eventCount: eventsCount
     }
   });
@@ -67,7 +67,7 @@ const StatisticBar = () => {
             <Statistic color="blue" >
               <Statistic.Value>
                 <Icon name="users" />
-                {groupCount}
+                {correctedGroupCount}
               </Statistic.Value>
               <Statistic.Label size="mini">Групп АА</Statistic.Label>
             </Statistic>

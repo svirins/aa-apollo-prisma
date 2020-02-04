@@ -49,6 +49,8 @@ const Map = () => {
   const markersList = data.groupList.groups.map(element => (
     <Marker
       key={element.id}
+      offsetLeft={-17.5} 
+      offsetTop={-17.5}      
       latitude={element.location.lattitude}
       longitude={element.location.longitude}
     >

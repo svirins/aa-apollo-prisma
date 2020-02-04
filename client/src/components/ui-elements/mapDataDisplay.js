@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import ReactMapGL, { Marker, Popup } from 'react-map-gl'
+import ReactMapGL, { Marker } from 'react-map-gl'
 import { Container } from 'semantic-ui-react';
 
+
 import mapMarker from "../../assets/images/logoMarker.svg";
+
 
 const MapDataDisplay = (props) => {
   const [viewport, setViewport] = useState({
@@ -23,12 +25,13 @@ const MapDataDisplay = (props) => {
           setViewport(viewport);
         }}
         {...viewport} >
-      <Marker
-        latitude={props.location.lattitude}
-        longitude={props.location.longitude}
-      >
-        <img className="marker-img" src={mapMarker} alt="AA Meeting" />
-      </Marker>   
+        <Marker
+          latitude={props.location.lattitude}
+          longitude={props.location.longitude}
+        >
+          <img className="marker-img" src={mapMarker} alt="AA Meeting" />
+        </Marker>  
+        
       </ReactMapGL>
     </Container>
     

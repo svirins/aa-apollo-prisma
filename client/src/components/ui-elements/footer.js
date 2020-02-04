@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Container,
   Divider,
-  Header,
   Image,
   List,
   Segment

@@ -14,8 +14,7 @@ export const resolvers = {
       const { lattitude: groupLat, longitude: groupLong } = group.location;
       const {
         latitude: userLat,
-        longitude: userLong,
-        error
+        longitude: userLong
       } = cache.readQuery({ query: GET_POSITION });
       const dist = getDistance(
         { latitude: groupLat, longitude: groupLong },
