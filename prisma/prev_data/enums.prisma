@@ -1,0 +1,31 @@
+
+enum Weekday {
+  Mo
+  Tu
+  We
+  Th
+  Fr
+  Sa
+  Su
+}
+
+enum meetingType {
+  Open
+  Closed 
+  Speaker
+  Twelve Steps
+  Reflections
+}
+
+enum regionType {
+  All
+  Minskaya
+  Brestskaya
+  Gomelskaya
+  Mogilevskaya
+  Grodnenskaya
+  Vitebskaya
+}
+
+
+

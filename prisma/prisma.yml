@@ -1,0 +1,7 @@
+endpoint: https://aa-locator-dfc4723d86.herokuapp.com/aa-locator/dev
+datamodel: 
+  - types.prisma
+  - enums.prisma
+generate:
+    - generator: javascript-client
+      output: ../src/generated/prisma-client
