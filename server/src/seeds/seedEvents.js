@@ -4,9 +4,9 @@ const faker = require('faker');
 // A `main` function so that we can use async/await
 async function main() {
   const newUser = await prisma.createUser({
-    name: '234345r45',
-    email: 's342343455@gmail.com',
-    password: '4523343',
+    name: 'igogosha_event',
+    email: '12@gmail.com',
+    password: 'zeroo',
     events: {
       create: [{
         name: faker.hacker.noun(),

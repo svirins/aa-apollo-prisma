@@ -48,6 +48,6 @@ var models = [
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `https://eu1.prisma.sh/dzmitry-sviryn-c0647b/aa_s/dev`
+  endpoint: `https://aa-locator-dfc4723d86.herokuapp.com/aa-locator/dev`
 });
 exports.prisma = new exports.Prisma();
